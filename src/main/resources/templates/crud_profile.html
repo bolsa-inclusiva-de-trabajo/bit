@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Pablo Andrés Smola">
+    <title>BIT</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;1,500&display=swap" rel="stylesheet">
+
+
+    <!-- Custom styles for this template -->
+    <link href="sticky-footer-navbar.css" rel="stylesheet">
+</head>
+<body class="d-flex flex-column h-100" >
+<header>
+    <!-- Fixed navbar -->
+</header>
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#CRUDProfileUser">
+    Registro 1
+</button>
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#CRUDProfileCity">
+    Registro 2
+</button>
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#CRUDProfileStudy">
+    Registro 3
+</button>
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#CRUDProfileSkill">
+    Registro 4
+</button>
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#CRUDProfileLastModal">
+    Registro 5
+</button>
+
+
+<div class="modal" id="CRUDProfileUser">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">Perfil de Postulante</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                  aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                  <span class="sr-only">0%</span>
+                </div>
+              </div>
+                <form  class="form-floating">
+                    <div class="mb-4">
+                        <label for="inputName">Nombre:</label>
+                        <input type="text" class="form-control" id="inputName" placeholder="Nombre">
+                    </div>
+                    <div class="mb-4">
+                        <label for="inputLastName">Apellido:</label>
+                        <input type="text" class="form-control" id="inputLastName" placeholder="Apellido">
+                    </div>
+                    <div class="mb-4">
+                        <label for="inputBirthDate">Fecha Nacimiento:</label>
+                        <input type="text" class="form-control" id="inputBirthDate" placeholder="Fecha Nacimiento">
+                    </div>
+                    <div class="form-group mb-4">
+                       <label for="inputGenre">Genero:</label>
+                       <select class="form-control" id="inputGenre">
+                          <option>Hombre</option>
+                          <option>Mujer</option>
+                          <option>Otro</option>
+                       </select>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-secondary" data-dismiss="modal">Siguiente</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="CRUDProfileCity">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">Perfil de Postulante</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                  aria-valuemin="0" aria-valuemax="100" style="width:20%">
+                  <span class="sr-only">0%</span>
+                </div>
+              </div>
+                <form  class="form-floating">
+                    <div class="form-group mb-4">
+                       <label for="inputState">Provincia:</label>
+                       <select class="form-control" id="inputState">
+                          <option>Misiones</option>
+                          <option>Corrientes</option>
+                          <option>Chaco</option>
+                       </select>
+                    </div>
+                    <div class="form-group mb-4">
+                       <label for="inputCity">Ciudad:</label>
+                       <select class="form-control" id="inputCity">
+                          <option>Posadas</option>
+                          <option>Oberá</option>
+                          <option>Puerto Rico</option>
+                       </select>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-secondary" data-dismiss="modal">Siguiente</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="CRUDProfileStudy">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">Perfil de Postulante</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                  aria-valuemin="0" aria-valuemax="100" style="width:40%">
+                  <span class="sr-only">0%</span>
+                </div>
+              </div>
+                <form  class="form-floating">
+                  <div class="mb-4">
+                      <label for="inputStudy">Estudios:</label>
+                      <textarea class="form-control" rows="4" id="inputStudy"></textarea>
+                  </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-secondary" data-dismiss="modal">Siguiente</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="CRUDProfileSkill">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">Perfil de Postulante</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                  aria-valuemin="0" aria-valuemax="100" style="width:60%">
+                  <span class="sr-only">0%</span>
+                </div>
+              </div>
+                <form  class="form-floating">
+                  <div class="mb-4">
+                      <label for="inputSkill">Habilidades:</label>
+                      <textarea class="form-control" rows="4" id="inputSkill"></textarea>
+                  </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-secondary" data-dismiss="modal">Siguiente</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="CRUDProfileLastModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+              <h4 class="modal-title">Perfil de Postulante</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                  aria-valuemin="0" aria-valuemax="100" style="width:80%">
+                  <span class="sr-only">0%</span>
+                </div>
+              </div>
+                <form  class="form-floating">
+                  <legend class="col-form-label col-sm-2 pt-0">Disponibilidad</legend>
+                  <div class="mb-4">
+                    <div class="form-check-inline">
+                      <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" value="">Tiempo Completo
+                      </label>
+                    </div>
+                    <div class="form-check-inline">
+                      <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" value="">Medio Tiempo
+                      </label>
+                    </div>
+                    <div class="form-check-inline">
+                      <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" value="">Teletrabajo
+                      </label>
+                    </div>
+                  </div>
+                  <div class="mb-4">
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" value="">Inhabilitar Perfil Laboral
+                      </label>
+                    </div>
+                  </div>
+                  <div class="mb-4">
+                    <input type="file" class="form-control-file border">
+                  </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" data-dismiss="modal">Guardar Perfil</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Begin page content -->
+<script src="/docs/5.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+
+
+
+
+</body>
+
+</html>

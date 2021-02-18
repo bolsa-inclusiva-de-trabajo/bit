@@ -14,5 +14,9 @@ public class FeatureController {
     public String home() {
         return "home";
     }
+    @GetMapping("/crud_profile")
+    public String crud_profile() { 
+        return "crud_profile"; 
+    }
 
 }
