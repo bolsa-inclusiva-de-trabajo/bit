@@ -1,14 +1,14 @@
-package ar.org.cpci.bit.tmp;
+package ar.org.cpci.bit.test;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class TmpController {
+public class TestController {
 
     @Autowired
-    TmpRepository repo;
+    TestRepository repo;
 
     @GetMapping("/")
     public String home() {
