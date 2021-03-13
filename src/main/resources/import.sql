@@ -1,0 +1,16 @@
+INSERT INTO country (name) VALUES ('Argentina');
+INSERT INTO state (country_id, name) VALUES (1, 'Misiones');
+INSERT INTO city (state_id, name) VALUES (1, 'Posadas');
+INSERT INTO city (state_id, name) VALUES (1, 'Garupá');
+INSERT INTO city (state_id, name) VALUES (1, 'Candelaria');
+INSERT INTO city (state_id, name) VALUES (1, 'Santa Ana');
+INSERT INTO city (state_id, name) VALUES (1, 'Santo Pipó');
+INSERT INTO city (state_id, name) VALUES (1, 'Gobernador Roca');
+INSERT INTO city (state_id, name) VALUES (1, 'Capioví');
+INSERT INTO city (state_id, name) VALUES (1, 'Puerto Rico');
+INSERT INTO city (state_id, name) VALUES (1, 'Garuapé');
+INSERT INTO city (state_id, name) VALUES (1, 'Wuanda');
+INSERT INTO city (state_id, name) VALUES (1, 'Iguazu');
+INSERT INTO city (state_id, name) VALUES (1, 'El Dorado');
+INSERT INTO city (state_id, name) VALUES (1, 'Apóstoles');
+INSERT INTO city (state_id, name) VALUES (1, 'Oberá');
