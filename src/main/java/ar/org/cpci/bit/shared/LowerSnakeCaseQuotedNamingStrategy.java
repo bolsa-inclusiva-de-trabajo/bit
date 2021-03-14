@@ -8,7 +8,7 @@ public class LowerSnakeCaseQuotedNamingStrategy extends SpringPhysicalNamingStra
 
     @Override
     protected Identifier getIdentifier(String name, boolean quoted, JdbcEnvironment env) {
-        // Always between quotation marks
+        // Always between quotation marks, for compatibility reasons
         return new Identifier(name, true);
     }
 
