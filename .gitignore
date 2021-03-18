@@ -1,5 +1,4 @@
 ### This file is ignored to allow developers to use their own databases
-/pom.xml
 .dbeaver
 
 ### Backup files on linux
