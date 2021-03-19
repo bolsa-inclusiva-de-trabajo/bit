@@ -1,4 +1,4 @@
-package ar.org.cpci.bit.domain.location;
+package ar.org.cpci.bit.model.location;
 
 import java.util.Objects;
 

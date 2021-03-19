@@ -1,4 +1,4 @@
-package ar.org.cpci.bit.domain;
+package ar.org.cpci.bit.model;
 
 import java.time.ZonedDateTime;
 import java.util.Collections;

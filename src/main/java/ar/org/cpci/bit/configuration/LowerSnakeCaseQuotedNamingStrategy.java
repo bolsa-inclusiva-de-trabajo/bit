@@ -1,4 +1,4 @@
-package ar.org.cpci.bit.shared;
+package ar.org.cpci.bit.configuration;
 
 import org.hibernate.boot.model.naming.Identifier;
 import org.hibernate.engine.jdbc.env.spi.JdbcEnvironment;

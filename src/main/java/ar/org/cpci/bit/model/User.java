@@ -1,4 +1,4 @@
-package ar.org.cpci.bit.domain;
+package ar.org.cpci.bit.model;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -18,7 +18,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import ar.org.cpci.bit.domain.location.City;
+import ar.org.cpci.bit.model.location.City;
 
 @Entity
 @Table(name = "user")

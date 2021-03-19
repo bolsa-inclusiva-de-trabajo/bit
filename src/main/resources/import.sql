@@ -1,5 +1,5 @@
-INSERT INTO country (name) VALUES ('Argentina');
-INSERT INTO state (country_id, name) VALUES (1, 'Misiones');
+INSERT INTO country (name) VALUES ('ARGENTINA');
+INSERT INTO state (country_id, name) VALUES (1, 'MISIONES');
 INSERT INTO city (state_id, name) VALUES (1, 'ACARAGUA')
 INSERT INTO city (state_id, name) VALUES (1, 'ALBA POSSE')
 INSERT INTO city (state_id, name) VALUES (1, 'APOSTOLES')
@@ -143,3 +143,25 @@ INSERT INTO city (state_id, name) VALUES (1, 'PUERTO INTEGRACION')
 INSERT INTO city (state_id, name) VALUES (1, 'PARAJE CAMPO ALEGRE')
 INSERT INTO city (state_id, name) VALUES (1, 'PIRAY KM 18')
 INSERT INTO city (state_id, name) VALUES (1, 'MARIANO NECOCHEA')
+
+INSERT INTO "user" (username, password, email, first_name, last_name, education, skills, full_time, part_time, home_work, apply_for_job, disabled) VALUES ('admin', '$2a$10$lZJNipBMsZj7S6Wq5tTb8uw7yMaYNCpKcyuAMmlysCmZ2LjIzeiUm', 'email1', 'first_name1', 'last_name1', 'education1', 'skills1', true, false, false, true, false)
+
+INSERT INTO "user" (username, password, email, first_name, last_name, education, skills, full_time, part_time, home_work, apply_for_job, disabled) VALUES ('user', '$2a$10$lZJNipBMsZj7S6Wq5tTb8uw7yMaYNCpKcyuAMmlysCmZ2LjIzeiUm', 'email2', 'first_name2', 'last_name2', 'education2', 'skills2', true, false, false, true, false)
+
+INSERT INTO job (title, description, expiration, full_time, part_time, home_work, independent, dependent, disabled, user_id) VALUES ('title1', 'description1', '2021-03-22 04:06:12', true, false, false, true, false, FALSE, 1)
+
+INSERT INTO job (title, description, expiration, full_time, part_time, home_work, independent, dependent, disabled, user_id) VALUES ('title2', 'description2', '2021-03-22 04:06:12', true, false, false, true, false, FALSE, 1)
+
+INSERT INTO job (title, description, expiration, full_time, part_time, home_work, independent, dependent, disabled, user_id) VALUES ('title3', 'description3', '2021-03-22 04:06:12', true, false, false, true, false, FALSE, 1)
+
+INSERT INTO job (title, description, expiration, full_time, part_time, home_work, independent, dependent, disabled, user_id) VALUES ('title4', 'description4', '2021-03-22 04:06:12', true, false, false, true, false, FALSE, 1)
+
+INSERT INTO job (title, description, expiration, full_time, part_time, home_work, independent, dependent, disabled, user_id) VALUES ('title5', 'description5', '2021-03-22 04:06:12', true, false, false, true, false, FALSE, 2)
+
+INSERT INTO job (title, description, expiration, full_time, part_time, home_work, independent, dependent, disabled, user_id) VALUES ('title6', 'description6', '2021-03-22 04:06:12', true, false, false, true, false, FALSE, 2)
+
+INSERT INTO contact (user_1_id, user_2_id) VALUES (1, 2)
+
+INSERT INTO interest (user_id, job_id) VALUES (2, 2)
+
+INSERT INTO interest (user_id, job_id) VALUES (2, 4)

@@ -1,6 +1,9 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="footer">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark font-weight-bold pb-0">
         <div class="container">
-            <a class="navbar-brand row text-center mx-auto" href="/">
+            <a class="navbar-brand row text-center mx-auto" th:href="@{/}">
                 <span class="h2 d-block mb-n1">BIT</span>
                 <span class="h5 d-block mb-0">Bolsa Inclusiva de Trabajo</span>
             </a>
@@ -24,3 +27,5 @@
             </a>
         </div>
     </div>
+</div>
+</html>
