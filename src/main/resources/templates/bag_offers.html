@@ -75,7 +75,16 @@
                                                                     </td>
                                                                 </tr>
                                                                 <tr >
-                                                                    <td><p class="offers_data_text">Le interesa a ## postulantes.  - Se postularon ## personas. </p></td>
+                                                                    getInterestedUsersCount
+                                                                    <td>
+                                                                        <p class="offers_data_text" th:text="${job.getInterestedUsersCount()}">txt</p>
+                                                                        <!--
+                                                                        <p class="offers_data_text" th:text="${job.getInterestedUsersCount} ?: 'ok' ">txt</p>
+                                                                        <p class="offers_data_text" th:text="${job.getInterestedUsersCount() > 0}  ? ${job.getInterestedUsersCount()} + ' personas interesadas' : '' ">txt</p>
+                                                                        <span th:if="${job.getInterestedUsersCount() > 0}">Female</span>
+                                                                        <p class="offers_data_text">Le interesa a ## postulantes.  - Se postularon ## personas. </p>
+                                                                        -->
+                                                                    </td>
                                                                     <td></td>
                                                                 </tr>
                                                             </table>

@@ -156,6 +156,20 @@ public class Job {
         return Collections.unmodifiableSet(interestedUsers);
     }
 
+    public int getInterestedUsersCount() {
+        if (getInterestedUsers() != null)
+        {
+            int xx = 0;
+            try {
+                Set<User> x = getInterestedUsers();
+                xx = x.size();
+            } catch (Exception e) {}
+            return xx;
+        } else {
+            return 0;
+        }
+    }
+
     public void setInterestedUsers(Iterable<User> users) {
         this.interestedUsers.clear();
         for (User user : users) {
@@ -192,5 +206,6 @@ public class Job {
         Job other = (Job) obj;
         return Objects.equals(id, other.id);
     }
+
 
 }
