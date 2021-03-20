@@ -1,26 +1,32 @@
-const NAVBAR_HEIGHT = 100;  // pixel
-const ANIMATION_TIME = 500;  // milliseconds
+const NAVBAR_HEIGHT = 100;              // pixel
+const ANIMATION_TIME = 500;             // milliseconds
+const RESIZE_DEBOUNCING_TIMER = 100;    // milliseconds
 
 $(document).ready(function() {
 
     // Put the footer navbar at the end if there is space under it
     const setFixedBottom = function() {
-        const main = document.getElementById('main');
-        const footer = document.getElementById('footer');
+        const main = document.getElementById('mainVerticalAdjFooter');
+        const footer = document.getElementById('verticalAdjFooter');
 
         if (main !== null && footer !== null) {
             const clientHeight = window.innerHeight || document.documentElement.clientHeight;
-            const availableSpace = clientHeight - footer.offsetHeight;
+            const availableSpace = clientHeight - main.offsetHeight - main.offsetTop - footer.offsetHeight;
 
-            if (availableSpace - footer.offsetTop > 0) {
-                footer.classList.add('fixed-bottom');
-            } else if (availableSpace - main.offsetTop - main.offsetHeight < 0) {
+            if (availableSpace < 0) {
                 footer.classList.remove('fixed-bottom');
+            } else {
+                footer.classList.add('fixed-bottom');
             }
         }
     };
     setFixedBottom();
-    window.onresize = setFixedBottom;
+    // Debouncing, avoid too many calls in too little time
+    var resizeDebouncingTimer;
+    $(window).resize(function() {
+        clearTimeout(resizeDebouncingTimer);
+        resizeDebouncingTimer = setTimeout(setFixedBottom, RESIZE_DEBOUNCING_TIMER);
+    });
 
     // Smooth displacement with fragments
     $('a[href^="#"]').click(function() {
