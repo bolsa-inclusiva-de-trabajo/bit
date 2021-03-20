@@ -3,7 +3,6 @@ package ar.org.cpci.bit.security;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -16,22 +15,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
-        // FIXME DOES NOT WORK, "STATIC" NOT VISIBLE
-
-        http//.exceptionHandling()
-            //.and()
-            //.sessionManagement()
-            //.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            //.and()
-            .formLogin().loginPage("/login").permitAll()
-            .and().logout().permitAll()
-            .and().authorizeRequests()
-            .antMatchers("/error").permitAll()
-            .antMatchers("/public/**").permitAll()
-            .antMatchers("/test/**").permitAll()
+        http.formLogin().loginPage("/login").permitAll();
+        http.logout().permitAll();
+        http.authorizeRequests()
             .antMatchers("/").permitAll()
-            .antMatchers("/**").permitAll();//.authenticated(); // FIXME
+            .antMatchers("/static/**").permitAll()
+            .antMatchers("/**").authenticated();
     }
 
     @Bean

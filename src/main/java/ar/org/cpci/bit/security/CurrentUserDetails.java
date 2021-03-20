@@ -7,13 +7,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import ar.org.cpci.bit.model.User;
 
-public class BitUserDetails implements UserDetails {
+public class CurrentUserDetails implements UserDetails {
 
     private static final long serialVersionUID = 1L;
 
     private transient User user;
 
-    public BitUserDetails(User user) {
+    public CurrentUserDetails(User user) {
         this.user = user;
     }
 

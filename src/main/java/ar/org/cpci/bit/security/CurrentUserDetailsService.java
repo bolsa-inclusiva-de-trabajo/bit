@@ -10,7 +10,7 @@ import ar.org.cpci.bit.model.User;
 import ar.org.cpci.bit.repository.UserRepository;
 
 @Service
-public class BitUserDetailsService implements UserDetailsService {
+public class CurrentUserDetailsService implements UserDetailsService {
 
     @Autowired
     private UserRepository repository;
@@ -21,7 +21,7 @@ public class BitUserDetailsService implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException(username);
         }
-        return new BitUserDetails(user);
+        return new CurrentUserDetails(user);
     }
 
 }
