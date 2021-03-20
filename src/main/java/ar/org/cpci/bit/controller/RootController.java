@@ -19,14 +19,14 @@ public class RootController {
         return "system/international";
     }
 
-    @GetMapping("/current_locale")
-    public @ResponseBody String locale(Locale locale) {
-        return locale.toString();
-    }
+//    @GetMapping("/current_locale")
+//    public @ResponseBody String locale(Locale locale) {
+//        return locale.toString();
+//    }
 
-    @GetMapping("/error")
-    public String errorpage() {
-        return "system/error";
-    }
+//    @GetMapping("/error")
+//    public String errorpage() {
+//        return "system/error";
+//    }
 
 }
