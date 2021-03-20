@@ -12,3 +12,83 @@ section#home-main {
     padding-top: 3.5em !important;
     padding-bottom: 3.5em !important;
 }
+
+
+/* CSS CLASSES FOR JOB OFFERS BAG */
+
+.col_a {
+  background-color: #E9E9E9;
+height: 100%;
+}
+
+.col_b {
+  background-color: #ffffff;
+  height: 100%;
+}
+
+.col_c {
+  background-color: #E9E9E9;
+height: 100%;
+}
+
+.panel_news {
+  border-radius: 5px;
+  background-color: #C9C9C9;
+}
+
+.news_title {
+  font-size: 10px;
+    font-weight: bold;
+}
+
+.news_content {
+  font-size: 10px;
+
+}
+
+.panel_contact {
+  border-radius: 5px;
+  background-color: #C9C9C9;
+}
+
+.contact_title {
+  font-size: 10px;
+    font-weight: bold;
+}
+
+.contact_content {
+  font-size: 10px;
+
+}
+
+.anyClass {
+
+  overflow-y: scroll;
+}
+
+.panel_postulant {
+  border-radius: 5px;
+  background-color: #C9C9C9;
+}
+
+.postulant_title {
+  font-size: 10px;
+    font-weight: bold;
+}
+
+.postulant_text {
+  font-size: 10px;
+
+}
+
+.postulant_data_text {
+  font-size: 10px;
+}
+
+#tblPostulantData {
+  width: 100%;
+  border: 1px;
+}
+
+
+

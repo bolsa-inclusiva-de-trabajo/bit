@@ -2,17 +2,205 @@
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <br th:replace="/fragments/head :: head"/>
 <body>
-<br th:replace="/fragments/header :: header"/>
+<br th:replace="/fragments/bag_offers_header :: header"/>
 
 <div class="container-fluid py-special" id="main">
 
-    <div class="p-5 m-5">
-        bolsa de ofertas laborales
-    </div>
+
+            <div class="container  mt-5 ">
+
+                <div class="row">
+
+
+                    <div class="col-4 col-sm-4 col-md-2 col_a " align="center" >
+
+                        <div class="container m-1 panel_news">
+                            <p class=" h6">NOVEDADES</p>
+                            <table>
+                                <tr>
+                                    <td><p class="news_content">NOVEDAD</p></td>
+                                </tr>
+
+                            </table>
+                        </div>
+                    </div>
+
+
+                    <div class="col-8 col-sm-8 col-md-7 vh-100 col_b" >
+
+                        <div class=" col">
+                            <ul class="nav nav-pills nav-stacked vh-100 anyClass">
+
+                                <table>
+
+
+                                    <tr>
+                                        <td>
+                                            <div class="container mt-2 panel_postulant">
+                                                <p class="postulant_title">JOB TITLE</p>
+                                                <table>
+                                                    <tr>
+                                                        <td>
+                                                            <p class="postulant_text">
+                                                                JOB DESCRIPTION
+                                                                Lorem ipsum dolor sit amet consectetur adipiscing elit, ullamcorper curae est nibh montes. Convallis erat montes pharetra turpis non suscipit sagittis pellentesque, integer feugiat magna eu mollis cras placerat porttitor, risus nam quam sociosqu lectus massa cum. Primis cras orci in luctus ultricies porttitor malesuada, cubilia donec sollicitudin sagittis viverra mattis penatibus, vitae placerat conubia himenaeos egestas netus.
+                                                            </p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <table id="tblPostulantData" >
+                                                                <tr >
+                                                                    <td ><p class="postulant_data_text">Medio tiempo/Tiempo completo/etc.</p></td>
+                                                                    <td>
+
+                                                                    </td>
+                                                                    <td rowspan="3" align="right">
+                                                                        <!--<button class="btn btn-secondary">CONTACTAR</button>-->
+                                                                        <a href="/postularme">
+                                                                            <i class="bi bi-telephone-plus" data-toggle="tooltip" data-original-title="Postularme"></i>
+                                                                        </A>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><p class="postulant_data_text">Activo hace #####.</p></td>
+                                                                    <td>
+                                                                        <a href="/meinteresaestaofertadetrabajo">
+                                                                            <i class="bi bi-hand-thumbs-up" data-toggle="tooltip" data-original-title="Me Interesa"></i>
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr >
+                                                                    <td><p class="postulant_data_text">Ha recibido contactos de ## empleadores.</p></td>
+                                                                    <td></td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                </table>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+
+
+                                </table>
+
+
+
+
+
+
+
+                            </ul>
+                        </div>
+
+
+
+
+
+                    </div>
+
+
+                    <div class="col-0 col-sm col-md-3  col_c" >
+                        <table>
+                            <tr>
+                                <td>
+
+
+                                    <form class="row">
+                                        <table>
+                                            <tr style="vertical-align: middle;">
+                                            <td>
+                                                <input type="text" class="form-control" id="txtSearch">
+                                            </td>
+                                            <td>
+                                                <button type="submit" class="btn btn-primary">
+                                                    <i class="bi bi-search"></i>
+                                                </button>
+                                            </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+
+                                    <form>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="chkMyCity">
+                                            <label class="custom-control-label" >Mi ciudad</label>
+                                        </div>
+                                    </form>
+
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+
+                                    <form>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="chkFullTime">
+                                            <label class="custom-control-label" >Full Time</label>
+                                        </div>
+                                    </form>
+
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+
+                                    <form>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="chkPartTime">
+                                            <label class="custom-control-label" >Medio Tiempo</label>
+                                        </div>
+                                    </form>
+
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+
+                                    <form>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="chkHomeWorking">
+                                            <label class="custom-control-label" >Desde casa</label>
+                                        </div>
+                                    </form>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="container mt-2  panel_contact">
+                                        <p class="h6">CONTACTOS</p>
+                                        <table>
+                                            <tr>
+                                                <td><p class="contact_content">CONTACTO 1</p></td>
+                                            </tr>
+
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+
+
 
 </div>
 
-<br th:replace="/fragments/footer :: footer"/>
+<br th:replace="/fragments/bag_footer :: footer"/>
 <br th:replace="/fragments/javascript :: javascript"/>
 </body>
 </html>
