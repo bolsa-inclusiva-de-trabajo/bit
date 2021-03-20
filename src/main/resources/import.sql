@@ -150,15 +150,15 @@ INSERT INTO "user" (username, password, email, first_name, last_name, education,
 
 INSERT INTO job (title, description, expiration, full_time, part_time, home_work, independent, dependent, disabled, user_id) VALUES ('title1', 'description1', '2021-03-22 04:06:12', true, false, false, true, false, FALSE, 1)
 
-INSERT INTO job (title, description, expiration, full_time, part_time, home_work, independent, dependent, disabled, user_id) VALUES ('title2', 'description2', '2021-03-22 04:06:12', true, false, false, true, false, FALSE, 1)
+INSERT INTO job (title, description, expiration, full_time, part_time, home_work, independent, dependent, disabled, user_id) VALUES ('title2', 'description2', '2021-03-22 04:06:12', false, true, false, true, false, FALSE, 1)
 
-INSERT INTO job (title, description, expiration, full_time, part_time, home_work, independent, dependent, disabled, user_id) VALUES ('title3', 'description3', '2021-03-22 04:06:12', true, false, false, true, false, FALSE, 1)
+INSERT INTO job (title, description, expiration, full_time, part_time, home_work, independent, dependent, disabled, user_id) VALUES ('title3', 'description3', '2021-03-22 04:06:12', false, false, true, false, true, FALSE, 1)
 
 INSERT INTO job (title, description, expiration, full_time, part_time, home_work, independent, dependent, disabled, user_id) VALUES ('title4', 'description4', '2021-03-22 04:06:12', true, false, false, true, false, FALSE, 1)
 
-INSERT INTO job (title, description, expiration, full_time, part_time, home_work, independent, dependent, disabled, user_id) VALUES ('title5', 'description5', '2021-03-22 04:06:12', true, false, false, true, false, FALSE, 2)
+INSERT INTO job (title, description, expiration, full_time, part_time, home_work, independent, dependent, disabled, user_id) VALUES ('title5', 'description5', '2021-03-22 04:06:12', true, false, false, false, true, FALSE, 2)
 
-INSERT INTO job (title, description, expiration, full_time, part_time, home_work, independent, dependent, disabled, user_id) VALUES ('title6', 'description6', '2021-03-22 04:06:12', true, false, false, true, false, FALSE, 2)
+INSERT INTO job (title, description, expiration, full_time, part_time, home_work, independent, dependent, disabled, user_id) VALUES ('title6', 'description6', '2021-03-22 04:06:12', false, false, true, true, false, FALSE, 2)
 
 INSERT INTO contact (user_1_id, user_2_id) VALUES (1, 2)
 

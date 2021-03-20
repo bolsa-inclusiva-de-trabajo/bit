@@ -7,51 +7,54 @@
 <div class="container-fluid py-special" id="main">
 
 
-            <div class="container  mt-5 ">
+            <div class="container mt-4 ">
 
-                <div class="row">
+                <div class="row" >
 
 
                     <div class="col-4 col-sm-4 col-md-2 col_a " align="center" >
-
                         <div class="container m-1 panel_news">
                             <p class=" h6">NOVEDADES</p>
                             <table>
                                 <tr>
                                     <td><p class="news_content">NOVEDAD</p></td>
                                 </tr>
-
                             </table>
                         </div>
                     </div>
 
 
-                    <div class="col-8 col-sm-8 col-md-7 vh-100 col_b" >
-
-                        <div class=" col">
-                            <ul class="nav nav-pills nav-stacked vh-100 anyClass">
-
+                    <div class="col-8 col-sm-8 col-md-7  col_b" >
+                        <div class="col">
+                            <ul class="nav nav-pills nav-stacked anyClass">
                                 <table>
 
 
-                                    <tr>
+                                    <tr th:id="'fila_' +  ${job.id}" th:each="job: ${jobs}">
                                         <td>
-                                            <div class="container mt-2 panel_postulant">
-                                                <p class="postulant_title">JOB TITLE</p>
+                                            <div class="container mt-2 panel_offers">
+
+
+
+                                                <p class="offers_title"  th:text="${job.title} ?: 'SIN TITULO'">JOB TITLE</p>
                                                 <table>
                                                     <tr>
                                                         <td>
-                                                            <p class="postulant_text">
-                                                                JOB DESCRIPTION
-                                                                Lorem ipsum dolor sit amet consectetur adipiscing elit, ullamcorper curae est nibh montes. Convallis erat montes pharetra turpis non suscipit sagittis pellentesque, integer feugiat magna eu mollis cras placerat porttitor, risus nam quam sociosqu lectus massa cum. Primis cras orci in luctus ultricies porttitor malesuada, cubilia donec sollicitudin sagittis viverra mattis penatibus, vitae placerat conubia himenaeos egestas netus.
-                                                            </p>
+                                                            <p class="offers_text" th:text="${job.description}  ?: 'SIN DESCRIPCION'">JOB DESCRIPTION</p>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <table id="tblPostulantData" >
+                                                            <table class="tbl_offer_data" >
                                                                 <tr >
-                                                                    <td ><p class="postulant_data_text">Medio tiempo/Tiempo completo/etc.</p></td>
+                                                                    <td >
+                                                                        <span class="offers_data_text" th:text="${job.fullTime} ? 'TIEMPO COMPLETO' : ''" >txt</span>
+                                                                        <span class="offers_data_text" th:text="${job.partTime} ? 'MEDIO TIEMPO' : ''" >txt</span>
+                                                                        <span class="offers_data_text" th:text="${job.homeWork} ? 'TRABAJO REMOTO' : ''" >txt</span>
+                                                                        <span class="offers_data_text" th:text="${job.independent} ? 'INDEPENDIENTE' : ''" >txt</span>
+                                                                        <span class="offers_data_text" th:text="${job.dependent} ? 'RELACION DE DEPENDENCIA' : ''" >txt</span>
+
+                                                                    </td>
                                                                     <td>
 
                                                                     </td>
@@ -63,15 +66,16 @@
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td><p class="postulant_data_text">Activo hace #####.</p></td>
+<!-- + ${#dates.format(job.expiration, 'dd-MMM-yyyy')}-->
+                                                                    <td><p class="offers_data_text" th:text="'V&aacute;lida hasta '" >V&aacute;lida hasta ##/##/####.</p></td>
                                                                     <td>
                                                                         <a href="/meinteresaestaofertadetrabajo">
-                                                                            <i class="bi bi-hand-thumbs-up" data-toggle="tooltip" data-original-title="Me Interesa"></i>
+                                                                            <i class="bi bi-hand-thumbs-up" data-toggle="tooltip" data-original-title="Me interesa"></i>
                                                                         </a>
                                                                     </td>
                                                                 </tr>
                                                                 <tr >
-                                                                    <td><p class="postulant_data_text">Ha recibido contactos de ## empleadores.</p></td>
+                                                                    <td><p class="offers_data_text">Le interesa a ## postulantes.  - Se postularon ## personas. </p></td>
                                                                     <td></td>
                                                                 </tr>
                                                             </table>
@@ -83,21 +87,11 @@
 
 
 
+
+
                                 </table>
-
-
-
-
-
-
-
                             </ul>
                         </div>
-
-
-
-
-
                     </div>
 
 
@@ -105,8 +99,6 @@
                         <table>
                             <tr>
                                 <td>
-
-
                                     <form class="row">
                                         <table>
                                             <tr style="vertical-align: middle;">
@@ -121,70 +113,56 @@
                                             </tr>
                                         </table>
                                     </form>
-
-
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-
                                     <form>
                                         <div class="custom-control custom-checkbox">
                                             <input type="checkbox" class="custom-control-input" id="chkMyCity">
                                             <label class="custom-control-label" >Mi ciudad</label>
                                         </div>
                                     </form>
-
-
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-
                                     <form>
                                         <div class="custom-control custom-checkbox">
                                             <input type="checkbox" class="custom-control-input" id="chkFullTime">
                                             <label class="custom-control-label" >Full Time</label>
                                         </div>
                                     </form>
-
-
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-
                                     <form>
                                         <div class="custom-control custom-checkbox">
                                             <input type="checkbox" class="custom-control-input" id="chkPartTime">
                                             <label class="custom-control-label" >Medio Tiempo</label>
                                         </div>
                                     </form>
-
-
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-
                                     <form>
                                         <div class="custom-control custom-checkbox">
                                             <input type="checkbox" class="custom-control-input" id="chkHomeWorking">
                                             <label class="custom-control-label" >Desde casa</label>
                                         </div>
                                     </form>
-
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <div class="container mt-2  panel_contact">
-                                        <p class="h6">CONTACTOS</p>
+                                        <p class="h6">MIS INTERESES</p>
                                         <table>
                                             <tr>
-                                                <td><p class="contact_content">CONTACTO 1</p></td>
+                                                <td><p class="contact_content">INTERES 1</p></td>
                                             </tr>
-
                                         </table>
                                     </div>
                                 </td>
@@ -192,7 +170,6 @@
                         </table>
                     </div>
                 </div>
-
             </div>
 
 

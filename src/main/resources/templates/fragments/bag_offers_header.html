@@ -5,7 +5,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top font-weight-bold">
         <div class="container">
             <a class="navbar-brand" th:href="@{/}">
-                <span class="mb-0">BIT Bolsa Inclusiva de Trabajo</span>
+                <span class="mb-0">BIT Bolsa Inclusiva de Trabajo - Oferta Laboral</span>
             </a>
 
             <button class="navbar-toggler p-1 px-sm-2"
@@ -19,7 +19,9 @@
             <div class="collapse navbar-collapse" id="headerNavbar">
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/">Inicio</a>
+                        <a class="nav-link" href="/">
+                            <i class="bi bi-house"></i>
+                        </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/bagapplicants">Postulantes</a>
@@ -27,10 +29,10 @@
                     <li class="nav-item">
                         <table>
                             <tr>
-                                <td><p class="nav-link"  href="/profile">John</p></td>
+                                <td><p class="nav-link"  th:href="'/profile/' + ${#authentication.name}" th:text="${#authentication.name}">John</p></td>
                                 <td></td>
                                 <td>
-                                    <p class="nav-link"  href="/profile">
+                                    <p class="nav-link"  th:href="'/profile/' + ${#authentication.name}">
                                     <i class="bi bi-gear"></i>
                                     </p>
                                 </td>

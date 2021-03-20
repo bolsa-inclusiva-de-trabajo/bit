@@ -17,78 +17,103 @@ section#home-main {
 /* CSS CLASSES FOR JOB OFFERS BAG */
 
 .col_a {
-  background-color: #E9E9E9;
-height: 100%;
+    background-color: #E9E9E9;
+    height: 100%;
 }
 
 .col_b {
-  background-color: #ffffff;
-  height: 100%;
+    background-color: #ffffff;
+    height: 100%;
 }
 
 .col_c {
-  background-color: #E9E9E9;
-height: 100%;
+    background-color: #E9E9E9;
+    height: 100%;
 }
 
 .panel_news {
-  border-radius: 5px;
-  background-color: #C9C9C9;
+    border-radius: 5px;
+    background-color: #C9C9C9;
 }
 
 .news_title {
-  font-size: 10px;
+    font-size: 10px;
     font-weight: bold;
 }
 
 .news_content {
-  font-size: 10px;
-
+    font-size: 10px;
 }
 
 .panel_contact {
-  border-radius: 5px;
-  background-color: #C9C9C9;
+    border-radius: 5px;
+    background-color: #C9C9C9;
 }
 
 .contact_title {
-  font-size: 10px;
+    font-size: 10px;
     font-weight: bold;
 }
 
 .contact_content {
-  font-size: 10px;
+    font-size: 10px;
 
 }
 
 .anyClass {
-
-  overflow-y: scroll;
+    overflow-y: scroll;
 }
 
-.panel_postulant {
-  border-radius: 5px;
-  background-color: #C9C9C9;
+
+
+
+.panel_applicant {
+    width: auto;
+    border-radius: 5px;
+    background-color: #C9C9C9;
 }
 
-.postulant_title {
-  font-size: 10px;
+.applicant_title {
+    font-size: 10px;
     font-weight: bold;
 }
 
-.postulant_text {
-  font-size: 10px;
+.applicant_text {
+    font-size: 10px;
+}
+
+.applicant_data_text {
+    font-size: 10px;
+}
+
+
+.tlb_applicant_data {
+    width: 100%;
+}
+
+
+.panel_offers {
+    width: auto;
+    border-radius: 5px;
+    background-color: #C9C9C9;
+}
+
+.offers_title {
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.offers_text {
+    font-size: 10px;
 
 }
 
-.postulant_data_text {
-  font-size: 10px;
+.offers_data_text {
+    font-size: 10px;
 }
 
-#tblPostulantData {
-  width: 100%;
-  border: 1px;
+.tbl_offer_data {
+    width: 100%;
 }
-
 
 
