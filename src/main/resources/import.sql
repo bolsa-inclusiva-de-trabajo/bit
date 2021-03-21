@@ -148,6 +148,8 @@ INSERT INTO "user" (username, password, email, first_name, last_name, education,
 
 INSERT INTO "user" (username, password, email, first_name, last_name, education, skills, full_time, part_time, home_work, apply_for_job, disabled) VALUES ('user', '$2a$10$lZJNipBMsZj7S6Wq5tTb8uw7yMaYNCpKcyuAMmlysCmZ2LjIzeiUm', 'email2', 'first_name2', 'last_name2', 'education2', 'skills2', true, false, false, true, false)
 
+INSERT INTO "user" (username, password, email, first_name, last_name, education, skills, full_time, part_time, home_work, apply_for_job, disabled) VALUES ('pepe', '$2a$10$lZJNipBMsZj7S6Wq5tTb8uw7yMaYNCpKcyuAMmlysCmZ2LjIzeiUm', 'email3', 'first_name3', 'last_name3', 'education3', 'skills3', true, false, false, true, false)
+
 INSERT INTO job (title, description, expiration, full_time, part_time, home_work, independent, dependent, disabled, user_id) VALUES ('title1', 'description1', '2021-03-22 04:06:12', true, false, false, true, false, FALSE, 1)
 
 INSERT INTO job (title, description, expiration, full_time, part_time, home_work, independent, dependent, disabled, user_id) VALUES ('title2', 'description2', '2021-03-22 04:06:12', false, true, false, true, false, FALSE, 1)

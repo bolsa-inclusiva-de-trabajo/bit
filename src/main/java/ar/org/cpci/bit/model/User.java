@@ -44,7 +44,7 @@ public class User {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "city_id")
     private City city;
 
@@ -69,17 +69,17 @@ public class User {
     @Column(name = "disabled", nullable = false)
     private Boolean disabled;
 
-    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
     private Set<Job> createdJobs;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "interest",
                joinColumns = @JoinColumn(name = "user_id"),
                inverseJoinColumns = @JoinColumn(name = "job_id"))
     private Set<Job> interestingJobs;
 
     //@Transient
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "contact",
                joinColumns = @JoinColumn(name = "user_1_id"),
                inverseJoinColumns = @JoinColumn(name = "user_2_id"))

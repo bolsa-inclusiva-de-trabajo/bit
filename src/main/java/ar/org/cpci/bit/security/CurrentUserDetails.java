@@ -1,6 +1,7 @@
 package ar.org.cpci.bit.security;
 
 import java.util.Collection;
+import java.util.HashSet;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,6 +16,10 @@ public class CurrentUserDetails implements UserDetails {
 
     public CurrentUserDetails(User user) {
         this.user = user;
+    }
+
+    public boolean havePublishedJobs() {
+        return !user.getCreatedJobs().isEmpty();
     }
 
     @Override

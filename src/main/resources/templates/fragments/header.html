@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<nav th:fragment="header" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top font-weight-bold">
+<nav th:fragment="header(menu)" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top font-weight-bold">
     <div class="container">
 
         <a class="navbar-brand mr-1" th:href="@{/}">
@@ -9,7 +9,8 @@
             <span class="mb-0">Bolsa Inclusiva de Trabajo</span>
         </a>
 
-        <button class="navbar-toggler p-0 px-sm-2"
+        <button th:if="${menu} != null"
+                class="navbar-toggler p-0 px-sm-2"
                 id="navbar-toggler-button"
                 type="button"
                 data-toggle="collapse"
@@ -17,22 +18,8 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="headerNavbar">
-            <ul class="nav navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#about" th:text="#{header.about}"></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#benefits" th:text="#{header.benefits}"></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#testimonials" th:text="#{header.testimonials}"></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href=""
-                       data-toggle="modal" data-target="#login" th:text="#{header.login}"></a>
-                </li>
-            </ul>
+        <div th:if="${menu} != null" class="collapse navbar-collapse" id="headerNavbar">
+            <th:block th:if="${menu} == 'home'" th:replace="/fragments/header_home :: menu"></th:block>
         </div>
     </div>
 </nav>

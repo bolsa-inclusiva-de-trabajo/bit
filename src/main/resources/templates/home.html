@@ -2,7 +2,7 @@
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <br th:replace="/fragments/head :: head"/>
 <body>
-<br th:replace="/fragments/header :: header"/>
+<br th:replace="/fragments/header :: header('home')"/>
 
     <div class="container-fluid" id="mainVerticalAdjFooter">
 
@@ -126,71 +126,6 @@
                  id="sumate">¡Sumate!</div>
         </section>
 
-    </div>
-
-    <!-- Log In Modal -->
-    <div class="modal fade" id="login" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div class="navbar row justify-content-around mx-auto pt-n4 my-n4 pt-md-0 my-md-n2">
-                        <a class="nav-link h3 mt-n1 mb-0 my-md-1" href="" data-dismiss="modal">
-                            <i class="bi bi-google"></i>
-                        </a>
-                        <a class="nav-link h3 mt-n1 mb-0 my-md-1" href="" data-dismiss="modal">
-                            <i class="bi bi-linkedin"></i>
-                        </a>
-                        <a class="nav-link h3 mt-n1 mb-0 my-md-1" href="" data-dismiss="modal">
-                            <i class="bi bi-twitter"></i>
-                        </a>
-                        <a class="nav-link h3 mt-n1 mb-0 my-md-1" href="" data-dismiss="modal">
-                            <i class="bi bi-facebook"></i>
-                        </a>
-                    </div>
-                </div>
-                <form class="needs-validation" method="POST">
-                    <div class="modal-body">
-                        <div class="form-group mb-1 mb-sm-4 mt-n1 mt-sm-1 mt-md-2">
-                            <label class="mb-0 mb-sm2" for="logInInputEmail">Correo electrónico</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text" id="btnGroupAddon">
-                                        <i class="bi bi-at"></i>
-                                    </div>
-                                </div>
-                                <input name="email" type="email" class="form-control"
-                                       data-focus="true" id="logInInputEmail" required>
-                            </div>
-                        </div>
-                        <div class="form-group mb-1 mb-sm-4">
-                            <label class="mb-0 mb-sm2" for="logInInputPassword">Contraseña</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text" id="btnGroupAddon">
-                                        <i class="bi bi-key-fill"></i>
-                                    </div>
-                                </div>
-                                <input name="password" type="password" class="form-control"
-                                       id="logInInputPassword" required>
-                            </div>
-                            <a href="" data-dismiss="modal">
-                                <small>¿Has olvidado tu contraseña?</small>
-                            </a>
-                        </div>
-                        <div class="container">
-                            <div class="row justify-content-md-center mb-n1 mb-md-3">
-                                <div class="col">
-                                    <a href="" class="btn btn-secondary btn-block" data-dismiss="modal">Registrate</a>
-                                </div>
-                                <div class="col">
-                                    <button type="submit" class="btn btn-primary btn-block">Ingresá</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                 </form>
-            </div>
-        </div>
     </div>
 
 <br th:replace="/fragments/footer :: footer"/>

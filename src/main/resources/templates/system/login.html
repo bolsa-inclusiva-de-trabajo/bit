@@ -2,27 +2,90 @@
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <br th:replace="/fragments/head :: head"/>
 <body>
-<br th:replace="/fragments/header :: header"/>
+<br th:replace="/fragments/header :: header(null)"/>
 
     <div class="container py-special" id="mainVerticalAdjFooter">
 
-        <section class="row m-5">
+        <section class="row">
 
-            <div class="col">
+            <div class="col col-sm-10 col-md-8 col-lg-6 col-xl-5 mx-auto mt-3 mb-4">
 
-                <div th:if="${param.error}" th:text="#{login.error}">
-                    -
+                <div class="navbar row justify-content-around mx-auto">
+                    <a class="nav-link h3 mb-0" href="">
+                        <i class="bi bi-google"></i>
+                    </a>
+                    <a class="nav-link h3 mb-0" href="">
+                        <i class="bi bi-linkedin"></i>
+                    </a>
+                    <a class="nav-link h3 mb-0" href="">
+                        <i class="bi bi-twitter"></i>
+                    </a>
+                    <a class="nav-link h3 mb-0" href="">
+                        <i class="bi bi-facebook"></i>
+                    </a>
                 </div>
-                <div th:if="${param.logout}" th:text="#{login.logout}">
-                    -
+
+<!--                 <div class="border-bottom mt-3 mb-4"></div> -->
+
+                <div>
+                    <div th:if="${param.error}" th:text="#{login.error}"></div>
+                    <div th:if="${param.logout}" th:text="#{login.logout}"></div>
                 </div>
 
-                <form th:action="@{/login}" method="post">
-                    <div><label> Usuario: <input type="text" name="username"/></label></div>
-                    <div><label> Contraseña: <input type="password" name="password"/></label></div>
-                    <div><input type="submit" th:value="#{login.login}"/></div>
+                <form class="needs-validation" th:action="@{/login}" method="POST">
+
+                    <div class="form-group mb-1 mb-sm-4 mt-n1 mt-sm-1 mt-md-2">
+
+                        <label class="mb-0 mb-sm2" for="logInInputUsername"
+                               th:text="#{username}">email</label>
+
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text" id="btnGroupAddon">
+                                    <i class="bi bi-person-fill"></i>
+                                </div>
+                            </div>
+                            <input name="username" type="text" class="form-control"
+                                   data-focus="true" id="logInInputUsername" required autofocus>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-1 mb-sm-4">
+
+                        <label class="mb-0 mb-sm2" for="logInInputPassword"
+                               th:text="#{password}">password</label>
+
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text" id="btnGroupAddon">
+                                    <i class="bi bi-key-fill"></i>
+                                </div>
+                            </div>
+                            <input name="password" type="password" class="form-control"
+                                   id="logInInputPassword" required>
+                        </div>
+
+                        <a href="" th:text="#{password.reset}">
+                            <small>password.reset</small>
+                        </a>
+                    </div>
+
+                    <div class="container">
+                        <div class="row justify-content-md-center mb-n1 mb-md-3">
+                            <div class="col">
+                                <a th:href="@{/logup}" class="btn btn-secondary btn-block"
+                                   th:text="#{register}">register</a>
+                            </div>
+                            <div class="col">
+                                <button type="submit" class="btn btn-primary btn-block"
+                                        th:text="#{login.login}">login</button>
+                            </div>
+                        </div>
+                    </div>
+
                 </form>
             </div>
+
         </section>
 
     </div>

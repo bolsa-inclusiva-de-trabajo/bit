@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <ul th:fragment="menu" class="nav navbar-nav ml-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="#about" th:text="#{header.about}">about</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#benefits" th:text="#{header.benefits}">benefits</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#testimonials" th:text="#{header.testimonials}">testimonials</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/login}" th:text="#{login.login}">login</a>
+        </li>
+    </ul>
+
+</body>
+</html>
