@@ -27,7 +27,6 @@ section#home-main {
 }
 
 .col_c {
-    background-color: #E9E9E9;
     height: 100%;
 }
 
@@ -115,5 +114,15 @@ section#home-main {
 .tbl_offer_data {
     width: 100%;
 }
+
+.tbl_filter {
+    background-color: #C9C9C9;
+    width: 100%;
+}
+.tbl_interests {
+    background-color: #C9C9C9;
+    width: 100%;
+}
+
 
 

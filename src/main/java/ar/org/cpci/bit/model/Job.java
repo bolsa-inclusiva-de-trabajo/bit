@@ -6,16 +6,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "job")
@@ -57,11 +48,17 @@ public class Job {
     @JoinColumn(name = "user_id")
     private User owner;
 
-    @ManyToMany(mappedBy = "interestingJobs")
+    @ManyToMany(mappedBy = "interestingJobs", fetch = FetchType.EAGER)
     private Set<User> interestedUsers;
 
+    @ManyToMany(mappedBy = "applyJobs", fetch = FetchType.EAGER)
+    private Set<User> applyUsers;
+
+
     public Job() {
+
         interestedUsers = new HashSet<>();
+        applyUsers = new HashSet<>();
     }
 
     public Long getId() {
@@ -156,6 +153,10 @@ public class Job {
         return Collections.unmodifiableSet(interestedUsers);
     }
 
+    public Set<User> getApplyUsers() {
+        return Collections.unmodifiableSet(applyUsers);
+    }
+
     public int getInterestedUsersCount() {
         if (getInterestedUsers() != null)
         {
@@ -180,6 +181,33 @@ public class Job {
     public void addInterestedUser(User user) {
         this.interestedUsers.add(user);
     }
+
+    public int getApplyUsersCount() {
+        if (getApplyUsers() != null)
+        {
+            int xx = 0;
+            try {
+                Set<User> x = getApplyUsers();
+                xx = x.size();
+            } catch (Exception e) {}
+            return xx;
+        } else {
+            return 0;
+        }
+    }
+
+    public void setApplyUsers(Iterable<User> users) {
+        this.applyUsers.clear();
+        for (User user : users) {
+            addAplyUser(user);
+        }
+    }
+
+    public void addAplyUser(User user) {
+        this.applyUsers.add(user);
+    }
+
+
 
     @Override
     public String toString() {

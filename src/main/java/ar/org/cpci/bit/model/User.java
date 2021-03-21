@@ -72,14 +72,20 @@ public class User {
     @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
     private Set<Job> createdJobs;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "interest",
                joinColumns = @JoinColumn(name = "user_id"),
                inverseJoinColumns = @JoinColumn(name = "job_id"))
     private Set<Job> interestingJobs;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "apply",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "job_id"))
+    private Set<Job> applyJobs;
+
     //@Transient
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "contact",
                joinColumns = @JoinColumn(name = "user_1_id"),
                inverseJoinColumns = @JoinColumn(name = "user_2_id"))

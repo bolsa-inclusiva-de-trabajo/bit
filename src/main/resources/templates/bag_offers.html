@@ -30,7 +30,7 @@
                                 <table>
 
 
-                                    <tr th:id="'fila_' +  ${job.id}" th:each="job: ${jobs}">
+                                    <tr th:id="'job_row_' +  ${job.id}" th:each="job: ${jobs}">
                                         <td>
                                             <div class="container mt-2 panel_offers">
 
@@ -67,7 +67,10 @@
                                                                 </tr>
                                                                 <tr>
 <!-- + ${#dates.format(job.expiration, 'dd-MMM-yyyy')}-->
-                                                                    <td><p class="offers_data_text" th:text="'V&aacute;lida hasta '" >V&aacute;lida hasta ##/##/####.</p></td>
+
+                                                                    <td>
+                                                                        <p class="offers_data_text" th:text="'V&aacute;lida hasta ' + ${#temporals.day(job.expiration)} + '/' + ${#temporals.month(job.expiration)} + '/' + ${#temporals.year(job.expiration)}" >txt</p>
+                                                                    </td>
                                                                     <td>
                                                                         <a href="/meinteresaestaofertadetrabajo">
                                                                             <i class="bi bi-hand-thumbs-up" data-toggle="tooltip" data-original-title="Me interesa"></i>
@@ -75,15 +78,13 @@
                                                                     </td>
                                                                 </tr>
                                                                 <tr >
-                                                                    getInterestedUsersCount
+
                                                                     <td>
-                                                                        <p class="offers_data_text" th:text="${job.getInterestedUsersCount()}">txt</p>
-                                                                        <!--
-                                                                        <p class="offers_data_text" th:text="${job.getInterestedUsersCount} ?: 'ok' ">txt</p>
-                                                                        <p class="offers_data_text" th:text="${job.getInterestedUsersCount() > 0}  ? ${job.getInterestedUsersCount()} + ' personas interesadas' : '' ">txt</p>
-                                                                        <span th:if="${job.getInterestedUsersCount() > 0}">Female</span>
-                                                                        <p class="offers_data_text">Le interesa a ## postulantes.  - Se postularon ## personas. </p>
-                                                                        -->
+                                                                        <p class="offers_data_text">
+                                                                            <span th:text="${job.getInterestedUsersCount() > 0}  ? ${job.getInterestedUsersCount()} + ' persona'+(${job.getInterestedUsersCount() > 1} ? 's' : '') +' interesada'+(${job.getInterestedUsersCount() > 1} ? 's' : '') : '' ">## persona/s interesada/s</span>
+                                                                            <span th:text="${job.getApplyUsersCount() > 0}  ? ${job.getApplyUsersCount()} + ' persona'+(${job.getApplyUsersCount() > 1} ? 's' : '') +' postulada'+(${job.getApplyUsersCount() > 1} ? 's' : '') : '' ">## persona/s postulada/s</span>
+
+                                                                        </p>
                                                                     </td>
                                                                     <td></td>
                                                                 </tr>
@@ -104,8 +105,8 @@
                     </div>
 
 
-                    <div class="col-0 col-sm col-md-3  col_c" >
-                        <table>
+                    <div class="col-0 col-sm col-md-3 col_c " >
+                        <table tbl_filter>
                             <tr>
                                 <td>
                                     <form class="row">
@@ -164,18 +165,36 @@
                                     </form>
                                 </td>
                             </tr>
+
+                        </table>
+                        <table class="tbl_interests mt-5">
                             <tr>
                                 <td>
-                                    <div class="container mt-2  panel_contact">
+                                    <div class="container  panel_contact">
                                         <p class="h6">MIS INTERESES</p>
-                                        <table>
-                                            <tr>
-                                                <td><p class="contact_content">INTERES 1</p></td>
+                                        <table style="width: 100%;">
+
+
+
+                                            <tr th:id="'interest_row_' +  ${interest.id}" th:each="interest: ${user.interestingJobs}">
+                                                <td style="width: auto;" class="align-middle">
+                                                    <p class="contact_content align-middle" th:text="${interest.title} ?: 'SIN TITULO'">JOB TITLE</p>
+                                                </td>
+                                                <td style="width: 40px;" class="align-middle">
+                                                    <a class="align-middle" href="/asdadasdasdasdsad"><i class="bi bi-eye"></i></a>
+                                                </td>
+                                                <td style="width: 40px;" class="align-middle">
+                                                    <a class="align-middle" href="/asdadasdasdasdsad"><i class="bi bi-trash"></i></a>
+                                                </td>
                                             </tr>
+
+
+
                                         </table>
                                     </div>
                                 </td>
                             </tr>
+
                         </table>
                     </div>
                 </div>
