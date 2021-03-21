@@ -1,17 +1,31 @@
 <!DOCTYPE html>
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-
+<br th:replace="/fragments/head :: head"/>
 <body>
-<h1 th:text="#{greeting}"></h1>
+<br th:replace="/fragments/header :: header(null)"/>
 
-<span th:text="#{lang.change}"></span>:
-    <form>
-        <select name="lang" id="locales">
-            <option value=""></option>
-            <option value="en" th:text="#{lang.en}"></option>
-            <option value="es" th:text="#{lang.es}"></option>
-        </select>
-        <input type="submit" />
-    </form>
+    <div class="container-fluid py-special" id="mainVerticalAdjFooter">
+
+        <section class="row my-5">
+
+            <div class="col col-sm-10 col-md-8 col-lg-6 col-xl-5 mx-auto mt-3 mb-4">
+                <form>
+                    <label class="mb-0 mb-sm2" for="locales"
+                           th:text="#{lang.change}">lang change</label>
+                    <select name="lang" id="locales">
+                        <option value=""></option>
+                        <option value="en" th:text="#{lang.en}"></option>
+                        <option value="es" th:text="#{lang.es}"></option>
+                    </select>
+                    <input type="submit" th:value="#{lang.apply}"/>
+                </form>
+            </div>
+
+        </section>
+
+    </div>
+
+<br th:replace="/fragments/footer :: footer"/>
+<br th:replace="/fragments/javascript :: javascript"/>
 </body>
 </html>
