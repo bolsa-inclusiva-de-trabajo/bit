@@ -264,6 +264,10 @@ public class User {
         interestingJobs.clear();
     }
 
+    public boolean containsInterestingJob(Job job) {
+        return interestingJobs.contains(job);
+    }
+
     /* ---- */
 
     public Set<Job> getApplyJobs() {

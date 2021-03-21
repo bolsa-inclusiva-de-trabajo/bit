@@ -27,8 +27,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .logoutSuccessUrl("/")
             .invalidateHttpSession(true)
             .permitAll();
+        http.csrf().ignoringAntMatchers("/api/**");
         http.authorizeRequests()
-            .antMatchers("/", "/static/**", "/international", "/error").permitAll()
+            .antMatchers("/", "/api/**", "/static/**", "/international", "/error").permitAll()
             .antMatchers("/**").authenticated();
     }
 
