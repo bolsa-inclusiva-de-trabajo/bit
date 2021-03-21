@@ -220,6 +220,21 @@ public class User {
         return Collections.unmodifiableSet(createdJobs);
     }
 
+    public int getCreatedJobsCount() {
+        return createdJobs.size();
+    }
+
+    public boolean existCreatedJob(long job_id){
+        boolean resp = false;
+        for (Job job : createdJobs) {
+            if (job.getId() == job_id) {
+                resp = true;
+                break;
+            }
+        }
+        return resp;
+    }
+
     public void setCreatedJobs(Iterable<Job> jobs) {
         createdJobs.clear();
         for (Job job : jobs) {
