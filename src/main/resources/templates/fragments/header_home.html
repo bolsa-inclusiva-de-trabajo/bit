@@ -11,8 +11,11 @@
         <li class="nav-item">
             <a class="nav-link" href="#testimonials" th:text="#{header.testimonials}">testimonials</a>
         </li>
-        <li class="nav-item">
+        <li th:if="${bagUrl} == null" class="nav-item">
             <a class="nav-link" th:href="@{/login}" th:text="#{login.login}">login</a>
+        </li>
+        <li th:if="${bagUrl} != null" class="nav-item" th:title="#{workspace}">
+            <a class="nav-link" th:href="${bagUrl}" th:text="${#httpServletRequest.remoteUser}">user</a>
         </li>
     </ul>
 

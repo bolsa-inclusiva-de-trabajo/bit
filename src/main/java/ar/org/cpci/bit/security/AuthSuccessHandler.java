@@ -12,6 +12,8 @@ import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
+import ar.org.cpci.bit.shared.Utils;
+
 public class AuthSuccessHandler implements AuthenticationSuccessHandler {
 
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
@@ -36,10 +38,7 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
 
     protected String determineTargetUrl(final Authentication authentication) {
         CurrentUserDetails user = (CurrentUserDetails) authentication.getPrincipal();
-        if (user.havePublishedJobs()) {
-            return "/bagapplicants";
-        }
-        return "/bagoffers";
+        return Utils.getAuthSuccessUrl(user.havePublishedJobs());
     }
 
     protected void clearAuthenticationAttributes(HttpServletRequest request) {
