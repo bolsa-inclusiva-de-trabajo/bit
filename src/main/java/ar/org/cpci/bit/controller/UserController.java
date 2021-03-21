@@ -16,32 +16,38 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import ar.org.cpci.bit.model.User;
+import ar.org.cpci.bit.model.location.City;
+import ar.org.cpci.bit.repository.CityRepository;
 import ar.org.cpci.bit.repository.UserRepository;
 
 @Controller
 public class UserController {
 
     @Autowired
-    private UserRepository repository;
-
+    private UserRepository repositoryUser;
+    
+    @Autowired
+    private CityRepository repositoryCity;
+    
     @Autowired
     private ApplicationContext context;
 
     @GetMapping("/user")
     public String getJobList(Model model, @PageableDefault(size = 5) Pageable page) {
-        Iterable<User> users = repository.findAll(page);
+        Iterable<User> users = repositoryUser.findAll(page);
         model.addAttribute("jobs", users);
         return "user_list";
     }
 
     @GetMapping("/user/{id}")
-    public String getJobDetail(@PathVariable Long id, Model model) {
-        Optional<User> user = repository.findById(id);
+    public String getUserDetail(@PathVariable Long id, Model model) {
+        Optional<User> user = repositoryUser.findById(id);
         if (user.isPresent()) {
             model.addAttribute("user", user.get());
         }
         return "user_detail";
     }
+
 
     @GetMapping("/user/edit")
     public String jobEdit(User user) {
@@ -49,12 +55,19 @@ public class UserController {
     }
 
     @PostMapping("/user/edit")
-    public String jobEdit(@Valid User user, BindingResult bindingResult) {
+    public String userEdit(@Valid User user, BindingResult bindingResult) {
+    	
         if (!bindingResult.hasErrors()) {
-            repository.save(user);
-            return "redirect:/user_list";
+        	repositoryUser.save(user);
+            return "redirect:/bag_offers";
         }
         return "user_edit";
+    }
+    @GetMapping("/crud_profile")
+    public String crud_profile(Model model) {
+        Iterable<City> city = repositoryCity.findAll();
+        model.addAttribute("cities", city);
+        return "crud_profile";
     }
 
 }

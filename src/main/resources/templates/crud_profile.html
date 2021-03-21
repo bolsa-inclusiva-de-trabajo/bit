@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>BIT</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" crossorigin="anonymous"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l">
+
+    <link rel="stylesheet" crossorigin="anonymous"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" href="/static/public/css/styles.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.standalone.min.css" integrity="sha512-TQQ3J4WkE/rwojNFo6OJdyu6G8Xe9z8rMrlF9y7xpFbQfW5g8aSWcygCQ4vqRiJqFsDsE1T6MoAOMJkFXlrI9A==" crossorigin="anonymous" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/css/bootstrap-select.min.css" integrity="sha512-ARJR74swou2y0Q2V9k0GbzQ/5vJ2RBSoCWokg4zkfM29Fb3vZEQyv0iWBMW/yvKgyHSR/7D64pFMmU8nYmbRkg==" crossorigin="anonymous" />
+</head>
+<body class="d-flex flex-column h-100" >
+<header>
+    <!-- Fixed navbar -->
+</header>
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#CRUDProfileUser">
+    Abrir modal crear usuario
+</button>
+
+<div class="modal" id="CRUDProfileUser">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">Perfil de Postulante</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                  aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                  <span class="sr-only">0%</span>
+                </div>
+              </div>
+                <form id=formCRUDProfileUser class="form-floating">
+                    <div class="form-group mb-4">
+                        <label for="inputUserName">Nombre de Usuario:</label>
+                        <input type="text" class="form-control" id="inputUserName" placeholder="Nombre de Usuario">
+                        <div id=invalid-feedback-UserName class="invalid-feedback"></div>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="inputEMail">Correo Electrónico:</label>
+                        <input type="text" class="form-control" id="inputEMail" placeholder="Correo Electrónico">
+                        <div id="invalid-feedback-EMail" class="invalid-feedback"></div>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="inputPassword">Contraseña:</label>
+                        <input type="password" class="form-control" id="inputPassword" placeholder="Contraseña">
+                        <div id="invalid-feedback-password" class="invalid-feedback"></div>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="inputPassword2">Repetir Contraseña:</label>
+                        <input type="password" class="form-control" id="inputPassword2" placeholder="Repetir Contraseña">
+                        <div id="invalid-feedback-password2" class="invalid-feedback"></div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button id=SubmitCRUDProfileUser class="btn btn-secondary">Siguiente</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="CRUDProfileUserData">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">Perfil de Postulante</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                  aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                  <span class="sr-only">0%</span>
+                </div>
+              </div>
+                <form id=formCRUDProfileUserData class="form-floating">
+                    <div class="form-group mb-4">
+                        <label for="inputName">Nombre:</label>
+                        <input type="text" class="form-control" id="inputName" placeholder="Nombre">
+                        <div class="invalid-feedback">No puede dejar el campo vacio.</div>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="inputLastName">Apellido:</label>
+                        <input type="text" class="form-control" id="inputLastName" placeholder="Apellido">
+                        <div class="invalid-feedback">No puede dejar el campo vacio.</div>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="inputBirthDate">Fecha Nacimiento:</label>
+                        <input type="text" class="form-control" id="inputBirthDate" placeholder="Fecha Nacimiento">
+                        <div class="invalid-feedback">Formato incorrecto</div>
+                    </div>
+                    <div class="form-group mb-4">
+                       <label for="inputGenre">Genero:</label>
+                       <select class="form-control" id="inputGenre">
+                          <option>Hombre</option>
+                          <option>Mujer</option>
+                          <option>Otro</option>
+                       </select>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button data-toggle="modal" data-target="#CRUDProfileUser" class="btn btn-secondary" data-dismiss="modal">Anterior</button>
+                <button id=SubmitCRUDProfileUserData class="btn btn-secondary">Siguiente</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="CRUDProfileCity">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">Perfil de Postulante</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                  aria-valuemin="0" aria-valuemax="100" style="width:20%">
+                  <span class="sr-only">0%</span>
+                </div>
+              </div>
+                <form id=formCRUDProfileCity class="form-floating">
+                <div class="form-group mb-4">
+                       <label for="inputCountry">País:</label>
+                       <select class="form-control" id="inputCountry">
+                          <option>Argentina</option>
+                       </select>
+                    </div>
+                    <div class="form-group mb-4">
+                       <label for="inputState">Provincia:</label>
+                       <select class="form-control" id="inputState">
+                          <option>Misiones</option>
+                       </select>
+                    </div>
+                    <div class="form-group mb-4">
+                       <label for="inputCity">Ciudad:</label>
+                       <select class="form-control" id="inputCity">
+                          <option th:each="city: ${cities}" th:value="${city.id}" th:text="${city.name}"></option>
+                       </select>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+            	<button data-toggle="modal" data-target="#CRUDProfileUserData" class="btn btn-secondary" data-dismiss="modal">Anterior</button>
+                <button data-toggle="modal" data-target="#CRUDProfileStudy" class="btn btn-secondary" data-dismiss="modal">Siguiente</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="CRUDProfileStudy">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">Perfil de Postulante</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                  aria-valuemin="0" aria-valuemax="100" style="width:40%">
+                  <span class="sr-only">0%</span>
+                </div>
+              </div>
+                <form id=formCRUDProfileStudy class="form-floating">
+                  <div class="form-group mb-4">
+                      <label for="inputStudy">Estudios:</label>
+                      <textarea class="form-control" rows="4" id="inputStudy"></textarea>
+                      <div class="invalid-feedback">No puede dejar el campo vacio.</div>
+                  </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button data-toggle="modal" data-target="#CRUDProfileCity" class="btn btn-secondary" data-dismiss="modal">Anterior</button>
+                <button id=submitCRUDProfileStudy class="btn btn-secondary">Siguiente</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="CRUDProfileSkill">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">Perfil de Postulante</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                  aria-valuemin="0" aria-valuemax="100" style="width:60%">
+                  <span class="sr-only">0%</span>
+                </div>
+              </div>
+                <form id=formCRUDProfileSkill class="form-floating">
+                  <div class="form-group mb-4">
+                      <label for="inputSkill">Habilidades:</label>
+                      <textarea class="form-control" rows="4" id="inputSkill"></textarea>
+                      <div class="invalid-feedback">No puede dejar el campo vacio.</div>
+                  </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button data-toggle="modal" data-target="#CRUDProfileStudy" class="btn btn-secondary" data-dismiss="modal">Anterior</button>
+                <button id=submitCRUDProfileSkill class="btn btn-secondary">Siguiente</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="CRUDProfileLastModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+              <h4 class="modal-title">Perfil de Postulante</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                  aria-valuemin="0" aria-valuemax="100" style="width:80%">
+                  <span class="sr-only">0%</span>
+                </div>
+              </div>
+                <form id=formCRUDProfileLastModal class="form-floating">
+                  <legend class="col-form-label col-sm-2 pt-0">Disponibilidad</legend>
+                  <div class="form-group mb-4">
+                    <div class="form-check-inline">
+                      <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" value="">Tiempo Completo
+                      </label>
+                    </div>
+                    <div class="form-check-inline">
+                      <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" value="">Medio Tiempo
+                      </label>
+                    </div>
+                    <div class="form-check-inline">
+                      <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" value="">Teletrabajo
+                      </label>
+                    </div>
+                  </div>
+                  <div class="mb-4">
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" value="">Inhabilitar Perfil Laboral
+                      </label>
+                    </div>
+                  </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button id=submitCRUDProfileLastModal class="btn btn-primary">Guardar Perfil</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"
+            integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+            crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+            crossorigin="anonymous"></script>
+    
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
+	integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ=="
+	crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/bootstrap-select.min.js" integrity="sha512-yDlE7vpGDP7o2eftkCiPZ+yuUyEcaBwoJoIhdXv71KZWugFqEphIS3PU60lEkFaz8RxaVsMpSvQxMBaKVwA5xg==" crossorigin="anonymous"></script>
+    <script src="/static/public/js/scripts.js"></script>
+ 	<script type="text/javascript">
+   	
+   	$(function() {
+   		function checkUsername(username)
+   	    {
+   			let noError=0;
+   			if(username.length==0)
+			{
+   				$("#inputUserName").removeClass("is-valid");
+				$("#inputUserName").addClass("is-invalid");
+				$("#invalid-feedback-UserName").html("No puede dejar el campo vacio.");
+				noError = 1;
+			}
+   			else
+   			{
+   				fetch('/api/existsByUsername/' + username).then(function(response) {
+   	   				response.json().then(function(data) {
+   	   					if(data)
+   	 					{
+   	   						$("#inputUserName").removeClass("is-valid");
+   	   						$("#inputUserName").addClass("is-invalid");
+   	   						$("#invalid-feedback-UserName").html("El nombre de usuario ya existe");
+   	   						noError = 2;
+   	   					}
+   	   					else
+ 	   					{
+   	   						$("#inputUserName").removeClass("is-invalid");
+	   						$("#inputUserName").addClass("is-valid");
+   	   					}
+   	   				});
+   				});
+  			}
+   			return noError;
+   	    }
+   		function checkEMail(email)
+   	    {
+   			let noError=0;
+   			if(email.length==0)
+			{
+   				$("#inputEMail").removeClass("is-valid");
+				$("#inputEMail").addClass("is-invalid");
+				$("#invalid-feedback-EMail").html("No puede dejar el campo vacio.");
+				noError=1;
+			}
+   			else
+   			{
+   				fetch('/api/existsByEMail/' + email).then(function(response) {
+   	   				response.json().then(function(data) {
+   	   					if(data)
+   	 					{
+   	   						$("#inputEMail").removeClass("is-valid");
+   	   						$("#inputEMail").addClass("is-invalid");
+   	   						$("#invalid-feedback-EMail").html("El correo electrónico ya existe");
+   	   						noError=2;
+   	   					}
+   	   					else
+ 	   					{
+   	   						$("#inputEMail").removeClass("is-invalid");
+	   						$("#inputEMail").addClass("is-valid");
+   	   					}
+   	   				});
+   				});
+  			}
+   			return noError;
+   	    }
+   		$('#inputBirthDate').datepicker({
+   		    format: "dd/mm/yyyy"
+   		});
+   		$('#inputCountry').selectpicker({liveSearch:true});
+   		$('#inputState').selectpicker({liveSearch:true});
+   		$('#inputCity').selectpicker({liveSearch:true,maxOptions:10});
+   		$('#inputUserName').focusout(function() {
+   			let username=$(this).val();
+			checkUsername(username);
+   		});
+   		$('#inputEMail').focusout(function() {
+   			let email=$(this).val();
+			checkEMail(email);
+   		});
+   		$("#SubmitCRUDProfileUser").click(function() {
+   			let username = $('#inputUserName').val();
+   			let email = $('#inputEMail').val();
+   			let noError=0;
+   			noError|=checkUsername(username);
+   			noError|=checkEMail(email);
+   			if($("#inputPassword").val().length==0)
+       		{
+        		$("#inputPassword").addClass("is-invalid");
+        		$("#invalid-feedback-password").html("No puede dejar el campo vacio.");
+        		noError=3;
+       		}
+        	else
+      		{
+        		$("#inputPassword").removeClass("is-invalid");
+        		if($("#inputPassword").val()!=$("#inputPassword2").val())
+       			{
+       				noError=4;
+       				$("#inputPassword2").addClass("is-invalid");
+       				$("#invalid-feedback-password2").html("Las contraseñas deben ser iguales");
+       			}
+        		else
+       			{
+        			$("#inputPassword2").removeClass("is-invalid");
+        			$('#CRUDProfileUser').modal('toggle');
+           		 	$('#CRUDProfileUserData').modal('toggle');
+       			}
+      		}
+   			
+   		});
+        $("#SubmitCRUDProfileUserData").click(function() {
+        	let noError=0;
+        	console.log("inicio " + noError);
+        	if($("#inputName").val().length==0)
+       		{
+        		$("#inputName").removeClass("is-valid");
+        		$("#inputName").addClass("is-invalid");
+        		noError=1;
+       		}
+        	else
+      		{
+        		$("#inputName").removeClass("is-invalid");
+        		$("#inputName").addClass("is-valid");
+      		}
+        	if($("#inputLastName").val().length==0)
+       		{
+        		$("#inputName").removeClass("is-valid");
+        		$("#inputLastName").addClass("is-invalid");
+        		noError=2;
+       		}
+        	else
+      		{
+        		$("#inputLastName").removeClass("is-invalid");
+        		$("#inputLastName").addClass("is-valid");
+      		}
+        	if(moment($("#inputBirthDate").val(), "DD/MM/YYYY", true).isValid())
+       		{
+        		$("#inputBirthDate").removeClass("is-invalid");
+        		$("#inputBirthDate").addClass("is-valid");
+       		}
+        	else
+       		{
+        		$("#inputBirthDate").removeClass("is-valid");
+        		$("#inputBirthDate").addClass("is-invalid");
+        		noError=3;
+       		}
+        	console.log("fin " + noError);
+        	if(noError===0)
+        	{
+        		 $('#CRUDProfileUserData').modal('toggle');
+        		 $('#CRUDProfileCity').modal('toggle');
+        	}
+        });
+        $("#submitCRUDProfileStudy").click(function() {
+        	if($('#inputStudy').val().length==0)
+       		{
+        		$("#inputStudy").removeClass("is-valid");
+        		$("#inputStudy").addClass("is-invalid");
+       		}
+        	else
+       		{
+        		$("#inputStudy").removeClass("is-invalid");
+        		$("#inputStudy").addClass("is-valid");
+       		 	$('#CRUDProfileStudy').modal('toggle');
+        		$('#CRUDProfileSkill').modal('toggle');
+       		}
+        });
+        $("#submitCRUDProfileSkill").click(function() {
+        	if($('#inputSkill').val().length==0)
+       		{
+        		$("#inputSkill").removeClass("is-valid");
+        		$("#inputSkill").addClass("is-invalid");
+       		}
+        	else
+       		{
+        		$("#inputSkill").removeClass("is-invalid");
+        		$("#inputSkill").addClass("is-valid");
+        		$('#CRUDProfileSkill').modal('toggle');
+        		$('#CRUDProfileLastModal').modal('toggle');
+       		}
+        });
+        $("#submitCRUDProfileLastModal").click(function() {
+        	$.ajax({
+                type: "POST",
+                url: "/api/user",
+                data: $('#formCRUDProfileUser').serialize(), // serializes the form's elements.
+                success: function (data) {
+                	
+                }
+            });
+        });
+    });
+    </script>
+</body>
+</html>
+
