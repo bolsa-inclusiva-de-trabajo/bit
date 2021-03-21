@@ -78,6 +78,12 @@ public class User {
                inverseJoinColumns = @JoinColumn(name = "job_id"))
     private Set<Job> interestingJobs;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "apply",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "job_id"))
+    private Set<Job> applyJobs;
+
     //@Transient
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "contact",

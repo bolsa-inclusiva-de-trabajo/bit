@@ -166,4 +166,12 @@ INSERT INTO contact (user_1_id, user_2_id) VALUES (1, 2)
 
 INSERT INTO interest (user_id, job_id) VALUES (2, 2)
 
+INSERT INTO interest (user_id, job_id) VALUES (1, 2)
+
 INSERT INTO interest (user_id, job_id) VALUES (2, 4)
+
+INSERT INTO apply (user_id, job_id) VALUES (1, 2)
+
+INSERT INTO apply (user_id, job_id) VALUES (2, 2)
+
+INSERT INTO apply (user_id, job_id) VALUES (1, 1)
