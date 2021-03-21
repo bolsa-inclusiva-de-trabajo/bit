@@ -65,3 +65,43 @@ $(document).ready(function() {
         }, false);
     });
 });
+
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip({
+        placement : 'top'
+    });
+});
+
+function hide (elements) {
+    elements = elements.length ? elements : [elements];
+    for (var index = 0; index < elements.length; index++) {
+        elements[index].style.display = 'none';
+    }
+}
+
+function show (elements, specifiedDisplay) {
+    elements = elements.length ? elements : [elements];
+    for (var index = 0; index < elements.length; index++) {
+        elements[index].style.display = specifiedDisplay || 'block';
+    }
+}
+
+/**
+function showModalJob(){
+    const idJob = this.id.replace("btn_show_job_","");
+    $.ajax({
+        method:"GET",
+        url:"/api/encuesta/" + idEncuesta,
+        success: function(){
+           $("#fila_" + idEncuesta).remove();
+           alert(idEncuesta + " quitado con exito");
+        },
+        error: function( response ) {
+            alert("error")
+        },
+
+    });
+
+}
+$(".botonBorrar").click(borrar);
+**/

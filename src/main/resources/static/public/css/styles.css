@@ -47,6 +47,7 @@ section#home-main {
 .panel_contact {
     border-radius: 5px;
     background-color: #C9C9C9;
+
 }
 
 .contact_title {
@@ -92,7 +93,7 @@ section#home-main {
 
 
 .panel_offers {
-    width: auto;
+    width: 100%;
     border-radius: 5px;
     background-color: #C9C9C9;
 }
@@ -113,14 +114,16 @@ section#home-main {
 
 .tbl_offer_data {
     width: 100%;
+    border: 1px solid black;
 }
 
 .tbl_filter {
     background-color: #C9C9C9;
     width: 100%;
 }
+
 .tbl_interests {
-    background-color: #C9C9C9;
+
     width: 100%;
 }
 

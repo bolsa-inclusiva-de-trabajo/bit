@@ -12,12 +12,13 @@
                 <div class="row" >
 
 
-                    <div class="col-4 col-sm-4 col-md-2 col_a " align="center" >
-                        <div class="container m-1 panel_news">
-                            <p class=" h6">NOVEDADES</p>
+                    <div class="col-4 col-sm-4 col-md-2 col_a " >
+                        <button type="button" class="btn btn-primary mt-2" th:text="#{bag_offer.addOfferButton}">add</button>
+                        <div class="container panel_news mt-2">
+                            <p class="h6">NOVEDADES</p>
                             <table>
                                 <tr>
-                                    <td><p class="news_content">NOVEDAD</p></td>
+                                    <td><p class="news_content" th:text="#{bag_offer.newsTitle}">news</p></td>
                                 </tr>
                             </table>
                         </div>
@@ -26,68 +27,76 @@
 
                     <div class="col-8 col-sm-8 col-md-7  col_b" >
                         <div class="col">
-                            <ul class="nav nav-pills nav-stacked anyClass">
-                                <table>
+                            <ul class="nav nav-pills nav-stacked ">
+                                <table class="table table-borderless align-middle" style="width: 100%;">
 
 
                                     <tr th:id="'job_row_' +  ${job.id}" th:each="job: ${jobs}">
-                                        <td>
+                                        <td colspan="3">
                                             <div class="container mt-2 panel_offers">
 
 
 
-                                                <p class="offers_title"  th:text="${job.title} ?: 'SIN TITULO'">JOB TITLE</p>
-                                                <table>
+                                                <p class="h6"  th:text="${job.title} ?: #{bag_offer.noTitle}">JOB TITLE</p>
+                                                <table  style=" width: 100%;">
                                                     <tr>
                                                         <td>
-                                                            <p class="offers_text" th:text="${job.description}  ?: 'SIN DESCRIPCION'">JOB DESCRIPTION</p>
+                                                            <p class="offers_text" th:text="${job.description}  ?: #{bag_offer.noDescription}">JOB DESCRIPTION</p>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <table class="tbl_offer_data" >
+                                                            <table class="table align-middle" style="width: 100%;" >
                                                                 <tr >
-                                                                    <td >
-                                                                        <span class="offers_data_text" th:text="${job.fullTime} ? 'TIEMPO COMPLETO' : ''" >txt</span>
-                                                                        <span class="offers_data_text" th:text="${job.partTime} ? 'MEDIO TIEMPO' : ''" >txt</span>
-                                                                        <span class="offers_data_text" th:text="${job.homeWork} ? 'TRABAJO REMOTO' : ''" >txt</span>
-                                                                        <span class="offers_data_text" th:text="${job.independent} ? 'INDEPENDIENTE' : ''" >txt</span>
-                                                                        <span class="offers_data_text" th:text="${job.dependent} ? 'RELACION DE DEPENDENCIA' : ''" >txt</span>
-
-                                                                    </td>
-                                                                    <td>
-
-                                                                    </td>
-                                                                    <td rowspan="3" align="right">
-                                                                        <!--<button class="btn btn-secondary">CONTACTAR</button>-->
-                                                                        <a href="/postularme">
-                                                                            <i class="bi bi-telephone-plus" data-toggle="tooltip" data-original-title="Postularme"></i>
-                                                                        </A>
+                                                                    <td colspan="4" >
+                                                                        <span class="offers_data_text" th:text="${job.fullTime} ? #{bag_offer.fullTime} : ''" >txt</span>
+                                                                        <span class="offers_data_text" th:text="${job.partTime} ? #{bag_offer.partTime} : ''" >txt</span>
+                                                                        <span class="offers_data_text" th:text="${job.homeWork} ? #{bag_offer.remote} : ''" >txt</span>
+                                                                        <span class="offers_data_text" th:text="${job.independent} ? #{bag_offer.independent} : ''" >txt</span>
+                                                                        <span class="offers_data_text" th:text="${job.dependent} ? #{bag_offer.dependent} : ''" >txt</span>
                                                                     </td>
                                                                 </tr>
-                                                                <tr>
-<!-- + ${#dates.format(job.expiration, 'dd-MMM-yyyy')}-->
-
-                                                                    <td>
-                                                                        <p class="offers_data_text" th:text="'V&aacute;lida hasta ' + ${#temporals.day(job.expiration)} + '/' + ${#temporals.month(job.expiration)} + '/' + ${#temporals.year(job.expiration)}" >txt</p>
+                                                                <tr >
+                                                                    <td class="table align-left">
+                                                                        <p class="offers_data_text" th:text="#{bag_offer.valid} + ' ' + ${#temporals.day(job.expiration)} + '/' + ${#temporals.month(job.expiration)} + '/' + ${#temporals.year(job.expiration)}" >txt</p>
                                                                     </td>
-                                                                    <td>
+                                                                    <td class="table align-right">
                                                                         <a href="/meinteresaestaofertadetrabajo">
-                                                                            <i class="bi bi-hand-thumbs-up" data-toggle="tooltip" data-original-title="Me interesa"></i>
+                                                                            <i class="bi bi-hand-thumbs-up" data-toggle="tooltip" th:data-original-title="#{bag_offer.interested}"></i>
+                                                                        </a>
+                                                                    </td>
+                                                                    <td class="table align-right">
+                                                                        <a href="/postularme">
+                                                                            <i class="bi bi-telephone-plus ml-2" data-toggle="tooltip" th:data-original-title="#{bag_offer.apply}"></i>
+                                                                        </a>
+                                                                    </td>
+                                                                    <td class="table align-right">
+                                                                        <a th:if="${user.existCreatedJob({job.id})}" href="/eliminaroferta">
+                                                                            <i class="bi bi-trash ml-2" data-toggle="tooltip" th:data-original-title="#{bag_offer.deleteOffer}"></i>
                                                                         </a>
                                                                     </td>
                                                                 </tr>
-                                                                <tr >
-
-                                                                    <td>
-                                                                        <p class="offers_data_text">
-                                                                            <span th:text="${job.getInterestedUsersCount() > 0}  ? ${job.getInterestedUsersCount()} + ' persona'+(${job.getInterestedUsersCount() > 1} ? 's' : '') +' interesada'+(${job.getInterestedUsersCount() > 1} ? 's' : '') : '' ">## persona/s interesada/s</span>
-                                                                            <span th:text="${job.getApplyUsersCount() > 0}  ? ${job.getApplyUsersCount()} + ' persona'+(${job.getApplyUsersCount() > 1} ? 's' : '') +' postulada'+(${job.getApplyUsersCount() > 1} ? 's' : '') : '' ">## persona/s postulada/s</span>
-
-                                                                        </p>
+                                                                <tr>
+                                                                    <td colspan="4">
+                                                                        <span class="offers_data_text" th:text="${job.getInterestedUsersCount() > 0}  ? (
+                                                                                    ${job.getInterestedUsersCount()} + ' ' +
+                                                                                    (${job.getInterestedUsersCount() > 1} ? #{bag_offer.interestPlural} : #{bag_offer.interestSingle})
+                                                                        )">interested people</span>
+                                                                        <span class="offers_data_text ml-4" th:text="${job.getApplyUsersCount() > 0}  ? (
+                                                                                    ${job.getApplyUsersCount()} + ' ' +
+                                                                                    (${job.getApplyUsersCount() > 1} ? #{bag_offer.applyPlural} : #{bag_offer.applySingle})
+                                                                        )">nominees</span>
                                                                     </td>
-                                                                    <td></td>
                                                                 </tr>
+
+
+
+
+
+
+
+
+
                                                             </table>
                                                         </td>
                                                 </table>
@@ -95,7 +104,23 @@
                                         </td>
                                     </tr>
 
+                                    <tr  >
+                                        <td >
+                                            <a th:if="${currentPage > 0}" th:href="'/bagoffers?page=' + ${currentPage - 1} + '&size=' + ${pageSize}">
+                                                <button type="button" class="btn btn-primary mt-2" th:text="#{bag_offer.buttonPrevious}">previous</button>
+                                            </a>
 
+                                        </td>
+                                        <td class="justify-content-center" >
+                                            <span align="align-center" th:text="#{bag_offer.pagerText} + ' ' + ${currentPage + 1} + ' ' + #{bag_offer.pagerConnector} + ' ' + ${pageTotal}"></span>
+                                        </td>
+                                        <td  >
+                                            <a th:if="${currentPage < pageTotal -1}" th:href="'/bagoffers?page=' + ${currentPage + 1} + '&size=' + ${pageSize}">
+                                                <button type="button" class="btn btn-primary mt-2" th:text="#{bag_offer.buttonNext}">next</button>
+                                            </a>
+
+                                        </td>
+                                    </tr>
 
 
 
@@ -105,89 +130,113 @@
                     </div>
 
 
-                    <div class="col-0 col-sm col-md-3 col_c " >
-                        <table tbl_filter>
-                            <tr>
-                                <td>
-                                    <form class="row">
-                                        <table>
-                                            <tr style="vertical-align: middle;">
-                                            <td>
-                                                <input type="text" class="form-control" id="txtSearch">
-                                            </td>
-                                            <td>
-                                                <button type="submit" class="btn btn-primary">
-                                                    <i class="bi bi-search"></i>
-                                                </button>
-                                            </td>
-                                            </tr>
-                                            <tr aria-colspan="2">
-                                                <td>
+                    <div class="col-0 col-sm col-md-3 col-c" >
 
-                                                        <input type="checkbox" id="chkMyCity"  onclick="">
-                                                        <label class="ml-2" >Mi ciudad</label>
+                        <form class="row">
+                            <table>
+                                <tr style="vertical-align: middle;">
+                                    <td>
+                                        <input type="text" class="form-control" id="txtSearch">
+                                    </td>
+                                    <td>
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="bi bi-search"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr aria-colspan="2">
+                                    <td>
 
-                                                </td>
-                                            </tr>
-                                            <tr aria-colspan="2">
-                                                <td>
-                                                        <input type="checkbox"  id="chkFullTime">
-                                                        <label class="ml-2">Full Time</label>
-                                                </td>
-                                            </tr>
-                                            <tr aria-colspan="2">
-                                                <td>
-                                                        <input type="checkbox"  id="chkPartTime">
-                                                        <label class="ml-2" >Medio Tiempo</label>
-                                                </td>
-                                            </tr>
-                                            <tr aria-colspan="2">
-                                                <td>
-                                                        <input type="checkbox" id="chkHomeWorking">
-                                                        <label class="ml-2" >Desde casa</label>
-                                                </td>
-                                            </tr>
-                                        </table>
+                                        <input type="checkbox" id="chkMyCity"  onclick="">
+                                        <label class="ml-2" th:text="#{bag_offer.mycity}">My city</label>
 
+                                    </td>
+                                </tr>
+                                <tr aria-colspan="2">
+                                    <td>
+                                        <input type="checkbox"  id="chkFullTime">
+                                        <label class="ml-2" th:text="#{bag_offer.fullTime}">Full Time</label>
+                                    </td>
+                                </tr>
+                                <tr aria-colspan="2">
+                                    <td>
+                                        <input type="checkbox"  id="chkPartTime">
+                                        <label class="ml-2"  th:text="#{bag_offer.partTime}" >Part time</label>
+                                    </td>
+                                </tr>
+                                <tr aria-colspan="2">
+                                    <td>
+                                        <input type="checkbox" id="chkHomeWorking">
+                                        <label class="ml-2"  th:text="#{bag_offer.remote}">home working</label>
+                                    </td>
+                                </tr>
+                                <tr aria-colspan="2">
+                                    <td>
+                                        <input type="checkbox" id="chkSoloMisOfertas">
+                                        <label class="ml-2" th:text="#{bag_offer.onlymyoffers}">Only my offers</label>
+                                    </td>
+                                </tr>
+                            </table>
 
-
-
-                                    </form>
-                                </td>
-                            </tr>
-
-
-                        </table>
-                        <table class="tbl_interests mt-5">
-                            <tr>
-                                <td>
-                                    <div class="container  panel_contact">
-                                        <p class="h6">MIS INTERESES</p>
-                                        <table style="width: 100%;">
+                        </form>
 
 
+                        <div class="container mt-2 panel_contact">
+                            <p class="h6" th:text="#{bag_offer.myInterests}">My interests</p>
+                            <table  style="width: 100%;">
+                                <tr  th:id="'interest_row_' +  ${interest.id}" th:each="interest: ${user.interestingJobs}">
+                                    <td style="width: auto;" class="align-middle">
+                                        <p class="contact_content align-middle" th:text="${interest.title} ?: #{bag_offer.noTitle}">JOB TITLE</p>
+                                    </td>
+                                    <td style="width: 40px;" class="align-middle">
+                                            <i  th:id="'btn_show_job_' +  ${interest.id}"
+                                                class="bi bi-eye"
+                                                data-toggle="tooltip"
+                                                th:data-original-title="#{bag_offer.viewOffer}"
+                                            onclick="  $('#modalJob').modal('show'); ">
 
-                                            <tr th:id="'interest_row_' +  ${interest.id}" th:each="interest: ${user.interestingJobs}">
-                                                <td style="width: auto;" class="align-middle">
-                                                    <p class="contact_content align-middle" th:text="${interest.title} ?: 'SIN TITULO'">JOB TITLE</p>
-                                                </td>
-                                                <td style="width: 40px;" class="align-middle">
-                                                    <a class="align-middle" href="/asdadasdasdasdsad"><i class="bi bi-eye"></i></a>
-                                                </td>
-                                                <td style="width: 40px;" class="align-middle">
-                                                    <a class="align-middle" href="/asdadasdasdasdsad"><i class="bi bi-trash"></i></a>
-                                                </td>
-                                            </tr>
-
-
-
-                                        </table>
-                                    </div>
-                                </td>
-                            </tr>
-
-                        </table>
+                                            </i>
+                                    </td>
+                                    <td style="width: 40px;" class="align-middle">
+                                        <a class="align-middle" href="/asdadasdasdasdsad"><i class="bi bi-trash" data-toggle="tooltip" th:data-original-title="#{bag_offer.deleteOffer}"></i></a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
+
+
+
+
+
+                    <div class="modal" id="modalJob">
+                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                            <div class="modal-content">
+
+                                <div class="modal-header">
+                                    <h4 class="modal-title">JOB</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+
+                                <div class="modal-body">
+
+
+
+
+
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
                 </div>
             </div>
 
