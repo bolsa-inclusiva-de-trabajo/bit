@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -29,7 +30,7 @@ public class User {
     @Column(name = "id", nullable = false, unique = true)
     private Long id;
 
-    @Column(name = "username", nullable = false, unique = true, length = 16)
+    @Column(name = "username", nullable = false, unique = true)
     private String username;
 
     @Column(name = "password", nullable = false)
@@ -69,7 +70,9 @@ public class User {
     @Column(name = "disabled", nullable = false)
     private Boolean disabled;
 
-    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
+    /* --- */
+
+    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Job> createdJobs;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -80,20 +83,22 @@ public class User {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "apply",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "job_id"))
+               joinColumns = @JoinColumn(name = "user_id"),
+               inverseJoinColumns = @JoinColumn(name = "job_id"))
     private Set<Job> applyJobs;
 
-    //@Transient
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "contact",
                joinColumns = @JoinColumn(name = "user_1_id"),
                inverseJoinColumns = @JoinColumn(name = "user_2_id"))
     private Set<User> contacts;
 
+    /* --- */
+
     public User() {
         createdJobs = new HashSet<>();
         interestingJobs = new HashSet<>();
+        applyJobs = new HashSet<>();
         contacts = new HashSet<>();
     }
 
@@ -209,59 +214,115 @@ public class User {
         this.disabled = disabled;
     }
 
+    /* ---- */
+
     public Set<Job> getCreatedJobs() {
         return Collections.unmodifiableSet(createdJobs);
     }
 
     public void setCreatedJobs(Iterable<Job> jobs) {
-        this.createdJobs.clear();
+        createdJobs.clear();
         for (Job job : jobs) {
             addCreatedJob(job);
         }
     }
 
     public void addCreatedJob(Job job) {
-        this.createdJobs.add(job);
+        createdJobs.add(job);
     }
+
+    public void remCreatedJob(Job job) {
+        createdJobs.remove(job);
+    }
+
+    public void remAllCreatedJobs() {
+        createdJobs.clear();
+    }
+
+    /* ---- */
 
     public Set<Job> getInterestingJobs() {
         return Collections.unmodifiableSet(interestingJobs);
     }
 
     public void setInterestingJobs(Iterable<Job> jobs) {
-        this.interestingJobs.clear();
+        interestingJobs.clear();
         for (Job job : jobs) {
             addInterestingJob(job);
         }
     }
 
     public void addInterestingJob(Job job) {
-        this.interestingJobs.add(job);
+        interestingJobs.add(job);
     }
+
+    public void remInterestingJob(Job job) {
+        interestingJobs.remove(job);
+    }
+
+    public void remAllInterestingJobs() {
+        interestingJobs.clear();
+    }
+
+    /* ---- */
+
+    public Set<Job> getApplyJobs() {
+        return Collections.unmodifiableSet(applyJobs);
+    }
+
+    public void setApplyJobs(Iterable<Job> jobs) {
+        applyJobs.clear();
+        for (Job job : jobs) {
+            addApplyJob(job);
+        }
+    }
+
+    public void addApplyJob(Job job) {
+        applyJobs.add(job);
+    }
+
+    public void remApplyJob(Job job) {
+        applyJobs.remove(job);
+    }
+
+    public void remAllApplyJobs() {
+        applyJobs.clear();
+    }
+
+    /* ---- */
 
     public Set<User> getContacts() {
         return Collections.unmodifiableSet(contacts);
     }
 
     public void setContacts(Iterable<User> users) {
-        this.contacts.clear();
+        contacts.clear();
         for (User user : users) {
             addContact(user);
         }
     }
 
     public void addContact(User user) {
-        this.contacts.add(user);
+        contacts.add(user);
     }
+
+    public void remContact(User user) {
+        contacts.remove(user);
+    }
+
+    public void remAllContacts() {
+        contacts.clear();
+    }
+
+    /* ---- */
 
     @Override
     public String toString() {
         return String.format("User [id=%s, username=%s, password=%s, email=%s, firstName=%s, lastName=%s, " +
                              "city=%s, education=%s, skills=%s, fullTime=%s, partTime=%s, homeWork=%s, " +
-                             "applyForJob=%s, disabled=%s, createdJobs=%s, interestingJobs=%s, contacts=%s]",
+                             "applyForJob=%s, disabled=%s]",
                              id, username, password, email, firstName, lastName, city, education,
-                             skills, fullTime, partTime, homeWork, applyForJob, disabled,
-                             createdJobs.size(), interestingJobs.size(), contacts.size());
+                             skills, fullTime, partTime, homeWork, applyForJob, disabled);
     }
 
     @Override

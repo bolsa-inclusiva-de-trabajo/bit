@@ -1,10 +1,8 @@
 package ar.org.cpci.bit.controller;
 
-import java.util.Locale;
-
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class RootController {
@@ -15,18 +13,13 @@ public class RootController {
     }
 
     @GetMapping("/international")
-    public String getInternationalPage() {
+    public String international() {
         return "system/international";
     }
 
-//    @GetMapping("/current_locale")
-//    public @ResponseBody String locale(Locale locale) {
-//        return locale.toString();
-//    }
-
-//    @GetMapping("/error")
-//    public String errorpage() {
-//        return "system/error";
-//    }
+    @GetMapping("/error")
+    public String error() {
+        return "system/error";
+    }
 
 }

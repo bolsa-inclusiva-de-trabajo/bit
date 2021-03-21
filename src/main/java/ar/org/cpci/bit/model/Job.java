@@ -6,7 +6,16 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "job")
@@ -44,7 +53,7 @@ public class Job {
     @Column(name = "disabled", nullable = false)
     private Boolean disabled;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User owner;
 
@@ -54,9 +63,9 @@ public class Job {
     @ManyToMany(mappedBy = "applyJobs", fetch = FetchType.EAGER)
     private Set<User> applyUsers;
 
+    /* ---- */
 
     public Job() {
-
         interestedUsers = new HashSet<>();
         applyUsers = new HashSet<>();
     }
@@ -149,73 +158,73 @@ public class Job {
         this.owner = owner;
     }
 
+    /* ---- */
+
     public Set<User> getInterestedUsers() {
         return Collections.unmodifiableSet(interestedUsers);
     }
 
-    public Set<User> getApplyUsers() {
-        return Collections.unmodifiableSet(applyUsers);
-    }
-
-    public int getInterestedUsersCount() {
-        if (getInterestedUsers() != null)
-        {
-            int xx = 0;
-            try {
-                Set<User> x = getInterestedUsers();
-                xx = x.size();
-            } catch (Exception e) {}
-            return xx;
-        } else {
-            return 0;
-        }
-    }
-
     public void setInterestedUsers(Iterable<User> users) {
-        this.interestedUsers.clear();
+        interestedUsers.clear();
         for (User user : users) {
             addInterestedUser(user);
         }
     }
 
     public void addInterestedUser(User user) {
-        this.interestedUsers.add(user);
+        interestedUsers.add(user);
     }
 
-    public int getApplyUsersCount() {
-        if (getApplyUsers() != null)
-        {
-            int xx = 0;
-            try {
-                Set<User> x = getApplyUsers();
-                xx = x.size();
-            } catch (Exception e) {}
-            return xx;
-        } else {
-            return 0;
-        }
+    public void remInterestedUser(User user) {
+        interestedUsers.remove(user);
+    }
+
+    public void remAllInterestedUser() {
+        interestedUsers.clear();
+    }
+
+    public int getInterestedUsersCount() {
+        return interestedUsers.size();
+    }
+
+    /* ---- */
+
+    public Set<User> getApplyUsers() {
+        return Collections.unmodifiableSet(applyUsers);
     }
 
     public void setApplyUsers(Iterable<User> users) {
-        this.applyUsers.clear();
+        applyUsers.clear();
         for (User user : users) {
             addAplyUser(user);
         }
     }
 
     public void addAplyUser(User user) {
-        this.applyUsers.add(user);
+        applyUsers.add(user);
     }
 
+    public void remAplyUser(User user) {
+        applyUsers.remove(user);
+    }
 
+    public void remAllAplyUser() {
+        applyUsers.clear();
+    }
+
+    public int getApplyUsersCount() {
+        return applyUsers.size();
+    }
+
+    /* ---- */
 
     @Override
     public String toString() {
         return String.format("Job [id=%s, title=%s, description=%s, expiration=%s, " +
                              "fullTime=%s, partTime=%s, homeWork=%s, independent=%s, dependent=%s, " +
-                             "disabled=%s, owner=%s, interestedUsers=%s]",
+                             "disabled=%s, owner=%s]",
                              id, title, description, expiration, fullTime, partTime, homeWork,
-                             independent, dependent, disabled, owner, interestedUsers.size());
+                             independent, dependent, disabled, owner);
     }
 
     @Override
@@ -234,6 +243,5 @@ public class Job {
         Job other = (Job) obj;
         return Objects.equals(id, other.id);
     }
-
 
 }
