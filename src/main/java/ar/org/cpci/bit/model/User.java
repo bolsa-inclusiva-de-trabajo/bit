@@ -239,6 +239,10 @@ public class User {
         createdJobs.clear();
     }
 
+    public boolean containsCreatedJob(Job job) {
+        return createdJobs.contains(job);
+    }
+
     /* ---- */
 
     public Set<Job> getInterestingJobs() {
@@ -293,6 +297,10 @@ public class User {
         applyJobs.clear();
     }
 
+    public boolean containsApplyJob(Job job) {
+        return applyJobs.contains(job);
+    }
+
     /* ---- */
 
     public Set<User> getContacts() {
@@ -316,6 +324,10 @@ public class User {
 
     public void remAllContacts() {
         contacts.clear();
+    }
+
+    public boolean containsContact(User user) {
+        return contacts.contains(user);
     }
 
     /* ---- */
