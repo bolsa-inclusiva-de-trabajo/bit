@@ -29,7 +29,7 @@ public class BagRestController {
 
     /* --- SCHMagic :) --- */
 
-    private static <T> T getByeIdFromRepo(CrudRepository<T, Long> repo, Long id) {
+    private static <T> T getByIdFromRepo(CrudRepository<T, Long> repo, Long id) {
         Optional<T> optional = repo.findById(id);
         return optional.isPresent() ? optional.get() : null;
     }
@@ -39,12 +39,11 @@ public class BagRestController {
                                                                  CrudRepository<T2, Long> repo2,
                                                                  Long id2,
                                                                  String methodName) {
-
         HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
         boolean success = false;
 
-        T1 obj1 = getByeIdFromRepo(repo1, id1);
-        T2 obj2 = getByeIdFromRepo(repo2, id2);
+        T1 obj1 = getByIdFromRepo(repo1, id1);
+        T2 obj2 = getByIdFromRepo(repo2, id2);
 
         if (obj1 != null && obj2 != null) {
             try {
@@ -57,7 +56,7 @@ public class BagRestController {
                     status = HttpStatus.OK;
                 }
             } catch (Exception e) {
-                // operation not possible
+                // Operation not possible
                 e.printStackTrace();
             }
         }
@@ -70,25 +69,27 @@ public class BagRestController {
         return processMethod(repositoryUser, uid, repositoryJob, jid, methodName);
     }
 
-    private ResponseEntity<Object> getResponseEntityUserUser(Long id1, Long id2, String methodName) {
-        return processMethod(repositoryUser, id1, repositoryUser, id2, methodName);
+    private ResponseEntity<Object> getResponseEntityUserUser(Long uid1, Long uid2, String methodName) {
+        return processMethod(repositoryUser, uid1, repositoryUser, uid2, methodName);
     }
 
-    /* --- User.interestingJobs<job> --- */
+    /* --- User.createdJob<job> --- */
 
-    @GetMapping(path = "/api/bag/user/{uid}/job/{jid}/created")
+    public static final String CREATED_JOBS_URL = "/api/bag/user/{uid}/job/{jid}/created";
+
+    @GetMapping(path = CREATED_JOBS_URL)
     public ResponseEntity<Object> getCreatedJob(@PathVariable("uid") Long uid,
                                                 @PathVariable("jid") Long jid) {
         return getResponseEntityUserJob(uid, jid, "containsCreatedJob");
     }
 
-    @PostMapping(path = "/api/bag/user/{uid}/job/{jid}/created")
+    @PostMapping(path = CREATED_JOBS_URL)
     public ResponseEntity<Object> newCreatedJob(@PathVariable("uid") Long uid,
                                                 @PathVariable("jid") Long jid) {
         return getResponseEntityUserJob(uid, jid, "addCreatedJob");
     }
 
-    @DeleteMapping(path = "/api/bag/user/{uid}/job/{jid}/created")
+    @DeleteMapping(path = CREATED_JOBS_URL)
     public ResponseEntity<Object> remCreatedJob(@PathVariable("uid") Long uid,
                                                 @PathVariable("jid") Long jid) {
         return getResponseEntityUserJob(uid, jid, "remCreatedJob");
@@ -96,19 +97,21 @@ public class BagRestController {
 
     /* --- User.interestingJobs<job> --- */
 
-    @GetMapping(path = "/api/bag/user/{uid}/job/{jid}/interested")
+    public static final String INTERESTED_JOBS_URL = "/api/bag/user/{uid}/job/{jid}/interested";
+
+    @GetMapping(path = INTERESTED_JOBS_URL)
     public ResponseEntity<Object> getInterestedJob(@PathVariable("uid") Long uid,
                                                    @PathVariable("jid") Long jid) {
         return getResponseEntityUserJob(uid, jid, "containsInterestingJob");
     }
 
-    @PostMapping(path = "/api/bag/user/{uid}/job/{jid}/interested")
+    @PostMapping(path = INTERESTED_JOBS_URL)
     public ResponseEntity<Object> newInterestedJob(@PathVariable("uid") Long uid,
                                                    @PathVariable("jid") Long jid) {
         return getResponseEntityUserJob(uid, jid, "addInterestingJob");
     }
 
-    @DeleteMapping(path = "/api/bag/user/{uid}/job/{jid}/interested")
+    @DeleteMapping(path = INTERESTED_JOBS_URL)
     public ResponseEntity<Object> remInterestedJob(@PathVariable("uid") Long uid,
                                                    @PathVariable("jid") Long jid) {
         return getResponseEntityUserJob(uid, jid, "remInterestingJob");
@@ -116,19 +119,21 @@ public class BagRestController {
 
     /* --- User.applyJobs<job> --- */
 
-    @GetMapping(path = "/api/bag/user/{uid}/job/{jid}/apply")
+    public static final String APPLY_JOBS_URL = "/api/bag/user/{uid}/job/{jid}/apply";
+
+    @GetMapping(path = APPLY_JOBS_URL)
     public ResponseEntity<Object> getApplyJob(@PathVariable("uid") Long uid,
                                               @PathVariable("jid") Long jid) {
         return getResponseEntityUserJob(uid, jid, "containsApplyJob");
     }
 
-    @PostMapping(path = "/api/bag/user/{uid}/job/{jid}/apply")
+    @PostMapping(path = APPLY_JOBS_URL)
     public ResponseEntity<Object> newApplyJob(@PathVariable("uid") Long uid,
                                               @PathVariable("jid") Long jid) {
         return getResponseEntityUserJob(uid, jid, "addApplyJob");
     }
 
-    @DeleteMapping(path = "/api/bag/user/{uid}/job/{jid}/apply")
+    @DeleteMapping(path = APPLY_JOBS_URL)
     public ResponseEntity<Object> remApplyJob(@PathVariable("uid") Long uid,
                                               @PathVariable("jid") Long jid) {
         return getResponseEntityUserJob(uid, jid, "remApplyJob");
@@ -136,21 +141,23 @@ public class BagRestController {
 
     /* --- User.contacts<user> --- */
 
-    @GetMapping(path = "/api/bag/user/{uid}/job/{jid}/contact")
-    public ResponseEntity<Object> getContact(@PathVariable("uid") Long uid1,
-                                             @PathVariable("uid") Long uid2) {
+    public static final String CONTACT_USER_URL = "/api/bag/user/{uid1}/user/{uid2}/contact";
+
+    @GetMapping(path = CONTACT_USER_URL)
+    public ResponseEntity<Object> getContactUser(@PathVariable("uid1") Long uid1,
+                                                 @PathVariable("uid2") Long uid2) {
         return getResponseEntityUserUser(uid1, uid2, "containsContact");
     }
 
-    @PostMapping(path = "/api/bag/user/{uid}/job/{jid}/contact")
-    public ResponseEntity<Object> newContact(@PathVariable("uid") Long uid1,
-                                             @PathVariable("uid") Long uid2) {
+    @PostMapping(path = CONTACT_USER_URL)
+    public ResponseEntity<Object> newContactUser(@PathVariable("uid1") Long uid1,
+                                                 @PathVariable("uid2") Long uid2) {
         return getResponseEntityUserUser(uid1, uid2, "addContact");
     }
 
-    @DeleteMapping(path = "/api/bag/user/{uid}/job/{jid}/contact")
-    public ResponseEntity<Object> remContact(@PathVariable("uid") Long uid1,
-                                             @PathVariable("uid") Long uid2) {
+    @DeleteMapping(path = CONTACT_USER_URL)
+    public ResponseEntity<Object> remContactUser(@PathVariable("uid1") Long uid1,
+                                                 @PathVariable("uid2") Long uid2) {
         return getResponseEntityUserUser(uid1, uid2, "remContact");
     }
 
@@ -161,7 +168,7 @@ public class BagRestController {
         HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
         boolean success = false;
 
-        Job obj1 = getByeIdFromRepo(repo1, id1);
+        Job obj1 = getByIdFromRepo(repo1, id1);
 
         HashMap<String, Job> map = new HashMap<>();
         map.put("job", obj1);
@@ -175,7 +182,7 @@ public class BagRestController {
     @GetMapping(path = "/api/bag/job/{jid}")
     public ResponseEntity<Object> getJob(@PathVariable("jid") Long jid) {
         HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
-        Job obj1 = getByeIdFromRepo(repositoryJob, jid);
+        Job obj1 = getByIdFromRepo(repositoryJob, jid);
         HashMap<String, Job> map = new HashMap<>();
         map.put("job", obj1);
         return ResponseEntity.status(status).body(map);
