@@ -15,7 +15,7 @@
             <a class="nav-link" th:href="@{/login}" th:text="#{login.login}">login</a>
         </li>
         <li th:if="${bagUrl} != null" class="nav-item" th:title="#{workspace}">
-            <a class="nav-link" th:href="${bagUrl}" th:text="${#httpServletRequest.remoteUser}">user</a>
+            <a class="nav-link text-primary" th:href="${bagUrl}" th:text="${#httpServletRequest.remoteUser}">user</a>
         </li>
     </ul>
 

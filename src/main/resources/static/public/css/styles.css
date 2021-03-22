@@ -1,11 +1,19 @@
 section#home-main {
-    background-image: url(/static/public/img/background.jpg);
+    background-image: url(/static/public/img/people_working.jpg);
     background-position: center;
     background-repeat: no-repeat;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+}
+
+p#introductoryMessage {
+    text-shadow: 0.0em 0.06em 0.5em blueviolet !important;
+}
+
+a#joinus {
+    color: #551a8b !important;
 }
 
 .py-special {
