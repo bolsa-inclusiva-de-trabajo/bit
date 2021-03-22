@@ -11,6 +11,217 @@
             type="text/javascript" crossorigin="anonymous"></script>
 
     <script type="text/javascript" th:src="@{/static/public/js/scripts.js}"></script>
-
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
+	integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ=="
+	crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/bootstrap-select.min.js" integrity="sha512-yDlE7vpGDP7o2eftkCiPZ+yuUyEcaBwoJoIhdXv71KZWugFqEphIS3PU60lEkFaz8RxaVsMpSvQxMBaKVwA5xg==" crossorigin="anonymous"></script>
+    <script src="/static/public/js/scripts.js"></script>
+<script type="text/javascript">
+   	
+   	$(function() {
+   		function checkUsername(username)
+   	    {
+   			let noError=0;
+   			if(username.length==0)
+			{
+   				$("#inputUserName").removeClass("is-valid");
+				$("#inputUserName").addClass("is-invalid");
+				$("#invalid-feedback-UserName").html("No puede dejar el campo vacio.");
+				noError = 1;
+			}
+   			else
+   			{
+   				fetch('/api/existsByUsername/' + username).then(function(response) {
+   	   				response.json().then(function(data) {
+   	   					if(data)
+   	 					{
+   	   						$("#inputUserName").removeClass("is-valid");
+   	   						$("#inputUserName").addClass("is-invalid");
+   	   						$("#invalid-feedback-UserName").html("El nombre de usuario ya existe");
+   	   						noError = 2;
+   	   					}
+   	   					else
+ 	   					{
+   	   						$("#inputUserName").removeClass("is-invalid");
+	   						$("#inputUserName").addClass("is-valid");
+   	   					}
+   	   				});
+   				});
+  			}
+   			return noError;
+   	    }
+   		function checkEMail(email)
+   	    {
+   			let noError=0;
+   			if(email.length==0)
+			{
+   				$("#inputEMail").removeClass("is-valid");
+				$("#inputEMail").addClass("is-invalid");
+				$("#invalid-feedback-EMail").html("No puede dejar el campo vacio.");
+				noError=1;
+			}
+   			else
+   			{
+   				fetch('/api/existsByEMail/' + email).then(function(response) {
+   	   				response.json().then(function(data) {
+   	   					if(data)
+   	 					{
+   	   						$("#inputEMail").removeClass("is-valid");
+   	   						$("#inputEMail").addClass("is-invalid");
+   	   						$("#invalid-feedback-EMail").html("El correo electrónico ya existe");
+   	   						noError=2;
+   	   					}
+   	   					else
+ 	   					{
+   	   						$("#inputEMail").removeClass("is-invalid");
+	   						$("#inputEMail").addClass("is-valid");
+   	   					}
+   	   				});
+   				});
+  			}
+   			return noError;
+   	    }
+   		$('#inputBirthDate').datepicker({
+   		    format: "dd/mm/yyyy"
+   		});
+   		$('#inputCountry').selectpicker({liveSearch:true});
+   		$('#inputState').selectpicker({liveSearch:true});
+   		$('#inputCity').selectpicker({liveSearch:true});
+   		$('#inputUserName').focusout(function() {
+   			let username=$(this).val();
+			checkUsername(username);
+   		});
+   		$('#inputEMail').focusout(function() {
+   			let email=$(this).val();
+			checkEMail(email);
+   		});
+   		$("#SubmitCRUDProfileUser").click(function() {
+   			let username = $('#inputUserName').val();
+   			let email = $('#inputEMail').val();
+   			let noError=0;
+   			noError|=checkUsername(username);
+   			noError|=checkEMail(email);
+   			if($("#inputPassword").val().length==0)
+       		{
+        		$("#inputPassword").addClass("is-invalid");
+        		$("#invalid-feedback-password").html("No puede dejar el campo vacio.");
+        		noError=3;
+       		}
+        	else
+      		{
+        		$("#inputPassword").removeClass("is-invalid");
+        		if($("#inputPassword").val()!=$("#inputPassword2").val())
+       			{
+       				noError=4;
+       				$("#inputPassword2").addClass("is-invalid");
+       				$("#invalid-feedback-password2").html("Las contraseñas deben ser iguales");
+       			}
+        		else
+       			{
+        			$("#inputPassword2").removeClass("is-invalid");
+        			$('.modal-dialog').hide();
+        			$('#CRUDProfileUserData').show();				
+       			}
+      		}
+   			
+   		});
+   		$("#PrevCRUDProfileUserData").click(function() {
+   			$('.modal-dialog').hide();
+			$('#CRUDProfileUser').show();	
+   		});
+        $("#SubmitCRUDProfileUserData").click(function() {
+        	let noError=0;
+        	console.log("inicio " + noError);
+        	if($("#inputName").val().length==0)
+       		{
+        		$("#inputName").removeClass("is-valid");
+        		$("#inputName").addClass("is-invalid");
+        		noError=1;
+       		}
+        	else
+      		{
+        		$("#inputName").removeClass("is-invalid");
+        		$("#inputName").addClass("is-valid");
+      		}
+        	if($("#inputLastName").val().length==0)
+       		{
+        		$("#inputName").removeClass("is-valid");
+        		$("#inputLastName").addClass("is-invalid");
+        		noError=2;
+       		}
+        	else
+      		{
+        		$("#inputLastName").removeClass("is-invalid");
+        		$("#inputLastName").addClass("is-valid");
+      		}
+        	if(moment($("#inputBirthDate").val(), "DD/MM/YYYY", true).isValid())
+       		{
+        		$("#inputBirthDate").removeClass("is-invalid");
+        		$("#inputBirthDate").addClass("is-valid");
+       		}
+        	else
+       		{
+        		$("#inputBirthDate").removeClass("is-valid");
+        		$("#inputBirthDate").addClass("is-invalid");
+        		noError=3;
+       		}
+        	console.log("fin " + noError);
+        	if(noError===0)
+        	{
+        		$('.modal-dialog').hide();
+    			$('#CRUDProfileCity').show();
+        	}
+        });
+        $("#prevCRUDProfileCity").click(function() {
+        	$('.modal-dialog').hide();
+			$('#CRUDProfileUserData').show();
+        });
+        $("#submitCRUDProfileCity").click(function() {
+        	$('.modal-dialog').hide();
+			$('#CRUDProfileStudy').show();
+        });
+        $("#prevCRUDProfileStudy").click(function() {
+        	$('.modal-dialog').hide();
+			$('#CRUDProfileCity').show();
+        });
+        $("#submitCRUDProfileStudy").click(function() {
+        	if($('#inputStudy').val().length==0)
+       		{
+        		$("#inputStudy").removeClass("is-valid");
+        		$("#inputStudy").addClass("is-invalid");
+       		}
+        	else
+       		{
+        		$("#inputStudy").removeClass("is-invalid");
+        		$("#inputStudy").addClass("is-valid");
+        		$('.modal-dialog').hide();
+    			$('#CRUDProfileSkill').show();
+       		}
+        });
+        $("#prevCRUDProfileSkill").click(function() {
+        	$('.modal-dialog').hide();
+			$('#CRUDProfileStudy').show();
+        });
+        $("#submitCRUDProfileSkill").click(function() {
+        	if($('#inputSkill').val().length==0)
+       		{
+        		$("#inputSkill").removeClass("is-valid");
+        		$("#inputSkill").addClass("is-invalid");
+       		}
+        	else
+       		{
+        		$("#inputSkill").removeClass("is-invalid");
+        		$("#inputSkill").addClass("is-valid");
+        		$('.modal-dialog').hide();
+    			$('#CRUDProfileLastModal').show();
+       		}
+        });
+        $("#prevCRUDProfileLastModal").click(function() {
+        	$('.modal-dialog').hide();
+			$('#CRUDProfileSkill').show();
+        });
+    });
+    </script>
 </div>
 </html>

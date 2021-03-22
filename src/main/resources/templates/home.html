@@ -124,12 +124,270 @@
 
         <section class="row py-5 bg-success">
             <div class="col-12 font-weight-bold text-center display-4 my-5">
-                <a href="" id="joinus">¡Sumate!</a></div>
+                <a data-toggle="modal" data-target="#ModalCRUDProfileUser" id="joinus">¡Sumate!</a>
+</div>
+                
         </section>
 
     </div>
+    
+<div class="modal" id="ModalCRUDProfileUser">
+	<form action="api/user/edit" method="POST">
+<!-- 	<input -->
+<!--             type="hidden" -->
+<!--             th:name="${_csrf.parameterName}" -->
+<!--             th:value="${_csrf.token}" /> -->
+    <div class="modal-dialog" id="CRUDProfileUser">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">Perfil de Postulante</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                  aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                  <span class="sr-only">0%</span>
+                </div>
+              </div>
+                    <div class="form-group mb-4">
+                        <label for="inputUserName">Nombre de Usuario:</label>
+                        <input name="username" type="text" class="form-control" id="inputUserName" placeholder="Nombre de Usuario">
+                        <div id=invalid-feedback-UserName class="invalid-feedback"></div>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="inputEMail">Correo Electrónico:</label>
+                        <input name="email" type="text" class="form-control" id="inputEMail" placeholder="Correo Electrónico">
+                        <div id="invalid-feedback-EMail" class="invalid-feedback"></div>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="inputPassword">Contraseña:</label>
+                        <input name="password" type="password" class="form-control" id="inputPassword" placeholder="Contraseña">
+                        <div id="invalid-feedback-password" class="invalid-feedback"></div>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="inputPassword2">Repetir Contraseña:</label>
+                        <input type="password" class="form-control" id="inputPassword2" placeholder="Repetir Contraseña">
+                        <div id="invalid-feedback-password2" class="invalid-feedback"></div>
+                    </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" id="SubmitCRUDProfileUser" class="btn btn-secondary">Siguiente</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-dialog" id="CRUDProfileUserData" style="display: none;">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">Perfil de Postulante</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                  aria-valuemin="0" aria-valuemax="100" style="width:10%">
+                  <span class="sr-only">0%</span>
+                </div>
+              </div>
+                    <div class="form-group mb-4">
+                        <label for="inputName">Nombre:</label>
+                        <input name="firstName" type="text" class="form-control" id="inputName" placeholder="Nombre">
+                        <div class="invalid-feedback">No puede dejar el campo vacio.</div>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="inputLastName">Apellido:</label>
+                        <input name="lastName" type="text" class="form-control" id="inputLastName" placeholder="Apellido">
+                        <div class="invalid-feedback">No puede dejar el campo vacio.</div>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="inputBirthDate">Fecha Nacimiento:</label>
+                        <input name="birthDate" type="text" class="form-control" id="inputBirthDate" placeholder="Fecha Nacimiento">
+                        <div class="invalid-feedback">Formato incorrecto</div>
+                    </div>
+<!--                     <div class="form-group mb-4"> -->
+<!--                        <label for="inputGenre">Genero:</label> -->
+<!--                        <select class="form-control" id="inputGenre"> -->
+<!--                           <option>Hombre</option> -->
+<!--                           <option>Mujer</option> -->
+<!--                           <option>Otro</option> -->
+<!--                        </select> -->
+<!--                     </div> -->
+            </div>
+
+            <div class="modal-footer">
+                <button type=button id="PrevCRUDProfileUserData"  class="btn btn-secondary">Anterior</button>
+                <button type=button id="SubmitCRUDProfileUserData" class="btn btn-secondary">Siguiente</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-dialog" id="CRUDProfileCity" style="display: none;">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">Perfil de Postulante</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                  aria-valuemin="0" aria-valuemax="100" style="width:20%">
+                  <span class="sr-only">0%</span>
+                </div>
+              </div>
+            	<div class="form-group mb-4">
+                   <label for="inputCountry">País:</label>
+                   <select class="form-control" id="inputCountry">
+                      <option>Argentina</option>
+                   </select>
+                </div>
+                <div class="form-group mb-4">
+                   <label for="inputState">Provincia:</label>
+                   <select class="form-control" id="inputState">
+                      <option>Misiones</option>
+                   </select>
+                </div>
+                <div class="form-group mb-4">
+                   <label for="inputCity">Ciudad:</label>
+                   <select name="city"  class="form-control" id="inputCity">
+                      <option th:each="city: ${cities}" th:value=${city.id} th:text="${city.name}"></option>
+                   </select>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+            	<button type="button" id="prevCRUDProfileCity" class="btn btn-secondary">Anterior</button>
+                <button type="button" id="submitCRUDProfileCity" class="btn btn-secondary">Siguiente</button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal-dialog" id="CRUDProfileStudy" style="display: none;">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">Perfil de Postulante</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                  aria-valuemin="0" aria-valuemax="100" style="width:40%">
+                  <span class="sr-only">0%</span>
+                </div>
+              </div>
+                  <div class="form-group mb-4">
+                      <label for="inputStudy">Estudios:</label>
+                      <textarea name="education" class="form-control" rows="4" id="inputStudy"></textarea>
+                      <div class="invalid-feedback">No puede dejar el campo vacio.</div>
+                  </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type=button id="prevCRUDProfileStudy" class="btn btn-secondary">Anterior</button>
+                <button type=button id="submitCRUDProfileStudy" class="btn btn-secondary">Siguiente</button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal-dialog" id="CRUDProfileSkill" style="display: none;">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">Perfil de Postulante</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                  aria-valuemin="0" aria-valuemax="100" style="width:60%">
+                  <span class="sr-only">0%</span>
+                </div>
+              </div>
+                  <div class="form-group mb-4">
+                      <label for="inputSkill">Habilidades:</label>
+                      <textarea name="skills" class="form-control" rows="4" id="inputSkill"></textarea>
+                      <div class="invalid-feedback">No puede dejar el campo vacio.</div>
+                  </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type=button id="prevCRUDProfileSkill" class="btn btn-secondary">Anterior</button>
+                <button type=button id="submitCRUDProfileSkill" class="btn btn-secondary">Siguiente</button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal-dialog" id="CRUDProfileLastModal" style="display: none;">
+        <div class="modal-content">
+
+            <div class="modal-header">
+              <h4 class="modal-title">Perfil de Postulante</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                  aria-valuemin="0" aria-valuemax="100" style="width:80%">
+                  <span class="sr-only">0%</span>
+                </div>
+              </div>
+                  <legend class="col-form-label col-sm-2 pt-0">Disponibilidad</legend>
+                  <div class="form-group mb-4">
+                    <div class="form-check-inline">
+                      <label class="form-check-label">
+                        <input name="fullTime" type="hidden" class="form-check-input" value="false">
+                        <input name="fullTime" type="checkbox" class="form-check-input" value="true">Tiempo Completo
+                      </label>
+                    </div>
+                    <div class="form-check-inline">
+                      <label class="form-check-label">
+                      <input name="partTime" type="hidden" class="form-check-input" value="false">
+                        <input name="partTime" type="checkbox" class="form-check-input" value="true">Medio Tiempo
+                      </label>
+                    </div>
+                    <div class="form-check-inline">
+                      <label class="form-check-label">
+                      	<input name="homeWork" type="hidden" class="form-check-input" value="false">
+                        <input name="homeWork" type="checkbox" class="form-check-input" value="true">Teletrabajo
+                      </label>
+                    </div>
+                  </div>
+                  <div class="mb-4">
+                    <div class="form-check">
+                      <label class="form-check-label">
+                      	<input name="applyForJob" type="hidden" class="form-check-input" value="false">
+                        <input name="applyForJob" type="checkbox" class="form-check-input" value="true">Habilitar Perfil Laboral
+                      </label>
+                    </div>
+                  </div>
+            </div>
+
+            <div class="modal-footer">
+            	<button type=button id="prevCRUDProfileLastModal" class="btn btn-secondary">Anterior</button>
+                <button type=submit id="submitCRUDProfileLastModal" class="btn btn-primary">Guardar Perfil</button>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+    
 
 <br th:replace="fragments/footer :: footer"/>
 <br th:replace="fragments/javascript :: javascript"/>
+
 </body>
 </html>

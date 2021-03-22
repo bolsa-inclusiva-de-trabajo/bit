@@ -55,13 +55,13 @@ public class UserController {
         return "user_edit";
     }
 
-    @PostMapping("/user/edit")
+    @PostMapping("/api/user/edit")
     public String userEdit(@Valid User user, BindingResult bindingResult) {    	
         if (!bindingResult.hasErrors()) {
         	user.setDisabled(false);
         	user.setPassword(Utils.getPasswordEncoder().encode(user.getPassword()));
         	repositoryUser.save(user);
-            return "redirect:/bagoffers";
+            return "redirect:/login";
         }
         return "user_edit";
     }
