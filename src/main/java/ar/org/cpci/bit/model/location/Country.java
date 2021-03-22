@@ -27,7 +27,7 @@ public class Country {
     @Column(name = "description", nullable = true)
     private String description;
 
-    @OneToMany(mappedBy = "country", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "country", fetch = FetchType.EAGER)
     private Set<State> states;
 
     public Country() {

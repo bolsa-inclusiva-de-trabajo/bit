@@ -19,6 +19,7 @@ import ar.org.cpci.bit.model.User;
 import ar.org.cpci.bit.model.location.City;
 import ar.org.cpci.bit.repository.CityRepository;
 import ar.org.cpci.bit.repository.UserRepository;
+import ar.org.cpci.bit.shared.Utils;
 
 @Controller
 public class UserController {
@@ -55,11 +56,12 @@ public class UserController {
     }
 
     @PostMapping("/user/edit")
-    public String userEdit(@Valid User user, BindingResult bindingResult) {
-    	
+    public String userEdit(@Valid User user, BindingResult bindingResult) {    	
         if (!bindingResult.hasErrors()) {
+        	user.setApplyForJob(true);    	
+        	user.setPassword(Utils.getPasswordEncoder().encode(user.getPassword()));
         	repositoryUser.save(user);
-            return "redirect:/bag_offers";
+            return "redirect:/bagoffers";
         }
         return "user_edit";
     }

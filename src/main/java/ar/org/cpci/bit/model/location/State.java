@@ -29,11 +29,11 @@ public class State {
     @Column(name = "description", nullable = true)
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "country_id")
     private Country country;
 
-    @OneToMany(mappedBy = "state", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "state", fetch = FetchType.EAGER)
     private Set<City> cities;
 
     public State() {
