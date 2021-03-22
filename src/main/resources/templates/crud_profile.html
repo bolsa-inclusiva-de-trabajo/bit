@@ -23,12 +23,17 @@
     <!-- Fixed navbar -->
 </header>
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#CRUDProfileUser">
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalCRUDProfileUser">
     Abrir modal crear usuario
 </button>
 
-<div class="modal" id="CRUDProfileUser">
-    <div class="modal-dialog">
+<div class="modal" id="ModalCRUDProfileUser">
+	<form action="/user/edit" method="POST">
+	<input
+            type="hidden"
+            th:name="${_csrf.parameterName}"
+            th:value="${_csrf.token}" />
+    <div class="modal-dialog" id="CRUDProfileUser">
         <div class="modal-content">
 
             <div class="modal-header">
@@ -43,20 +48,19 @@
                   <span class="sr-only">0%</span>
                 </div>
               </div>
-                <form id=formCRUDProfileUser class="form-floating">
                     <div class="form-group mb-4">
                         <label for="inputUserName">Nombre de Usuario:</label>
-                        <input type="text" class="form-control" id="inputUserName" placeholder="Nombre de Usuario">
+                        <input name="username" type="text" class="form-control" id="inputUserName" placeholder="Nombre de Usuario">
                         <div id=invalid-feedback-UserName class="invalid-feedback"></div>
                     </div>
                     <div class="form-group mb-4">
                         <label for="inputEMail">Correo Electrónico:</label>
-                        <input type="text" class="form-control" id="inputEMail" placeholder="Correo Electrónico">
+                        <input name="email" type="text" class="form-control" id="inputEMail" placeholder="Correo Electrónico">
                         <div id="invalid-feedback-EMail" class="invalid-feedback"></div>
                     </div>
                     <div class="form-group mb-4">
                         <label for="inputPassword">Contraseña:</label>
-                        <input type="password" class="form-control" id="inputPassword" placeholder="Contraseña">
+                        <input name="password" type="password" class="form-control" id="inputPassword" placeholder="Contraseña">
                         <div id="invalid-feedback-password" class="invalid-feedback"></div>
                     </div>
                     <div class="form-group mb-4">
@@ -64,18 +68,15 @@
                         <input type="password" class="form-control" id="inputPassword2" placeholder="Repetir Contraseña">
                         <div id="invalid-feedback-password2" class="invalid-feedback"></div>
                     </div>
-                </form>
             </div>
 
             <div class="modal-footer">
-                <button id=SubmitCRUDProfileUser class="btn btn-secondary">Siguiente</button>
+                <button type="button" id="SubmitCRUDProfileUser" class="btn btn-secondary">Siguiente</button>
             </div>
         </div>
     </div>
-</div>
 
-<div class="modal" id="CRUDProfileUserData">
-    <div class="modal-dialog">
+    <div class="modal-dialog" id="CRUDProfileUserData" style="display: none;">
         <div class="modal-content">
 
             <div class="modal-header">
@@ -86,24 +87,23 @@
             <div class="modal-body">
               <div class="progress">
                 <div class="progress-bar" role="progressbar" aria-valuenow="70"
-                  aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                  aria-valuemin="0" aria-valuemax="100" style="width:10%">
                   <span class="sr-only">0%</span>
                 </div>
               </div>
-                <form id=formCRUDProfileUserData class="form-floating">
                     <div class="form-group mb-4">
                         <label for="inputName">Nombre:</label>
-                        <input type="text" class="form-control" id="inputName" placeholder="Nombre">
+                        <input name="firstName" type="text" class="form-control" id="inputName" placeholder="Nombre">
                         <div class="invalid-feedback">No puede dejar el campo vacio.</div>
                     </div>
                     <div class="form-group mb-4">
                         <label for="inputLastName">Apellido:</label>
-                        <input type="text" class="form-control" id="inputLastName" placeholder="Apellido">
+                        <input name="lastName" type="text" class="form-control" id="inputLastName" placeholder="Apellido">
                         <div class="invalid-feedback">No puede dejar el campo vacio.</div>
                     </div>
                     <div class="form-group mb-4">
                         <label for="inputBirthDate">Fecha Nacimiento:</label>
-                        <input type="text" class="form-control" id="inputBirthDate" placeholder="Fecha Nacimiento">
+                        <input name="BirthDate" type="text" class="form-control" id="inputBirthDate" placeholder="Fecha Nacimiento">
                         <div class="invalid-feedback">Formato incorrecto</div>
                     </div>
                     <div class="form-group mb-4">
@@ -114,19 +114,16 @@
                           <option>Otro</option>
                        </select>
                     </div>
-                </form>
             </div>
 
             <div class="modal-footer">
-                <button data-toggle="modal" data-target="#CRUDProfileUser" class="btn btn-secondary" data-dismiss="modal">Anterior</button>
-                <button id=SubmitCRUDProfileUserData class="btn btn-secondary">Siguiente</button>
+                <button type=button id="PrevCRUDProfileUserData"  class="btn btn-secondary">Anterior</button>
+                <button type=button id="SubmitCRUDProfileUserData" class="btn btn-secondary">Siguiente</button>
             </div>
         </div>
     </div>
-</div>
 
-<div class="modal" id="CRUDProfileCity">
-    <div class="modal-dialog">
+    <div class="modal-dialog" id="CRUDProfileCity" style="display: none;">
         <div class="modal-content">
 
             <div class="modal-header">
@@ -141,39 +138,35 @@
                   <span class="sr-only">0%</span>
                 </div>
               </div>
-                <form id=formCRUDProfileCity class="form-floating">
+            	<div class="form-group mb-4">
+                   <label for="inputCountry">País:</label>
+                   <select class="form-control" id="inputCountry">
+                      <option>Argentina</option>
+                   </select>
+                </div>
                 <div class="form-group mb-4">
-                       <label for="inputCountry">País:</label>
-                       <select class="form-control" id="inputCountry">
-                          <option>Argentina</option>
-                       </select>
-                    </div>
-                    <div class="form-group mb-4">
-                       <label for="inputState">Provincia:</label>
-                       <select class="form-control" id="inputState">
-                          <option>Misiones</option>
-                       </select>
-                    </div>
-                    <div class="form-group mb-4">
-                       <label for="inputCity">Ciudad:</label>
-                       <select class="form-control" id="inputCity">
-                          <option th:each="city: ${cities}" th:value="${city.id}" th:text="${city.name}"></option>
-                       </select>
-                    </div>
-                </form>
+                   <label for="inputState">Provincia:</label>
+                   <select class="form-control" id="inputState">
+                      <option>Misiones</option>
+                   </select>
+                </div>
+                <div class="form-group mb-4">
+                   <label for="inputCity">Ciudad:</label>
+                   <select name="city"  class="form-control" id="inputCity">
+                      <option th:each="city: ${cities}" th:value=${city.id} th:text="${city.name}"></option>
+                   </select>
+                </div>
             </div>
 
             <div class="modal-footer">
-            	<button data-toggle="modal" data-target="#CRUDProfileUserData" class="btn btn-secondary" data-dismiss="modal">Anterior</button>
-                <button data-toggle="modal" data-target="#CRUDProfileStudy" class="btn btn-secondary" data-dismiss="modal">Siguiente</button>
+            	<button type="button" id="prevCRUDProfileCity" class="btn btn-secondary">Anterior</button>
+                <button type="button" id="submitCRUDProfileCity" class="btn btn-secondary">Siguiente</button>
             </div>
 
         </div>
     </div>
-</div>
 
-<div class="modal" id="CRUDProfileStudy">
-    <div class="modal-dialog">
+    <div class="modal-dialog" id="CRUDProfileStudy" style="display: none;">
         <div class="modal-content">
 
             <div class="modal-header">
@@ -188,26 +181,22 @@
                   <span class="sr-only">0%</span>
                 </div>
               </div>
-                <form id=formCRUDProfileStudy class="form-floating">
                   <div class="form-group mb-4">
                       <label for="inputStudy">Estudios:</label>
-                      <textarea class="form-control" rows="4" id="inputStudy"></textarea>
+                      <textarea name="education" class="form-control" rows="4" id="inputStudy"></textarea>
                       <div class="invalid-feedback">No puede dejar el campo vacio.</div>
                   </div>
-                </form>
             </div>
 
             <div class="modal-footer">
-                <button data-toggle="modal" data-target="#CRUDProfileCity" class="btn btn-secondary" data-dismiss="modal">Anterior</button>
-                <button id=submitCRUDProfileStudy class="btn btn-secondary">Siguiente</button>
+                <button type=button id="prevCRUDProfileStudy" class="btn btn-secondary">Anterior</button>
+                <button type=button id="submitCRUDProfileStudy" class="btn btn-secondary">Siguiente</button>
             </div>
 
         </div>
     </div>
-</div>
 
-<div class="modal" id="CRUDProfileSkill">
-    <div class="modal-dialog">
+    <div class="modal-dialog" id="CRUDProfileSkill" style="display: none;">
         <div class="modal-content">
 
             <div class="modal-header">
@@ -222,26 +211,22 @@
                   <span class="sr-only">0%</span>
                 </div>
               </div>
-                <form id=formCRUDProfileSkill class="form-floating">
                   <div class="form-group mb-4">
                       <label for="inputSkill">Habilidades:</label>
-                      <textarea class="form-control" rows="4" id="inputSkill"></textarea>
+                      <textarea name="skills" class="form-control" rows="4" id="inputSkill"></textarea>
                       <div class="invalid-feedback">No puede dejar el campo vacio.</div>
                   </div>
-                </form>
             </div>
 
             <div class="modal-footer">
-                <button data-toggle="modal" data-target="#CRUDProfileStudy" class="btn btn-secondary" data-dismiss="modal">Anterior</button>
-                <button id=submitCRUDProfileSkill class="btn btn-secondary">Siguiente</button>
+                <button type=button id="prevCRUDProfileSkill" class="btn btn-secondary">Anterior</button>
+                <button type=button id="submitCRUDProfileSkill" class="btn btn-secondary">Siguiente</button>
             </div>
 
         </div>
     </div>
-</div>
 
-<div class="modal" id="CRUDProfileLastModal">
-    <div class="modal-dialog">
+    <div class="modal-dialog" id="CRUDProfileLastModal" style="display: none;">
         <div class="modal-content">
 
             <div class="modal-header">
@@ -256,29 +241,32 @@
                   <span class="sr-only">0%</span>
                 </div>
               </div>
-                <form id=formCRUDProfileLastModal class="form-floating">
                   <legend class="col-form-label col-sm-2 pt-0">Disponibilidad</legend>
                   <div class="form-group mb-4">
                     <div class="form-check-inline">
                       <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" value="">Tiempo Completo
+                        <input name="fullTime" type="hidden" class="form-check-input" value="false">
+                        <input name="fullTime" type="checkbox" class="form-check-input" value="true">Tiempo Completo
                       </label>
                     </div>
                     <div class="form-check-inline">
                       <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" value="">Medio Tiempo
+                      <input name="partTime" type="hidden" class="form-check-input" value="false">
+                        <input name="partTime" type="checkbox" class="form-check-input" value="true">Medio Tiempo
                       </label>
                     </div>
                     <div class="form-check-inline">
                       <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" value="">Teletrabajo
+                      	<input name="homeWork" type="hidden" class="form-check-input" value="false">
+                        <input name="homeWork" type="checkbox" class="form-check-input" value="true">Teletrabajo
                       </label>
                     </div>
                   </div>
                   <div class="mb-4">
                     <div class="form-check">
                       <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" value="">Inhabilitar Perfil Laboral
+                      	<input name="disabled" type="hidden" class="form-check-input" value="false">
+                        <input name="disabled" type="checkbox" class="form-check-input" value="true">Inhabilitar Perfil Laboral
                       </label>
                     </div>
                   </div>
@@ -286,11 +274,13 @@
             </div>
 
             <div class="modal-footer">
-                <button id=submitCRUDProfileLastModal class="btn btn-primary">Guardar Perfil</button>
+            	<button type=button id="prevCRUDProfileLastModal" class="btn btn-secondary">Anterior</button>
+                <button type=submit id="submitCRUDProfileLastModal" class="btn btn-primary">Guardar Perfil</button>
             </div>
 
         </div>
     </div>
+</form>
 </div>
 
 
@@ -379,7 +369,7 @@
    		});
    		$('#inputCountry').selectpicker({liveSearch:true});
    		$('#inputState').selectpicker({liveSearch:true});
-   		$('#inputCity').selectpicker({liveSearch:true,maxOptions:10});
+   		$('#inputCity').selectpicker({liveSearch:true});
    		$('#inputUserName').focusout(function() {
    			let username=$(this).val();
 			checkUsername(username);
@@ -412,11 +402,15 @@
         		else
        			{
         			$("#inputPassword2").removeClass("is-invalid");
-        			$('#CRUDProfileUser').modal('toggle');
-           		 	$('#CRUDProfileUserData').modal('toggle');
+        			$('.modal-dialog').hide();
+        			$('#CRUDProfileUserData').show();				
        			}
       		}
    			
+   		});
+   		$("#PrevCRUDProfileUserData").click(function() {
+   			$('.modal-dialog').hide();
+			$('#CRUDProfileUser').show();	
    		});
         $("#SubmitCRUDProfileUserData").click(function() {
         	let noError=0;
@@ -457,9 +451,21 @@
         	console.log("fin " + noError);
         	if(noError===0)
         	{
-        		 $('#CRUDProfileUserData').modal('toggle');
-        		 $('#CRUDProfileCity').modal('toggle');
+        		$('.modal-dialog').hide();
+    			$('#CRUDProfileCity').show();
         	}
+        });
+        $("#prevCRUDProfileCity").click(function() {
+        	$('.modal-dialog').hide();
+			$('#CRUDProfileUserData').show();
+        });
+        $("#submitCRUDProfileCity").click(function() {
+        	$('.modal-dialog').hide();
+			$('#CRUDProfileStudy').show();
+        });
+        $("#prevCRUDProfileStudy").click(function() {
+        	$('.modal-dialog').hide();
+			$('#CRUDProfileCity').show();
         });
         $("#submitCRUDProfileStudy").click(function() {
         	if($('#inputStudy').val().length==0)
@@ -471,9 +477,13 @@
        		{
         		$("#inputStudy").removeClass("is-invalid");
         		$("#inputStudy").addClass("is-valid");
-       		 	$('#CRUDProfileStudy').modal('toggle');
-        		$('#CRUDProfileSkill').modal('toggle');
+        		$('.modal-dialog').hide();
+    			$('#CRUDProfileSkill').show();
        		}
+        });
+        $("#prevCRUDProfileSkill").click(function() {
+        	$('.modal-dialog').hide();
+			$('#CRUDProfileStudy').show();
         });
         $("#submitCRUDProfileSkill").click(function() {
         	if($('#inputSkill').val().length==0)
@@ -485,19 +495,13 @@
        		{
         		$("#inputSkill").removeClass("is-invalid");
         		$("#inputSkill").addClass("is-valid");
-        		$('#CRUDProfileSkill').modal('toggle');
-        		$('#CRUDProfileLastModal').modal('toggle');
+        		$('.modal-dialog').hide();
+    			$('#CRUDProfileLastModal').show();
        		}
         });
-        $("#submitCRUDProfileLastModal").click(function() {
-        	$.ajax({
-                type: "POST",
-                url: "/api/user",
-                data: $('#formCRUDProfileUser').serialize(), // serializes the form's elements.
-                success: function (data) {
-                	
-                }
-            });
+        $("#prevCRUDProfileLastModal").click(function() {
+        	$('.modal-dialog').hide();
+			$('#CRUDProfileSkill').show();
         });
     });
     </script>
