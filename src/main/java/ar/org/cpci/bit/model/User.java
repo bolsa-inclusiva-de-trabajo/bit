@@ -1,6 +1,7 @@
 package ar.org.cpci.bit.model;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -51,7 +52,10 @@ public class User {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "city_id")
     private City city;
-
+    
+    @Column(name = "birth_date", nullable = false)
+    private Date birthDate;
+    
     @Column(name = "education", nullable = false)
     private String education;
 
@@ -140,8 +144,16 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
+    
+    public Date getBirthDate() {
+		return birthDate;
+	}
 
-    public String getFirstName() {
+	public void setBirthDate(Date birthDate) {
+		this.birthDate = birthDate;
+	}
+
+	public String getFirstName() {
         return firstName;
     }
 

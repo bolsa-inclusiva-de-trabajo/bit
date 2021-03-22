@@ -58,7 +58,7 @@ public class UserController {
     @PostMapping("/user/edit")
     public String userEdit(@Valid User user, BindingResult bindingResult) {    	
         if (!bindingResult.hasErrors()) {
-        	user.setApplyForJob(true);    	
+        	user.setDisabled(false);
         	user.setPassword(Utils.getPasswordEncoder().encode(user.getPassword()));
         	repositoryUser.save(user);
             return "redirect:/bagoffers";
