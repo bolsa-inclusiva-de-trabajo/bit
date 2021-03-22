@@ -19,6 +19,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import ar.org.cpci.bit.model.location.City;
 
 @Entity
@@ -33,6 +35,7 @@ public class User {
     @Column(name = "username", nullable = false, unique = true)
     private String username;
 
+    @JsonIgnore
     @Column(name = "password", nullable = false)
     private String password;
 
@@ -72,21 +75,25 @@ public class User {
 
     /* --- */
 
+    @JsonIgnore
     @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Job> createdJobs;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "interest",
                joinColumns = @JoinColumn(name = "user_id"),
                inverseJoinColumns = @JoinColumn(name = "job_id"))
     private Set<Job> interestingJobs;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "apply",
                joinColumns = @JoinColumn(name = "user_id"),
                inverseJoinColumns = @JoinColumn(name = "job_id"))
     private Set<Job> applyJobs;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "contact",
                joinColumns = @JoinColumn(name = "user_1_id"),
@@ -220,11 +227,12 @@ public class User {
         return Collections.unmodifiableSet(createdJobs);
     }
 
+    @JsonIgnore
     public int getCreatedJobsCount() {
         return createdJobs.size();
     }
 
-    public boolean existCreatedJob(long job_id){
+    public boolean existCreatedJob(long job_id) {
         boolean resp = false;
         for (Job job : createdJobs) {
             if (job.getId() == job_id) {

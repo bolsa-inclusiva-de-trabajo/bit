@@ -17,6 +17,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "job")
 public class Job {
@@ -57,9 +59,11 @@ public class Job {
     @JoinColumn(name = "user_id")
     private User owner;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "interestingJobs", fetch = FetchType.EAGER)
     private Set<User> interestedUsers;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "applyJobs", fetch = FetchType.EAGER)
     private Set<User> applyUsers;
 
@@ -183,6 +187,7 @@ public class Job {
         interestedUsers.clear();
     }
 
+    @JsonIgnore
     public int getInterestedUsersCount() {
         return interestedUsers.size();
     }
@@ -212,6 +217,7 @@ public class Job {
         applyUsers.clear();
     }
 
+    @JsonIgnore
     public int getApplyUsersCount() {
         return applyUsers.size();
     }
