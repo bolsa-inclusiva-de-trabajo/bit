@@ -4,6 +4,7 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Optional;
 
+import ar.org.cpci.bit.model.Job;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.http.HttpStatus;
@@ -38,6 +39,7 @@ public class BagRestController {
                                                                  CrudRepository<T2, Long> repo2,
                                                                  Long id2,
                                                                  String methodName) {
+
         HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
         boolean success = false;
 
@@ -150,6 +152,39 @@ public class BagRestController {
     public ResponseEntity<Object> remContact(@PathVariable("uid") Long uid1,
                                              @PathVariable("uid") Long uid2) {
         return getResponseEntityUserUser(uid1, uid2, "remContact");
+    }
+
+    /* ------- Job ------------- */
+
+    private static <Job> ResponseEntity<Object> processMethod(CrudRepository<Job, Long> repo1,
+                                                                 Long id1) {
+        HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
+        boolean success = false;
+
+        Job obj1 = getByeIdFromRepo(repo1, id1);
+
+        HashMap<String, Job> map = new HashMap<>();
+        map.put("job", obj1);
+        return ResponseEntity.status(status).body(map);
+    }
+
+    private ResponseEntity<Object> getResponseEntityJob(Long id1) {
+        return processMethod(repositoryJob, id1);
+    }
+
+    @GetMapping(path = "/api/bag/job/{jid}")
+    public ResponseEntity<Object> getJob(@PathVariable("jid") Long jid) {
+        HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
+        Job obj1 = getByeIdFromRepo(repositoryJob, jid);
+        HashMap<String, Job> map = new HashMap<>();
+        map.put("job", obj1);
+        return ResponseEntity.status(status).body(map);
+    }
+
+    @GetMapping(path = "/api/bag/job_by_id/{jid}")
+    public Job getJobById(@PathVariable("jid") Long jid) {
+        Optional<Job> j = repositoryJob.findById(jid);
+        return j.isPresent() ? j.get() : null;
     }
 
 }
