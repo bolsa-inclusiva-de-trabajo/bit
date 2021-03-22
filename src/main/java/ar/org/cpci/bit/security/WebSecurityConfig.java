@@ -29,8 +29,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .permitAll();
         http.csrf().ignoringAntMatchers("/api/**");
         http.authorizeRequests()
-            .antMatchers("/", "/api/**", "/static/**", "/international", "/error").permitAll()
-            .antMatchers("/**").authenticated();
+            .antMatchers("/", "/api/**", "/static/**", "/international", "/error", "/crud_profile")
+            .permitAll()
+            .antMatchers("/**")
+            .authenticated();
     }
 
     @Bean

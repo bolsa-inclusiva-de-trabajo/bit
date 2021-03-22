@@ -1,6 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<br th:replace="fragments/head :: head"/>
 <body>
-<h1>ERROR</h1>
+<br th:replace="fragments/header :: header(null)"/>
+
+    <div class="container-fluid py-special" id="mainVerticalAdjFooter">
+
+        <div class="p-5 m-5 alert alert-danger">
+            ERROR
+        </div>
+
+    </div>
+
+<br th:replace="fragments/footer :: footer"/>
+<br th:replace="fragments/javascript :: javascript"/>
 </body>
 </html>

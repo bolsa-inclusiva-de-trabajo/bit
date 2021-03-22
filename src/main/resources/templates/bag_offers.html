@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<br th:replace="/fragments/head :: head"/>
+<br th:replace="fragments/head :: head"/>
 <body>
-<br th:replace="/fragments/bag_offers_header :: header"/>
+<br th:replace="fragments/bag_offers_header :: header"/>
 
 <div class="container-fluid py-special" id="main">
 
@@ -198,7 +198,7 @@
                                             </i>
                                     </td>
                                     <td style="width: 40px;" class="align-middle">
-                                        <a class="align-middle" href="/asdadasdasdasdsad"><i class="bi bi-trash" data-toggle="tooltip" th:data-original-title="#{bag_offer.deleteOffer}"></i></a>
+                                        <a class="align-middle" href=""><i class="bi bi-trash" data-toggle="tooltip" th:data-original-title="#{bag_offer.deleteOffer}"></i></a>
                                     </td>
                                 </tr>
                             </table>
@@ -245,7 +245,7 @@
 
 </div>
 
-<br th:replace="/fragments/bag_footer :: footer"/>
-<br th:replace="/fragments/javascript :: javascript"/>
+<br th:replace="fragments/footer :: footer"/>
+<br th:replace="fragments/javascript :: javascript"/>
 </body>
 </html>

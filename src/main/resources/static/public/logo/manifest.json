@@ -1,6 +1,7 @@
 {
     "name": "Bolsa Inclusiva de Trabajo",
     "short_name": "BIT",
+    "description": "BIT la bolsa de trabajo donde se respetan las diferencias personales y la preselección se realiza por habilidades.",
     "start_url": "/",
     "icons":[
         {
