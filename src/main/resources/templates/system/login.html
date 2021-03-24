@@ -73,6 +73,7 @@
                         <div class="row justify-content-md-center mb-n1 mb-md-3">
                             <div class="col">
                                 <a href="" class="btn btn-secondary btn-block"
+                                   data-toggle="modal" data-target="#ModalCRUDProfileUser"
                                    th:text="#{register}">register</a>
                             </div>
                             <div class="col">
@@ -89,7 +90,9 @@
 
     </div>
 
+<br th:replace="fragments/logup :: modal"/>
 <br th:replace="fragments/footer :: footer"/>
 <br th:replace="fragments/javascript :: javascript"/>
+
 </body>
 </html>

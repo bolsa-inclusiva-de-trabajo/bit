@@ -21,6 +21,21 @@ a#joinus {
     padding-bottom: 3.0em !important;
 }
 
+.w-16 {
+    width: 16% !important;
+}
+.w-32 {
+    width: 32% !important;
+}
+.w-48 {
+    width: 48% !important;
+}
+.w-64 {
+    width: 64% !important;
+}
+.w-80 {
+    width: 80% !important;
+}
 
 /* CSS CLASSES FOR JOB OFFERS BAG */
 
