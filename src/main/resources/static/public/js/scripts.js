@@ -86,22 +86,26 @@ function show (elements, specifiedDisplay) {
     }
 }
 
-/**
+/*
 function showModalJob(){
     const idJob = this.id.replace("btn_show_job_","");
     $.ajax({
         method:"GET",
-        url:"/api/encuesta/" + idEncuesta,
+        url:"/api/bag/job/" + idJob,
         success: function(){
-           $("#fila_" + idEncuesta).remove();
-           alert(idEncuesta + " quitado con exito");
+           //$("#fila_" + idEncuesta).remove();
+           //alert(idEncuesta + " quitado con exito");
         },
         error: function( response ) {
-            alert("error")
+            //alert("error")
         },
 
     });
 
 }
 $(".botonBorrar").click(borrar);
-**/
+*/
+
+//$(document).ready(function(){
+//    refreshInterestButtonClass();
+//});

@@ -222,6 +222,37 @@
 			$('#CRUDProfileSkill').show();
         });
     });
+
+
+
+
+
+function refreshInterestButtonClass() {
+  //$("#999").removeClass("bi-hand-thumbs-up").addClass("bi-hand-thumbs-up-fill");
+  const idJobIdUser = this.id.replace("btn_interest_","");
+  const String[] idJobIdUserArray = idJobIdUser.split("_");
+  alert("entro en la funcion!");
+  const idJob = idJobIdUserArray[0];
+  const idUSer = idJobIdUserArray[1];
+    alert(this.id);
+
+       $.ajax({
+          method:"GET",
+          url:"/api/bag/user/"+idUser+"/job/"+idJob+"/interested" ,
+          success: function(){
+            alert("success!");
+               $("#"+this.id).removeClass("bi-hand-thumbs-up").addClass("bi-hand-thumbs-up-fill");
+
+          },
+          error: function( response ) {
+           alert("error!");
+               $("#"+this.id).removeClass("bi-hand-thumbs-up-fill").addClass("bi-hand-thumbs-up");
+          },
+
+      });
+}
+
+
     </script>
 </div>
 </html>

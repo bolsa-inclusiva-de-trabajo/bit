@@ -61,17 +61,18 @@
                                                                         <p class="offers_data_text" th:text="#{bag_offer.valid} + ' ' + ${#temporals.day(job.expiration)} + '/' + ${#temporals.month(job.expiration)} + '/' + ${#temporals.year(job.expiration)}" >txt</p>
                                                                     </td>
                                                                     <td class="table align-right">
-                                                                        <a href="/meinteresaestaofertadetrabajo">
-                                                                            <i class="bi bi-hand-thumbs-up" data-toggle="tooltip" th:data-original-title="#{bag_offer.interested}"></i>
-                                                                        </a>
+
+                                                                            <i class="bi bi-hand-thumbs-up" data-toggle="tooltip" th:data-original-title="#{bag_offer.interested}"
+                                                                            onclick="'refreshInterestButtonClass()'"></i>
+
                                                                     </td>
                                                                     <td class="table align-right">
-                                                                        <a href="/postularme">
+                                                                        <a href="">
                                                                             <i class="bi bi-telephone-plus ml-2" data-toggle="tooltip" th:data-original-title="#{bag_offer.apply}"></i>
                                                                         </a>
                                                                     </td>
                                                                     <td class="table align-right">
-                                                                        <a th:if="${user.existCreatedJob({job.id})}" href="/eliminaroferta">
+                                                                        <a th:if="${user.existCreatedJob({job.id})}" href="">
                                                                             <i class="bi bi-trash ml-2" data-toggle="tooltip" th:data-original-title="#{bag_offer.deleteOffer}"></i>
                                                                         </a>
                                                                     </td>
