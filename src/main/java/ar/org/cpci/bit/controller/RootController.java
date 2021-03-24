@@ -15,10 +15,13 @@ import ar.org.cpci.bit.shared.Utils;
 
 @Controller
 public class RootController {
-	@Autowired
+
+    @Autowired
     private CityRepository repositoryCity;
-	@Autowired
+
+    @Autowired
     private ApplicationContext context;
+
     @GetMapping("/")
     public String home(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -28,8 +31,8 @@ public class RootController {
         } catch (ClassCastException e) {
             model.addAttribute("bagUrl", null);
         }
-        Iterable<City> city = repositoryCity.findAll();
-        model.addAttribute("cities", city);
+        Iterable<City> cities = repositoryCity.findAll();
+        model.addAttribute("cities", cities);
         return "home";
     }
 
