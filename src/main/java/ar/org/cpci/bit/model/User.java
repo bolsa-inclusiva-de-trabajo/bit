@@ -20,6 +20,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import ar.org.cpci.bit.model.location.City;
@@ -53,6 +54,7 @@ public class User {
     @JoinColumn(name = "city_id")
     private City city;
     
+    @JsonFormat(pattern="dd/MM/yyyy")
     @Column(name = "birth_date", nullable = false)
     private Date birthDate;
     

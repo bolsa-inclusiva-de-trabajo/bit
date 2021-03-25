@@ -1,7 +1,7 @@
 package ar.org.cpci.bit.model;
 
-import java.time.ZonedDateTime;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -17,6 +17,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -34,8 +35,9 @@ public class Job {
     @Column(name = "description", nullable = false)
     private String description;
 
+    @JsonFormat(pattern="dd/MM/yyyy")
     @Column(name = "expiration", nullable = false)
-    private ZonedDateTime expiration;
+    private Date expiration;
 
     @Column(name = "full_time", nullable = false)
     private Boolean fullTime;
@@ -98,11 +100,11 @@ public class Job {
         this.description = description;
     }
 
-    public ZonedDateTime getExpiration() {
+    public Date getExpiration() {
         return expiration;
     }
 
-    public void setExpiration(ZonedDateTime expiration) {
+    public void setExpiration(Date expiration) {
         this.expiration = expiration;
     }
 
