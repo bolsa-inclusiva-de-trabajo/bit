@@ -17,6 +17,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -35,7 +37,7 @@ public class Job {
     @Column(name = "description", nullable = false)
     private String description;
 
-    @JsonFormat(pattern="dd/MM/yyyy")
+    @DateTimeFormat(pattern="dd/MM/yyyy")
     @Column(name = "expiration", nullable = false)
     private Date expiration;
 
