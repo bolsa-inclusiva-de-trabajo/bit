@@ -48,11 +48,6 @@ $(document).ready(function() {
         }
     });
 
-    // Focusing on the first field in the modal
-    $('#logIn').on('shown.bs.modal', function () {
-        $('#logInInputEmail').trigger('focus');
-    });
-
     // Needs for validation form (works without js :)
     Array.prototype.filter.call($('.needs-validation'), function(form) {
         form.setAttribute('novalidate', null);
