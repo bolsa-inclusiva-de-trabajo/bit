@@ -1,5 +1,6 @@
 package ar.org.cpci.bit.controller.rest;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Optional;
@@ -25,23 +26,54 @@ public class BagRestController {
     public static final String APPLY_JOBS_URL = "/api/bag/user/{uid}/job/{jid}/apply";
     public static final String CONTACT_USER_URL = "/api/bag/user/{uid1}/user/{uid2}/contact";
 
+    public static final HttpStatus STATE_OK = HttpStatus.OK;
+    public static final HttpStatus STATE_FAIL = HttpStatus.NOT_FOUND;
+
     @Autowired
     private UserRepository repositoryUser;
 
     @Autowired
     private JobRepository repositoryJob;
 
-    /* --- SCHMagic :) --- */
+    /* === SCHMagic === functions using java generics === */
 
+    /**
+     * This function searches for an object in a repository by its identifier.
+     *
+     * @param  repo Generic type repository with long type identifier.
+     * @param  id   Identifier to search for.
+     *
+     * @return      Returns the searched object of the generic type (T) if found,
+     *              otherwise returns null.
+     */
     private static <T> T getByIdFromRepo(CrudRepository<T, Long> repo, Long id) {
         Optional<T> optional = repo.findById(id);
         return optional.isPresent() ? optional.get() : null;
     }
 
+    /**
+     * This function searches in the "repo1" with the "id1" for an object (obj1) to which
+     * it will call its method defined in "methodName" passing as argument another object
+     * (obj2) searched in the repo2 with the id2, encapsulating the response in a
+     * ResponseEntity, which also the HTTP status depending on the result of the process
+     * described above. Both objects are persisted if the operation is successful.
+     *
+     * @param  repo1      Generic type repository with long type identifier.
+     * @param  id1        Identifier to search for in repo1.
+     * @param  repo2      Generic type repository with long type identifier.
+     * @param  id2        Identifier to search for in repo2.
+     * @param  methodName Name of the method to be executed, designed for setters
+     *                    and getters that return booleans.
+     *
+     * @return            Returns an ResponseEntity object with a status and value,
+     *                    described above.
+     *
+     * @see               getByIdFromRepo
+     */
     private static <T1, T2> ResponseEntity<Object> processMethod(CrudRepository<T1, Long> repo1, Long id1,
                                                                  CrudRepository<T2, Long> repo2, Long id2,
                                                                  String methodName) {
-        HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
+        HttpStatus status = STATE_FAIL;
         boolean success = false;
 
         T1 obj1 = getByIdFromRepo(repo1, id1);
@@ -55,9 +87,10 @@ public class BagRestController {
                 if (success) {
                     repo1.save(obj1);
                     repo2.save(obj2);
-                    status = HttpStatus.OK;
+                    status = STATE_OK;
                 }
-            } catch (Exception e) {
+            } catch (NoSuchMethodException | SecurityException | IllegalAccessException |
+                     IllegalArgumentException | InvocationTargetException e) {
                 // Operation not possible
                 e.printStackTrace();
             }
@@ -67,23 +100,61 @@ public class BagRestController {
         return ResponseEntity.status(status).body(map);
     }
 
+    /**
+     * This function is a gateway to the processMethod function, for more details see this
+     * function.
+     *
+     * @param  uid        User identifier.
+     * @param  jid        Job identifier.
+     * @param  methodName name of a method to call.
+     *
+     * @return            Returns an ResponseEntity object
+     *
+     * @see               processMethod
+     */
     private ResponseEntity<Object> getResponseUserJob(Long uid, Long jid, String methodName) {
         return processMethod(repositoryUser, uid, repositoryJob, jid, methodName);
     }
 
+    /**
+     * This function is a gateway to the processMethod function, for more details see this
+     * function.
+     *
+     * @param  uid1       User identifier.
+     * @param  uid2       User identifier.
+     * @param  methodName name of a method to call.
+     *
+     * @return            Returns an ResponseEntity object.
+     *
+     * @see               processMethod
+     */
     private ResponseEntity<Object> getResponseUserUser(Long uid1, Long uid2, String methodName) {
         return processMethod(repositoryUser, uid1, repositoryUser, uid2, methodName);
     }
 
+    /**
+     * Function that searches for an object by its identifier in a repository,
+     * both passed by parameter, and returns a ResponseEntity with the value if it was
+     * found, or a "success=false" otherwise.
+     *
+     * @param  repo Generic type repository with long type identifier.
+     * @param  id   Identifier to search for.
+     *
+     * @return      Returns an ResponseEntity object.
+     *
+     * @see         getByIdFromRepo
+     */
     private static <T> ResponseEntity<Object> getResponseById(CrudRepository<T, Long> repo, Long id) {
         T obj = getByIdFromRepo(repo, id);
         if (obj != null) {
-            return ResponseEntity.status(HttpStatus.OK).body(obj);
+            return ResponseEntity.status(STATE_OK).body(obj);
         }
         HashMap<String, Boolean> map = new HashMap<>();
         map.put("success", false);
-        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(map);
+        return ResponseEntity.status(STATE_FAIL).body(map);
     }
+
+    /* ============ End of generic functions ============ */
 
     /* --- User.createdJob<job> --- */
 
