@@ -22,23 +22,13 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
     public void onAuthenticationSuccess(HttpServletRequest request,
                                         HttpServletResponse response,
                                         Authentication authentication) throws IOException {
-        handle(request, response, authentication);
-        clearAuthenticationAttributes(request);
-    }
-
-    protected void handle(HttpServletRequest request,
-                          HttpServletResponse response,
-                          Authentication authentication) throws IOException {
         if (response.isCommitted()) {
             return;
         }
-        String targetUrl = determineTargetUrl(authentication);
-        redirectStrategy.sendRedirect(request, response, targetUrl);
-    }
-
-    protected String determineTargetUrl(final Authentication authentication) {
         CurrentUserDetails user = (CurrentUserDetails) authentication.getPrincipal();
-        return Utils.getAuthSuccessUrl(user.havePublishedJobs());
+        String targetUrl = Utils.getAuthSuccessUrl(user.isEmployer());
+        redirectStrategy.sendRedirect(request, response, targetUrl);
+        clearAuthenticationAttributes(request);
     }
 
     protected void clearAuthenticationAttributes(HttpServletRequest request) {

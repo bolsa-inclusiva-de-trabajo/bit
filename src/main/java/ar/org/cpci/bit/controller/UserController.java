@@ -10,10 +10,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ar.org.cpci.bit.model.User;
 import ar.org.cpci.bit.model.location.City;
@@ -26,10 +27,10 @@ public class UserController {
 
     @Autowired
     private UserRepository repositoryUser;
-    
+
     @Autowired
     private CityRepository repositoryCity;
-    
+
     @Autowired
     private ApplicationContext context;
 
@@ -56,15 +57,19 @@ public class UserController {
     }
 
     @PostMapping("/api/user/edit")
-    public String userEdit(@Valid User user, BindingResult bindingResult) {    	
-        if (!bindingResult.hasErrors()) {
-        	user.setDisabled(false);
-        	user.setPassword(Utils.getPasswordEncoder().encode(user.getPassword()));
-        	repositoryUser.save(user);
+    public String userEdit(@Valid User user, Errors errors, RedirectAttributes attrs) {
+        if (!errors.hasErrors()) {
+            user.setDisabled(false);
+            user.setPassword(Utils.getPasswordEncoder().encode(user.getPassword()));
+            repositoryUser.save(user);
+
+            attrs.addFlashAttribute("newUsername", user.getUsername());
             return "redirect:/login";
         }
-        return "user_edit";
+        attrs.addFlashAttribute("errors", errors);
+        return "redirect:/login";
     }
+
     @GetMapping("/crud_profile")
     public String crud_profile(Model model) {
         Iterable<City> city = repositoryCity.findAll();

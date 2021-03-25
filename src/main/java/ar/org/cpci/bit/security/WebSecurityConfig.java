@@ -19,20 +19,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         // http.authorizeRequests().antMatchers("/**").permitAll(); // sacar logueo
 
+        final String login = "/login";
+        final String[] safe = new String[] {"/", login, "/user", "/api/**", "/static/**", "/error"};
+
         http.formLogin()
-            .loginPage("/login")
+            .loginPage(login)
             .successHandler(getAuthSuccessHandler())
             .permitAll();
         http.logout()
             .logoutSuccessUrl("/")
             .invalidateHttpSession(true)
             .permitAll();
-        http.csrf().ignoringAntMatchers("/api/**");
         http.authorizeRequests()
-            .antMatchers("/", "/api/**", "/static/**", "/international", "/error", "/crud_profile")
+            .antMatchers(safe)
             .permitAll()
             .antMatchers("/**")
             .authenticated();
+        http.csrf()
+            .ignoringAntMatchers(safe);
     }
 
     @Bean

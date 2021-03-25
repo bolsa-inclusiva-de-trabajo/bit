@@ -48,17 +48,11 @@ public class WebConfig implements WebMvcConfigurer, ApplicationContextAware {
                 .setCachePeriod(CACHE_PERIOD_SECONDS);
     }
 
-    @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/login").setViewName("system/login");
-        registry.addViewController("/logout").setViewName("system/logout");
-    }
-
     private ITemplateResolver htmlTemplateResolver() {
         SpringResourceTemplateResolver resolver = new SpringResourceTemplateResolver();
         resolver.setApplicationContext(applicationContext);
         resolver.setPrefix("/templates/");
-        resolver.setCacheable(false);
+        resolver.setCacheable(CACHE_PERIOD_SECONDS != 0);
         resolver.setTemplateMode(TemplateMode.HTML);
         return resolver;
     }
@@ -83,16 +77,16 @@ public class WebConfig implements WebMvcConfigurer, ApplicationContextAware {
 
     @Bean
     public LocaleChangeInterceptor localeChangeInterceptor() {
-        LocaleChangeInterceptor lci = new LocaleChangeInterceptor();
-        lci.setParamName("lang");
-        return lci;
+        LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
+        interceptor.setParamName("lang");
+        return interceptor;
     }
 
     @Bean
     public LocaleResolver localeResolver() {
-        SessionLocaleResolver slr = new SessionLocaleResolver();
-        slr.setDefaultLocale(Locale.forLanguageTag("es_AR"));
-        return slr;
+        SessionLocaleResolver resolver = new SessionLocaleResolver();
+        resolver.setDefaultLocale(Locale.forLanguageTag("es_AR"));
+        return resolver;
     }
 
     @Override
@@ -110,10 +104,10 @@ public class WebConfig implements WebMvcConfigurer, ApplicationContextAware {
 
     @Bean
     public MessageSource messageSource() {
-        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-        messageSource.setBasename("classpath:/messages/messages");
-        messageSource.setDefaultEncoding("UTF-8");
-        return messageSource;
+        ReloadableResourceBundleMessageSource source = new ReloadableResourceBundleMessageSource();
+        source.setBasename("classpath:/messages/messages");
+        source.setDefaultEncoding("UTF-8");
+        return source;
     }
 
 }

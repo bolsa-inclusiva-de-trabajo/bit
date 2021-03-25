@@ -27,13 +27,18 @@ public class RootController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         try {
             CurrentUserDetails user = (CurrentUserDetails) auth.getPrincipal();
-            model.addAttribute("bagUrl", Utils.getAuthSuccessUrl(user.havePublishedJobs()));
+            model.addAttribute("userTargetUrl", Utils.getAuthSuccessUrl(user.isEmployer()));
         } catch (ClassCastException e) {
-            model.addAttribute("bagUrl", null);
+            model.addAttribute("userTargetUrl", null);
         }
-        Iterable<City> cities = repositoryCity.findAll();
-        model.addAttribute("cities", cities);
+        model.addAttribute("cities", repositoryCity.findAll());
         return "home";
+    }
+
+    @GetMapping("/login")
+    public String login(Model model) {
+        model.addAttribute("cities", repositoryCity.findAll());
+        return "system/login";
     }
 
     @GetMapping("/international")
