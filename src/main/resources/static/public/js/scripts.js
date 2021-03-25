@@ -90,7 +90,7 @@ $(function() {
         {
             $('#inputUserName').removeClass('is-valid');
             $('#inputUserName').addClass('is-invalid');
-            $('#invalid-feedback-UserName').html(document.texts.INVALID_EMPTY);
+            $('#invalid-feedback-UserName').html(document.texts.notEmpty);
             noError = 1;
         }
         else
@@ -101,7 +101,7 @@ $(function() {
                     {
                         $('#inputUserName').removeClass('is-valid');
                         $('#inputUserName').addClass('is-invalid');
-                        $('#invalid-feedback-UserName').html(document.texts.INVALID_USERNAME_ALREADY_EXISTS);
+                        $('#invalid-feedback-UserName').html(document.texts.usernameAlreadyExists);
                         noError = 2;
                     }
                     else
@@ -122,7 +122,7 @@ $(function() {
         {
             $('#inputEMail').removeClass('is-valid');
             $('#inputEMail').addClass('is-invalid');
-            $('#invalid-feedback-EMail').html(document.texts.INVALID_EMPTY);
+            $('#invalid-feedback-EMail').html(document.texts.notEmpty);
             noError = 1;
         }
         else
@@ -133,7 +133,7 @@ $(function() {
                     {
                         $('#inputEMail').removeClass('is-valid');
                         $('#inputEMail').addClass('is-invalid');
-                        $('#invalid-feedback-EMail').html(document.texts.INVALID_EMAIL_ALREADY_EXISTS);
+                        $('#invalid-feedback-EMail').html(document.texts.emailAlreadyExists);
                         noError = 2;
                     }
                     else
@@ -172,7 +172,7 @@ $(function() {
         if($('#inputPassword').val().length === 0)
         {
             $('#inputPassword').addClass('is-invalid');
-            $('#invalid-feedback-password').html(document.texts.INVALID_EMPTY);
+            $('#invalid-feedback-password').html(document.texts.notEmpty);
             noError = 3;
         }
         else
@@ -182,7 +182,7 @@ $(function() {
             {
                 noError = 4;
                 $('#inputPassword2').addClass('is-invalid');
-                $('#invalid-feedback-').html(document.texts.INVALID_PASSWORD_NOT_EQUAL);
+                $('#invalid-feedback-').html(document.texts.passwordsNotEqual);
             }
             else
             {
