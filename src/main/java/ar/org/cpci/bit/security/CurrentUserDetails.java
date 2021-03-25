@@ -17,8 +17,8 @@ public class CurrentUserDetails implements UserDetails {
         this.user = user;
     }
 
-    public boolean havePublishedJobs() {
-        return !user.getCreatedJobs().isEmpty();
+    public boolean isEmployer() {
+        return user.isEmployer();
     }
 
     @Override

@@ -372,13 +372,21 @@ public class User {
 
     /* ---- */
 
+    public boolean isEmployer() {
+        boolean texts = (education != null && !education.isEmpty()) ||
+                        (skills != null && !skills.isEmpty());
+        return !createdJobs.isEmpty() || !(fullTime || partTime || homeWork || applyForJob || texts);
+    }
+
+    /* ---- */
+
     @Override
     public String toString() {
         return String.format("User [id=%s, username=%s, password=%s, email=%s, firstName=%s, lastName=%s, " +
-                             "city=%s, education=%s, skills=%s, fullTime=%s, partTime=%s, homeWork=%s, " +
-                             "applyForJob=%s, disabled=%s]",
-                             id, username, password, email, firstName, lastName, city, education,
-                             skills, fullTime, partTime, homeWork, applyForJob, disabled);
+                             "city=%s, birthDate=%s, education=%s, skills=%s, fullTime=%s, partTime=%s, " +
+                             "homeWork=%s, applyForJob=%s, disabled=%s]",
+                             id, username, password, email, firstName, lastName, city, birthDate,
+                             education, skills, fullTime, partTime, homeWork, applyForJob, disabled);
     }
 
     @Override
