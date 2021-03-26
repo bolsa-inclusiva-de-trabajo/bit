@@ -58,7 +58,10 @@
                                                                 </tr>
                                                                 <tr >
                                                                     <td class="table align-left">
+                                                                   <!--
                                                                         <p class="offers_data_text" th:text="#{bag_offer.valid} + ' ' + ${#temporals.day(job.expiration)} + '/' + ${#temporals.month(job.expiration)} + '/' + ${#temporals.year(job.expiration)}" >txt</p>
+                                                                    -->
+                                                                        <p class="offers_data_text" th:text="#{bag_offer.valid} + ' ' + ${job.expiration}" >txt</p>
                                                                     </td>
                                                                     <td class="table align-right">
                                                                           <!--  <input class="buttonInterest" type="button" value="createDeleteInterest" th:id="'interest_' + ${job.id} + '_' + + ${user.id}"/>-->

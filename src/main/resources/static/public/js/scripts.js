@@ -389,9 +389,18 @@ function showModalJob(e) {
                     var jobDependent = document.getElementById("modalJobDependent");
                     jobDependent.innerText = data.dependent ? "Relacion de dependencia" : "";
 
-                    var jobExpirationDate = document.getElementById("modalExpirationDate");
-                    jobExpirationDate.innerText =  data.expiration;
+                    var jobExpiration = document.getElementById("modalExpirationDate");
+                    jobExpiration.innerText =  data.expiration;
 
+                    var jobInterested = document.getElementById("modalInterested");
+                    jobInterested.innerText = data.interestedUsersCount > 0 ?  data.interestedUsersCount +
+                    (data.interestedUsersCount > 1 ? " Personas interesadas" : " Persona Interesada")
+                    : "";
+
+                    var jobNominees = document.getElementById("modalNominees");
+                    jobNominees.innerText = data.applyUsersCount > 0 ?  data.applyUsersCount +
+                     (data.applyUsersCount > 1 ? " Personas postuladas" : " Persona postulada")
+                     : "";
 
 
 

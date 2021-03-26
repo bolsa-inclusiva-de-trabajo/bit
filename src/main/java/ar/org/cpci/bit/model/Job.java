@@ -37,6 +37,7 @@ public class Job {
     @Column(name = "description", nullable = false)
     private String description;
 
+    @JsonFormat(pattern="dd/MM/yyyy")
     @DateTimeFormat(pattern="dd/MM/yyyy")
     @Column(name = "expiration", nullable = false)
     private Date expiration;
@@ -191,7 +192,7 @@ public class Job {
         interestedUsers.clear();
     }
 
-    @JsonIgnore
+    //@JsonIgnore
     public int getInterestedUsersCount() {
         return interestedUsers.size();
     }
@@ -221,7 +222,7 @@ public class Job {
         applyUsers.clear();
     }
 
-    @JsonIgnore
+    //@JsonIgnore
     public int getApplyUsersCount() {
         return applyUsers.size();
     }
