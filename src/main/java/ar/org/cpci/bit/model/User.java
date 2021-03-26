@@ -255,6 +255,7 @@ public class User {
         return resp;
     }
 
+
     public void setCreatedJobs(Iterable<Job> jobs) {
         createdJobs.clear();
         for (Job job : jobs) {

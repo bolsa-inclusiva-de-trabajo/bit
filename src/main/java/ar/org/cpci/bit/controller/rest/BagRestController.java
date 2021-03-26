@@ -41,7 +41,7 @@ public class BagRestController {
     private static <T1, T2> ResponseEntity<Object> processMethod(CrudRepository<T1, Long> repo1, Long id1,
                                                                  CrudRepository<T2, Long> repo2, Long id2,
                                                                  String methodName) {
-        HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
+        HttpStatus status = HttpStatus.NOT_FOUND;
         boolean success = false;
 
         T1 obj1 = getByIdFromRepo(repo1, id1);
@@ -82,7 +82,7 @@ public class BagRestController {
         }
         HashMap<String, Boolean> map = new HashMap<>();
         map.put("success", false);
-        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(map);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(map);
     }
 
     /* --- User.createdJob<job> --- */

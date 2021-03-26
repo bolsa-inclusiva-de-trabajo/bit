@@ -1,4 +1,4 @@
-const NAVBAR_HEIGHT = 100;              // pixel
+//const NAVBAR_HEIGHT = 100;              // pixel
 const ANIMATION_TIME = 500;             // milliseconds
 const RESIZE_DEBOUNCING_TIMER = 100;    // milliseconds
 
@@ -69,6 +69,10 @@ $(document).ready(function() {
     $('[data-toggle="tooltip"]').tooltip({
         placement : 'top'
     });
+
+
+
+
 });
 
 /*
@@ -307,4 +311,107 @@ $(function() {
         $('.modal-dialog').hide();
         $('#CRUDProfileSkill').show();
     });
+
+
+
 });
+
+
+
+function createDeleteInterest(e) {
+
+
+        const ids = e.id.replace("interest_","");
+        var idJob = ids.split("_")[0];
+        var idUser = ids.split("_")[1];
+        const urlInterested = "/api/bag/user/"+idUser+"/job/"+idJob+"/interested";
+
+
+        fetch(urlInterested).then(function(response) {
+
+            if (response.ok) {
+                            fetch(urlInterested, {method: 'DELETE'}).then( function(response) {
+                               if (response.ok) {
+                                    var ee = document.getElementById(e.id);
+                                   $(ee).removeClass("bi-hand-thumbs-up-fill");
+                                   $(ee).addClass("bi-hand-thumbs-up");
+
+
+
+                               } else {
+                                    var ee = document.getElementById(e.id);
+                                    $(ee).removeClass("bi-hand-thumbs-up");
+                                   $(ee).addClass("bi-hand-thumbs-up-fill");
+                               }
+                            });
+
+            } else {
+                fetch(urlInterested, {method: 'POST'}).then( function(response) {
+                   if (response.ok) {
+                        var ee = document.getElementById(e.id);
+                       $(ee).removeClass("bi-hand-thumbs-up");
+                       $(ee).addClass("bi-hand-thumbs-up-fill");
+
+                   } else {
+                        var ee = document.getElementById(e.id);
+                       $(ee).removeClass("bi-hand-thumbs-up-fill");
+                       $(ee).addClass("bi-hand-thumbs-up");
+                   }
+                });
+            }
+        });
+
+   }
+
+
+
+function showModalJob(e) {
+
+  const ids = e.id.replace("btn_show_job_","");
+  var idJob = ids.split("_")[0];
+  var idUser = ids.split("_")[1];
+  const urlJob = "/api/bag/job/" + idJob;
+
+
+
+    fetch(urlJob).then( function(response) {
+        if (response.ok) {
+            response.json().then(function(data) {
+   	   			if(data) {
+   	   			    var jobTitle = document.getElementById("modalJobTitle");
+                    jobTitle.innerText = data.title;
+   	   			    var jobDescription = document.getElementById("modalJobDescription");
+                    jobDescription.innerText = data.description;
+
+                    var jobFullTime = document.getElementById("modalJobFullTime");
+                    jobFullTime.innerText = data.fullTime ? "Tiempo Completo" : "";
+                    var jobPartTime = document.getElementById("modalJobPartTime");
+                    jobPartTime.innerText = data.partTime ? "Medio Tiempo" : "";
+                    var jobRemote = document.getElementById("modalJobRemote");
+                    jobRemote.innerText = data.homeWork ? "Trabajo remoto" : "";
+                    var jobIndependent = document.getElementById("modalJobIndependent");
+                    jobIndependent.innerText = data.independent ? "Independiente" : "";
+                    var jobDependent = document.getElementById("modalJobDependent");
+                    jobDependent.innerText = data.dependent ? "Relacion de dependencia" : "";
+
+                    var jobExpirationDate = document.getElementById("modalExpirationDate");
+                    jobExpirationDate.innerText =  data.expiration;
+
+
+
+
+                    $('#modalJob').modal('show');
+   	   			} else {
+        		}
+            });
+
+           // var ee = document.getElementById(e.id);
+            //$(ee).removeClass("bi-hand-thumbs-up-fill");
+            //alert(e.id);
+
+             //$(ee).modal('show')
+        } else {
+        }
+
+    });
+}
