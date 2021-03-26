@@ -211,7 +211,12 @@
 
                                     </td>
                                     <td style="width: 40px;" class="align-middle">
-                                        <a class="align-middle" href=""><i class="bi bi-trash" data-toggle="tooltip" th:data-original-title="#{bag_offer.deleteOffer}"></i></a>
+
+                                            <i th:id="'btn_delete_interest_' + ${interest.id} + '_'+ ${user.id}"
+                                               class="bi bi-trash" data-toggle="tooltip"
+                                               onclick="deleteInterest(this)"
+                                               th:data-original-title="#{bag_offer.deleteOffer}"></i>
+
                                     </td>
                                 </tr>
                             </table>

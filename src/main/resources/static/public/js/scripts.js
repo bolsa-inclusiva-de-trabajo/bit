@@ -361,7 +361,6 @@ function showModalJob(e) {
 
 function createDeleteInterest(e) {
 
-
         const ids = e.id.replace("interest_","");
         var idJob = ids.split("_")[0];
         var idUser = ids.split("_")[1];
@@ -421,9 +420,12 @@ function createDeleteInterest(e) {
                                                 +"</i>"
                                                 +"</td>"
                                                 +"<td style=\"width: 40px;\" class=\"align-middle\">"
-                                                +"<a class=\"align-middle\" href=\"\"><i class=\"bi bi-trash\" data-toggle=\"tooltip\" data-original-title=\"Eliminar\"></i></a>"
+                                                +"<i id=\"btn_delete_interest_"+idJob+"_"+idUser+"\" "
+                                                +"class=\"bi bi-trash\" data-toggle=\"tooltip\" data-original-title=\"Eliminar\" onclick=\"deleteInterest(this)\"></i>"
                                                 +"</td>";
                                           t.appendChild(tr);
+
+
 
                                     }
                                 });
@@ -442,6 +444,39 @@ function createDeleteInterest(e) {
         });
 
 }
+
+function deleteInterest(e) {
+
+        const ids = e.id.replace("btn_delete_interest_","");
+        var idJob = ids.split("_")[0];
+        var idUser = ids.split("_")[1];
+        const urlInterested = "/api/bag/user/"+idUser+"/job/"+idJob+"/interested";
+
+
+        fetch(urlInterested).then(function(response) {
+
+            if (response.ok) {
+                            fetch(urlInterested, {method: 'DELETE'}).then( function(response) {
+                               if (response.ok) {
+
+                                    var objId = "interest_row_"+idJob+"_"+idUser;
+                                    var element = document.getElementById(objId);
+                                    element.remove();
+
+                                     var idInterestButton =  "interest_"+idJob+"_"+idUser;
+                                     var interestButton = document.getElementById(idInterestButton);
+                                     if (typeof interestButton !== 'undefined' && interestButton !== null) {
+                                        $(interestButton).removeClass("bi-hand-thumbs-up-fill");
+                                        $(interestButton).addClass("bi-hand-thumbs-up");
+                                    }
+                               }
+                            });
+            }
+        });
+
+}
+
+
 
 
 
