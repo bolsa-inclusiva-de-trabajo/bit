@@ -11,11 +11,11 @@
         <li class="nav-item">
             <a class="nav-link" href="#testimonials" th:text="#{header.testimonials}">testimonials</a>
         </li>
-        <li th:if="${bagUrl} == null" class="nav-item">
-            <a class="nav-link" th:href="@{/login}" th:text="#{login.login}">login</a>
+        <li th:if="${userTargetUrl} == null" class="nav-item">
+            <a class="nav-link" href="/login" th:text="#{login.action}">login</a>
         </li>
-        <li th:if="${bagUrl} != null" class="nav-item" th:title="#{workspace}">
-            <a class="nav-link text-primary" th:href="${bagUrl}" th:text="${#httpServletRequest.remoteUser}">user</a>
+        <li th:if="${userTargetUrl} != null" class="nav-item" th:title="#{workspace}">
+            <a class="nav-link text-primary" th:href="${userTargetUrl}" th:text="${#httpServletRequest.remoteUser}">user</a>
         </li>
     </ul>
 

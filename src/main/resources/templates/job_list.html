@@ -11,7 +11,8 @@
 
             <div th:each="job : ${jobs}">
                 <span th:text="${job.title}"></span>:
-                <span th:text="${#temporals.formatISO(job.expiration)}"></span>
+                <span th:text="${job.description}"></span>
+                <span th:text="${job.expiration}"></span>
             </div>
 
         </div>

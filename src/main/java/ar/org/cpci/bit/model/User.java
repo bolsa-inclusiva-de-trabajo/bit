@@ -20,6 +20,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import ar.org.cpci.bit.model.location.City;
@@ -53,6 +56,8 @@ public class User {
     @JoinColumn(name = "city_id")
     private City city;
     
+    @JsonFormat(pattern="dd/MM/yyyy")
+    @DateTimeFormat(pattern="dd/MM/yyyy")
     @Column(name = "birth_date", nullable = false)
     private Date birthDate;
     
@@ -368,13 +373,21 @@ public class User {
 
     /* ---- */
 
+    public boolean isEmployer() {
+        boolean texts = (education != null && !education.isEmpty()) ||
+                        (skills != null && !skills.isEmpty());
+        return !createdJobs.isEmpty() || !(fullTime || partTime || homeWork || applyForJob || texts);
+    }
+
+    /* ---- */
+
     @Override
     public String toString() {
         return String.format("User [id=%s, username=%s, password=%s, email=%s, firstName=%s, lastName=%s, " +
-                             "city=%s, education=%s, skills=%s, fullTime=%s, partTime=%s, homeWork=%s, " +
-                             "applyForJob=%s, disabled=%s]",
-                             id, username, password, email, firstName, lastName, city, education,
-                             skills, fullTime, partTime, homeWork, applyForJob, disabled);
+                             "city=%s, birthDate=%s, education=%s, skills=%s, fullTime=%s, partTime=%s, " +
+                             "homeWork=%s, applyForJob=%s, disabled=%s]",
+                             id, username, password, email, firstName, lastName, city, birthDate,
+                             education, skills, fullTime, partTime, homeWork, applyForJob, disabled);
     }
 
     @Override

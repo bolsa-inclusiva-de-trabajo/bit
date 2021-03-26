@@ -17,8 +17,8 @@ public final class Utils {
         return Integer.parseInt(env.getOrDefault(key, value));
     }
 
-    public static String getAuthSuccessUrl(boolean havePublishedJobs) {
-        return havePublishedJobs ? "/bagapplicants" : "/bagoffers";
+    public static String getAuthSuccessUrl(boolean isEmployer) {
+        return isEmployer ? "/bagapplicants" : "/bagoffers";
     }
 
     public static PasswordEncoder getPasswordEncoder() {
