@@ -311,63 +311,12 @@ $(function() {
 
 });
 
-
-
-function createDeleteInterest(e) {
-
-
-        const ids = e.id.replace("interest_","");
-        var idJob = ids.split("_")[0];
-        var idUser = ids.split("_")[1];
-        const urlInterested = "/api/bag/user/"+idUser+"/job/"+idJob+"/interested";
-
-
-        fetch(urlInterested).then(function(response) {
-
-            if (response.ok) {
-                            fetch(urlInterested, {method: 'DELETE'}).then( function(response) {
-                               if (response.ok) {
-                                    var ee = document.getElementById(e.id);
-                                   $(ee).removeClass("bi-hand-thumbs-up-fill");
-                                   $(ee).addClass("bi-hand-thumbs-up");
-
-
-
-                               } else {
-                                    var ee = document.getElementById(e.id);
-                                    $(ee).removeClass("bi-hand-thumbs-up");
-                                   $(ee).addClass("bi-hand-thumbs-up-fill");
-                               }
-                            });
-
-            } else {
-                fetch(urlInterested, {method: 'POST'}).then( function(response) {
-                   if (response.ok) {
-                        var ee = document.getElementById(e.id);
-                       $(ee).removeClass("bi-hand-thumbs-up");
-                       $(ee).addClass("bi-hand-thumbs-up-fill");
-
-                   } else {
-                        var ee = document.getElementById(e.id);
-                       $(ee).removeClass("bi-hand-thumbs-up-fill");
-                       $(ee).addClass("bi-hand-thumbs-up");
-                   }
-                });
-            }
-        });
-
-   }
-
-
-
 function showModalJob(e) {
 
   const ids = e.id.replace("btn_show_job_","");
   var idJob = ids.split("_")[0];
   var idUser = ids.split("_")[1];
   const urlJob = "/api/bag/job/" + idJob;
-
-
 
     fetch(urlJob).then( function(response) {
         if (response.ok) {
@@ -402,20 +351,97 @@ function showModalJob(e) {
                      (data.applyUsersCount > 1 ? " Personas postuladas" : " Persona postulada")
                      : "";
 
-
-
                     $('#modalJob').modal('show');
-   	   			} else {
-        		}
+   	   			}
             });
-
-           // var ee = document.getElementById(e.id);
-            //$(ee).removeClass("bi-hand-thumbs-up-fill");
-            //alert(e.id);
-
-             //$(ee).modal('show')
-        } else {
         }
-
     });
 }
+
+
+function createDeleteInterest(e) {
+
+
+        const ids = e.id.replace("interest_","");
+        var idJob = ids.split("_")[0];
+        var idUser = ids.split("_")[1];
+        const urlInterested = "/api/bag/user/"+idUser+"/job/"+idJob+"/interested";
+
+
+        fetch(urlInterested).then(function(response) {
+
+            if (response.ok) {
+                            fetch(urlInterested, {method: 'DELETE'}).then( function(response) {
+                               if (response.ok) {
+                                    var ee = document.getElementById(e.id);
+                                   $(ee).removeClass("bi-hand-thumbs-up-fill");
+                                   $(ee).addClass("bi-hand-thumbs-up");
+
+                                    var objId = "interest_row_"+idJob+"_"+idUser;
+                                    var element = document.getElementById(objId);
+                                    element.remove();
+
+
+                               } else {
+                                    var ee = document.getElementById(e.id);
+                                    $(ee).removeClass("bi-hand-thumbs-up");
+                                   $(ee).addClass("bi-hand-thumbs-up-fill");
+                               }
+                            });
+
+            } else {
+                fetch(urlInterested, {method: 'POST'}).then( function(response) {
+                   if (response.ok) {
+                        var ee = document.getElementById(e.id);
+                       $(ee).removeClass("bi-hand-thumbs-up");
+                       $(ee).addClass("bi-hand-thumbs-up-fill");
+
+
+                     var urlJob = "/api/bag/job/" + idJob;
+
+                        fetch(urlJob).then( function(response) {
+                            if (response.ok) {
+                                response.json().then(function(data) {
+                                    if(data) {
+
+                                          var t = document.getElementById('interestsTable'),
+                                              tr = document.createElement('tr');
+
+                                              tr.id= "interest_row_" + idJob  + '_'+ idUser;
+
+                                              tr.innerHTML = "<td style=\"width: auto;\" class=\"align-middle\">"
+                                                +"<p class=\"contact_content align-middle\" text=\"\">"+data.title+"</p>"
+                                                +"</td>"
+                                                +"<td style=\"width: 40px;\" class=\"align-middle\">"
+                                                +"<i id=\"btn_show_job_"+idJob+"_"+idUser+"\""
+                                                +"class=\"bi bi-eye\""
+                                                +"data-toggle=\"tooltip\""
+                                                +"data-original-title=\"Ver trabajo\""
+                                                +"onclick=\"showModalJob(this)\">"
+                                                +"</i>"
+                                                +"</td>"
+                                                +"<td style=\"width: 40px;\" class=\"align-middle\">"
+                                                +"<a class=\"align-middle\" href=\"\"><i class=\"bi bi-trash\" data-toggle=\"tooltip\" data-original-title=\"Eliminar\"></i></a>"
+                                                +"</td>";
+                                          t.appendChild(tr);
+
+                                    }
+                                });
+                            }
+                        });
+
+
+
+                   } else {
+                        var ee = document.getElementById(e.id);
+                       $(ee).removeClass("bi-hand-thumbs-up-fill");
+                       $(ee).addClass("bi-hand-thumbs-up");
+                   }
+                });
+            }
+        });
+
+}
+
+
+

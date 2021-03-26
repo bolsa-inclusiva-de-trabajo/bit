@@ -192,7 +192,7 @@
 
                         <div class="container mt-2 panel_contact">
                             <p class="h6" th:text="#{bag_offer.myInterests}">My interests</p>
-                            <table  style="width: 100%;">
+                            <table id="interestsTable" style="width: 100%;">
                                 <tr  th:id="'interest_row_' +  ${interest.id} + '_'+ ${user.id}"
                                      th:each="interest: ${user.interestingJobs}">
                                     <td style="width: auto;" class="align-middle">
