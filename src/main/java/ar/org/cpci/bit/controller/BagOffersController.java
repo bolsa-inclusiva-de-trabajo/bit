@@ -50,11 +50,8 @@ public class BagOffersController {
                                @RequestParam("size") Optional<Integer> s) {
 
 
-        Iterable<Job> desc = getDescriptionNotExpiredJob();
 
-
-
-        Iterable<Job> jobs = jobsRepository.findAll(page);
+        Iterable<Job> jobs = jobsRepository.findAllActiveJobs(page);
 
         model.addAttribute("jobs", jobs);
 

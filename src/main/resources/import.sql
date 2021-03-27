@@ -154,13 +154,13 @@ INSERT INTO job (title, description, expiration, full_time, part_time, home_work
 
 INSERT INTO job (title, description, expiration, full_time, part_time, home_work, independent, dependent, disabled, user_id) VALUES ('VENTAS EN LOCAL', 'Se necesita personal para venta al público, buena remuneración, horario comercial, Centro de Eldorado.', '2021-03-31 04:06:12', true, false, false, true, false, FALSE, 1)
 
-INSERT INTO job (title, description, expiration, full_time, part_time, home_work, independent, dependent, disabled, user_id) VALUES ('PLANTA PERMANENTE ELECTRICISTA', 'Vacante disponible para cubrir puesto de electricista planta permanente en importante secadero de yerba mate.', '2021-03-22 04:06:12', true, false, false, false, true, FALSE, 1)
+INSERT INTO job (title, description, expiration, full_time, part_time, home_work, independent, dependent, disabled, user_id) VALUES ('PLANTA PERMANENTE ELECTRICISTA', 'Vacante disponible para cubrir puesto de electricista planta permanente en importante secadero de yerba mate.', '2021-05-22 04:06:12', true, false, false, false, true, FALSE, 1)
 
-INSERT INTO job (title, description, expiration, full_time, part_time, home_work, independent, dependent, disabled, user_id) VALUES ('COCINA CASA DE RETIRO', 'Personal de cocina para establecimiento de retiro,', '2021-03-22 04:06:12', false, true, false, true, false, FALSE, 1)
+INSERT INTO job (title, description, expiration, full_time, part_time, home_work, independent, dependent, disabled, user_id) VALUES ('COCINA CASA DE RETIRO', 'Personal de cocina para establecimiento de retiro,', '2021-06-22 04:06:12', false, true, false, true, false, FALSE, 1)
 
-INSERT INTO job (title, description, expiration, full_time, part_time, home_work, independent, dependent, disabled, user_id) VALUES ('DESARROLLADOR MULTIPLATAFORMA', 'Trainee para Multiplataforma JAva, SpringBoot, ThyMyLeaf, Hybernate, Postgre SQL. ', '2021-03-22 04:06:12', false, false, true, false, true, FALSE, 2)
+INSERT INTO job (title, description, expiration, full_time, part_time, home_work, independent, dependent, disabled, user_id) VALUES ('DESARROLLADOR MULTIPLATAFORMA', 'Trainee para Multiplataforma JAva, SpringBoot, ThyMyLeaf, Hybernate, Postgre SQL. ', '2021-04-22 04:06:12', false, false, true, false, true, FALSE, 2)
 
-INSERT INTO job (title, description, expiration, full_time, part_time, home_work, independent, dependent, disabled, user_id) VALUES ('CUIDADO DE NIÑOS', 'Personal para cuidar niños por la tarde.', '2021-03-22 04:06:12', false, true, false, true, false, FALSE, 2)
+INSERT INTO job (title, description, expiration, full_time, part_time, home_work, independent, dependent, disabled, user_id) VALUES ('CUIDADO DE NIÑOS', 'Personal para cuidar niños por la tarde.', '2021-04-22 04:06:12', false, true, false, true, false, FALSE, 2)
 
 INSERT INTO contact (user_1_id, user_2_id) VALUES (1, 2)
 
