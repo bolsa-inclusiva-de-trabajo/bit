@@ -67,7 +67,7 @@
                                                                           <!--  <input class="buttonInterest" type="button" value="createDeleteInterest" th:id="'interest_' + ${job.id} + '_' + + ${user.id}"/>-->
 
                                                                         <i th:id="'interest_' + ${job.id} + '_' +  ${user.id}"
-                                                                           th:class="${user.containsInterestingJob(job)} ? 'bi bi-hand-thumbs-up-fill' : 'bi bi-hand-thumbs-up'"
+                                                                           th:class="${user.containsInterestingJob(job)} ? 'bi bi-hand-thumbs-up-fill ' : 'bi bi-hand-thumbs-up '"
                                                                            data-toggle="tooltip"
                                                                            th:data-original-title="#{bag_offer.interested}"
                                                                            onclick="createDeleteInterest(this)"
@@ -75,9 +75,13 @@
 
                                                                     </td>
                                                                     <td class="table align-right">
-                                                                        <a href="">
-                                                                            <i class="bi bi-telephone-plus ml-2" data-toggle="tooltip" th:data-original-title="#{bag_offer.apply}"></i>
-                                                                        </a>
+
+                                                                            <i th:id="'apply_' + ${job.id} + '_' +  ${user.id}"
+                                                                               th:class="${user.containsApplyJob(job)} ? 'bi bi-telephone-plus-fill ml-2 ' : 'bi bi-telephone-plus '"
+                                                                               data-toggle="tooltip"
+                                                                               onclick="createDeleteApply(this)"
+                                                                               th:data-original-title="#{bag_offer.apply}"></i>
+
                                                                     </td>
                                                                     <td class="table align-right">
                                                                         <a th:if="${user.existCreatedJob({job.id})}" href="">
@@ -208,7 +212,6 @@
 
                                         </i>
 
-
                                     </td>
                                     <td style="width: 40px;" class="align-middle">
 
@@ -221,6 +224,37 @@
                                 </tr>
                             </table>
                         </div>
+
+                        <div class="container mt-2 panel_contact">
+                            <p class="h6" th:text="#{bag_offer.myAplies}">My Applies</p>
+                            <table id="applyTable" style="width: 100%;">
+                                <tr  th:id="'apply_row_' +  ${apply.id} + '_'+ ${user.id}"
+                                     th:each="apply: ${user.applyJobs}">
+                                    <td style="width: auto;" class="align-middle">
+                                        <p class="contact_content align-middle" th:text="${apply.title} ?: #{bag_offer.noTitle}">APPLY TITLE</p>
+                                    </td>
+                                    <td style="width: 40px;" class="align-middle">
+
+                                        <i  th:id="'btn_show_apply_' + ${apply.id} + '_'+ ${user.id}"
+                                            class="bi bi-eye"
+                                            data-toggle="tooltip"
+                                            th:data-original-title="#{bag_offer.viewOffer}"
+                                            onclick="showModalApply(this)">
+                                        </i>
+
+                                    </td>
+                                    <td style="width: 40px;" class="align-middle">
+
+                                        <i th:id="'btn_delete_apply_' + ${apply.id} + '_'+ ${user.id}"
+                                           class="bi bi-trash" data-toggle="tooltip"
+                                           onclick="deleteApply(this)"
+                                           th:data-original-title="#{bag_offer.deleteOffer}"></i>
+
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
                     </div>
 
 
@@ -230,10 +264,22 @@
                                 <div class="modal-content">
 
                                     <div class="modal-header">
-                                        <div id="modalJobTitle" class="modal-title h4">JOB TITLE</div>
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <table  class="table table-borderless" style="width: 100%;">
+                                            <tr>
+                                                <td>
+                                                    <div class="h6">Te interesa:</div>
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <div id="modalJobTitle" class="modal-title h3">JOB TITLE</div>
+                                                </td>
+                                            </tr>
+                                        </table>
                                     </div>
-
                                     <div class="modal-body">
 
                                             <table class="table table-borderless align-middle" style=" width: 100%;">
@@ -274,6 +320,68 @@
                             </div>
                         </div>
 
+
+
+                    <div class="modal" id="modalApply">
+                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <table  class="table table-borderless" style="width: 100%;">
+                                        <tr>
+                                            <td>
+                                                <div class="h6">Te postulaste a:</div>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <div id="modalApplyTitle" class="modal-title h3">Apply TITLE</div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                                <div class="modal-body">
+
+                                    <table class="table table-borderless align-middle" style=" width: 100%;">
+                                        <tr>
+                                            <td>
+                                                <div class="offers_text" id="modalApplyDescription" >Apply DESCRIPTION</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div id="modalApplyFullTime" class="offers_data_text" text="FULL TIME" >txt</div>
+                                                <div id="modalApplyPartTime" class="offers_data_text" text="PART TIME" >txt</div>
+                                                <div id="modalApplyRemote" class="offers_data_text" text="REMOTE" >txt</div>
+                                                <div id="modalApplyIndependent" class="offers_data_text" text="FREE LANCE" >txt</div>
+                                                <div id="modalApplyDependent" class="offers_data_text" text="DEPENDENT" >txt</div>
+                                                <div id="modalApplyExpirationDate" class="offers_data_text" text="expiration date" >txt</div>
+                                            </td>
+                                    </table>
+
+
+
+                                </div>
+
+                                <div class="modal-footer">
+                                    <div class="d-flex flex-row justify-content-start">
+                                        <div class="p-2">
+                                            <span id="modalApplyInterested" class="offers_data_text " text="Interested people">interested people</span>
+                                        </div>
+                                        <div class="p-2">
+                                            <span id="modalApplyNominees" class="offers_data_text ml-4" text="nominees">nominees</span>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
 
 
 
