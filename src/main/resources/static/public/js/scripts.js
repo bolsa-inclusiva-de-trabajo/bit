@@ -391,7 +391,7 @@ function deleteApply(e) {
         var idJob = ids.split("_")[0];
         var idUser = ids.split("_")[1];
         const urlApply = "/api/bag/user/"+idUser+"/job/"+idJob+"/apply";
-
+this
 
         fetch(urlApply).then(function(response) {
 
@@ -416,7 +416,25 @@ function deleteApply(e) {
 
 }
 
+function bagFilterText(e) {
 
+}
 
+function bagFilterCity(e) {
+    alert('city');
+}
 
+function bagFilterFullTime(e) {
+    alert('full');
+}
+function bagFilterPartTime(e) {
+    alert('part');
+}
+function bagFilterRemote(e) {
+    alert('remote');
+}
+
+function bagFilterMyOffers(e) {
+    alert('myoffers');
+}
 
