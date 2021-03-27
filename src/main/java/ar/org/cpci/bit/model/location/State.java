@@ -1,5 +1,7 @@
 package ar.org.cpci.bit.model.location;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -72,10 +74,12 @@ public class State {
         this.description = description;
     }
 
+
     public Set<City> getCities() {
         return Collections.unmodifiableSet(cities);
     }
 
+    @JsonIgnore
     public void setCities(Iterable<City> cities) {
         this.cities.clear();
         for (City city : cities) {

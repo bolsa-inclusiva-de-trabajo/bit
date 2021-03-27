@@ -1,5 +1,7 @@
 package ar.org.cpci.bit.model.location;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -53,6 +55,7 @@ public class Country {
         this.description = description;
     }
 
+    @JsonIgnore
     public Set<State> getStates() {
         return Collections.unmodifiableSet(states);
     }
