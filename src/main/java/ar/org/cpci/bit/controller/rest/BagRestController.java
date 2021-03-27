@@ -5,6 +5,7 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import ar.org.cpci.bit.model.location.City;
+import ar.org.cpci.bit.model.location.CityDTO;
+import ar.org.cpci.bit.repository.CityRepository;
 import ar.org.cpci.bit.repository.JobRepository;
 import ar.org.cpci.bit.repository.UserRepository;
 
@@ -34,7 +38,9 @@ public class BagRestController {
 
     @Autowired
     private JobRepository repositoryJob;
-
+    
+    @Autowired
+    private CityRepository repositoryCity;
     /* === SCHMagic === functions using java generics === */
 
     /**
@@ -246,6 +252,19 @@ public class BagRestController {
     @GetMapping("/api/bag/job/{jid}")
     public ResponseEntity<Object> getJobById(@PathVariable("jid") Long jid) {
         return getResponseById(repositoryJob, jid);
+    }
+    
+    @GetMapping("/api/bag/city/{cid}")
+    public ResponseEntity<CityDTO> getCityById(@PathVariable("cid") Long cid) {
+    	// user here is a prepopulated User instance
+    	Optional<City> oCity = repositoryCity.findById(cid);
+    	City city = oCity.get();
+    	CityDTO cityDTO = new CityDTO();
+    	cityDTO.setId(city.getId());
+    	cityDTO.setName(city.getName());
+    	cityDTO.setDescription(city.getDescription());
+    	cityDTO.setState(city.getState().getName());
+        return ResponseEntity.ok().body(cityDTO);
     }
 
 }

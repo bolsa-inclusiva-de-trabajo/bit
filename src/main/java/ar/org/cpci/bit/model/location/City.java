@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity(name = "city")
 public class City {
 
@@ -24,7 +26,8 @@ public class City {
 
     @Column(name = "description", nullable = true)
     private String description;
-
+    
+//    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "state_id")
     private State state;
