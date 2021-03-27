@@ -2,9 +2,11 @@ package ar.org.cpci.bit.controller.rest;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Optional;
 
+import ar.org.cpci.bit.model.Job;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
@@ -74,7 +76,7 @@ public class BagRestController {
      * @return            Returns an ResponseEntity object with a status and value,
      *                    described above.
      *
-     * @see               getByIdFromRepo
+     * @see               //getByIdFromRepo
      */
     private static <T1, T2> ResponseEntity<Object> processMethod(CrudRepository<T1, Long> repo1, Long id1,
                                                                  CrudRepository<T2, Long> repo2, Long id2,
@@ -116,7 +118,7 @@ public class BagRestController {
      *
      * @return            Returns an ResponseEntity object
      *
-     * @see               processMethod
+     * @see               //processMethod
      */
     private ResponseEntity<Object> getResponseUserJob(Long uid, Long jid, String methodName) {
         return processMethod(repositoryUser, uid, repositoryJob, jid, methodName);
@@ -132,7 +134,7 @@ public class BagRestController {
      *
      * @return            Returns an ResponseEntity object.
      *
-     * @see               processMethod
+     * @see               //processMethod
      */
     private ResponseEntity<Object> getResponseUserUser(Long uid1, Long uid2, String methodName) {
         return processMethod(repositoryUser, uid1, repositoryUser, uid2, methodName);
@@ -148,7 +150,7 @@ public class BagRestController {
      *
      * @return      Returns an ResponseEntity object.
      *
-     * @see         getByIdFromRepo
+     * @see         //getByIdFromRepo
      */
     private static <T> ResponseEntity<Object> getResponseById(CrudRepository<T, Long> repo, Long id) {
         T obj = getByIdFromRepo(repo, id);
@@ -265,6 +267,21 @@ public class BagRestController {
     	cityDTO.setDescription(city.getDescription());
     	cityDTO.setState(city.getState().getName());
         return ResponseEntity.ok().body(cityDTO);
+    }
+
+    @GetMapping("/api/bag/job/text/{filterText}")
+    public ResponseEntity<Object> getJobByTextFilter(@PathVariable("filterText") String filterText) {
+        HashMap<String, Boolean> map = new HashMap<>();
+        HttpStatus status = HttpStatus.NOT_FOUND;
+        map.put("success", false);
+        Iterable<Job> jobs = repositoryJob.findTextFilteredJobs(filterText);
+        if ( jobs instanceof Collection) {
+            if (((Collection<?>) jobs).size() > 0 ) {
+                map.replace("success", true);
+                status =  HttpStatus.OK;
+            }
+        }
+        return ResponseEntity.status(status).body(map);
     }
 
 }

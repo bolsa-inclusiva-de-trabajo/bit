@@ -24,6 +24,10 @@ public interface JobRepository extends JpaRepository<Job, Long> {
     public abstract Page<Job> findTextFilteredJobs(Pageable var1,
                                                @Param("text") String text);
 
+    @Query(value = "SELECT j FROM Job j WHERE (j.expiration > CURRENT_DATE) " +
+            "AND ( j.description LIKE %:text% ) ")
+    public abstract Iterable<Job> findTextFilteredJobs(@Param("text") String text);
+
 
     @Query(value = "SELECT j FROM Job j INNER JOIN j.owner o INNER JOIN o.city c WHERE (j.expiration > CURRENT_DATE) " +
             "AND ( c.id = :city ) ")

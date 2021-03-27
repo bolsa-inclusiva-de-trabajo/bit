@@ -39,13 +39,6 @@ public class BagOffersController {
     private ApplicationContext context;
 
 
-    @Query(value = "SELECT j.description FROM Job j WHERE Job.id = 1")
-    public List<Job> getDescriptionNotExpiredJob()
-    {
-        return jobsRepository.findAll();
-
-    }
-
     @GetMapping("/bagoffers")
     public String getBagOffers(Model model, @PageableDefault(size = 4) Pageable page,
                                @RequestParam("page") Optional<Integer> p,
@@ -66,13 +59,16 @@ public class BagOffersController {
         List<Job> jobstotal = jobsRepository.findAll();
         int pageTotal = 1;
         if (jobstotal.size() > pageSize && pageSize > 0) {
-            pageTotal = (int) Math.round(jobstotal.size() / pageSize) + 1;
+            if (Math.round(jobstotal.size() / pageSize) > 1) {
+                pageTotal = (int) Math.round(jobstotal.size() / pageSize) + 1;
+            }
         }
 
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("pageSize", pageSize);
         model.addAttribute("pageTotal", pageTotal);
-        model.addAttribute("filtro", "");
+        model.addAttribute("filterType", "");
+        model.addAttribute("filterContent", "");
         return "bag_offers";
     }
 
@@ -84,7 +80,7 @@ public class BagOffersController {
                                        @PathVariable String filterText) {
 
 
-         Iterable<Job> jobs = jobsRepository.findTextFilteredJobs(page, filterText);
+        Iterable<Job> jobs = jobsRepository.findTextFilteredJobs(page, filterText);
         model.addAttribute("jobs", jobs);
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -99,13 +95,16 @@ public class BagOffersController {
         List<Job> jobstotal = jobsRepository.findAll();
         int pageTotal = 1;
         if (jobstotal.size() > pageSize && pageSize > 0) {
-            pageTotal = (int) Math.round(jobstotal.size() / pageSize) + 1;
+            if (Math.round(jobstotal.size() / pageSize) > 1) {
+                pageTotal = (int) Math.round(jobstotal.size() / pageSize) + 1;
+            }
         }
 
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("pageSize", pageSize);
         model.addAttribute("pageTotal", pageTotal);
-        model.addAttribute("filtro", "text");
+        model.addAttribute("filterType", "text");
+        model.addAttribute("filterContent", filterText);
 
         return "bag_offers";
     }
@@ -125,13 +124,14 @@ public class BagOffersController {
 
         //cargo la ciudad para el filtro si es necesario
         long fCity = 0;
+
         if (filterCity) {
             fCity = user.getCity().getId();
+
         }
 
         Iterable<Job> jobs = jobsRepository.findCityFilteredJobs(page, fCity);
         model.addAttribute("jobs", jobs);
-
 
         int currentPage = p.orElse(0);
         int pageSize = s.orElse(100);
@@ -148,9 +148,8 @@ public class BagOffersController {
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("pageSize", pageSize);
         model.addAttribute("pageTotal", pageTotal);
-        model.addAttribute("filtro", "city");
-
-
+        model.addAttribute("filterType", "city");
+        model.addAttribute("filterContent", "");
         return "bag_offers";
     }
 

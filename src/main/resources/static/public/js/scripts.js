@@ -391,33 +391,55 @@ function deleteApply(e) {
         var idJob = ids.split("_")[0];
         var idUser = ids.split("_")[1];
         const urlApply = "/api/bag/user/"+idUser+"/job/"+idJob+"/apply";
-this
 
         fetch(urlApply).then(function(response) {
 
             if (response.ok) {
-                            fetch(urlApply, {method: 'DELETE'}).then( function(response) {
-                               if (response.ok) {
+                fetch(urlApply, {method: 'DELETE'}).then( function(response) {
+                    if (response.ok) {
 
-                                    var objId = "apply_row_"+idJob+"_"+idUser;
-                                    var element = document.getElementById(objId);
-                                    element.remove();
+                    var objId = "apply_row_"+idJob+"_"+idUser;
+                    var element = document.getElementById(objId);
+                    element.remove();
 
-                                     var idApplyButton =  "apply_"+idJob+"_"+idUser;
-                                     var applyButton = document.getElementById(idApplyButton);
-                                     if (typeof applyButton !== 'undefined' && applyButton !== null) {
-                                        $(applyButton).removeClass("bi-telephone-plus-fill");
-                                        $(applyButton).addClass("bi-telephone-plus");
-                                    }
-                               }
-                            });
-            }
-        });
+                    var idApplyButton =  "apply_"+idJob+"_"+idUser;
+                    var applyButton = document.getElementById(idApplyButton);
+                    if (typeof applyButton !== 'undefined' && applyButton !== null) {
+                        $(applyButton).removeClass("bi-telephone-plus-fill");
+                        $(applyButton).addClass("bi-telephone-plus");
+                    }
+                }
+            });
+        }
+    });
 
 }
 
-function bagFilterText(e) {
+ function setValid(id, isValid) {
+        const classes = isValid ? ['is-invalid', 'is-valid'] : ['is-valid', 'is-invalid'];
+        $(id).removeClass('is-checking').removeClass(classes[0]).addClass(classes[1]);
+    }
 
+    function setChecking(id) {
+        $(id).removeClass('is-valid').removeClass('is-invalid').addClass('is-checking');
+    }
+
+
+function bagFilterText(e) {
+      setChecking(e.id);
+      if ($('#txtSearch').val() == "") {
+            setValid("#txtSearch", false);
+      } else {
+          var urlFilter = "/api/bag/job/text/" + $('#txtSearch').val();
+          fetch(urlFilter).then(function(response) {
+                if (response.ok) {
+                     setValid("#txtSearch", true);
+                     window.location.replace("/bagoffers/text/"+$('#txtSearch').val());
+                } else {
+                    setValid("#txtSearch", false);
+                }
+          });
+      }
 }
 
 function bagFilterCity(e) {
