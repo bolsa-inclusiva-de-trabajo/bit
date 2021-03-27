@@ -3,6 +3,8 @@ package ar.org.cpci.bit.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import ar.org.cpci.bit.model.User;
 import ar.org.cpci.bit.repository.UserRepository;
 import ar.org.cpci.bit.security.CurrentUserDetails;
@@ -16,6 +18,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import ar.org.cpci.bit.model.Job;
@@ -23,6 +26,7 @@ import ar.org.cpci.bit.repository.JobRepository;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class BagOffersController {
@@ -152,6 +156,21 @@ public class BagOffersController {
         model.addAttribute("filterContent", "");
         return "bag_offers";
     }
-
+    @PostMapping("/api/job/edit")
+    public String jobEdit(@Valid Job job, BindingResult bindingResult, RedirectAttributes attrs) {
+    	System.out.println(job.getTitle()+job.getDescription()+job.getExpiration());
+        if (!bindingResult.hasErrors()) {
+        	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            CurrentUserDetails userDetail = (CurrentUserDetails)auth.getPrincipal();
+            String username = userDetail.getUsername();
+            User user = userRepository.findByUsername(username);
+            job.setOwner(user);
+            job.setDisabled(false);
+            jobsRepository.save(job); 
+            return "redirect:/bagoffers"; 
+        }
+        attrs.addFlashAttribute("error_create_offer", 1);
+        return "redirect:/bagoffers"; 
+    }
 
 }
