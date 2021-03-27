@@ -15,6 +15,7 @@ import java.util.Optional;
 @Repository
 public interface JobRepository extends JpaRepository<Job, Long> {
 
+
     @Query(value = "SELECT j FROM Job j WHERE j.expiration > CURRENT_DATE")
     public abstract Page<Job> findAllActiveJobs(Pageable var1);
 

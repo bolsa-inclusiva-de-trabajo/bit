@@ -63,8 +63,9 @@ public class BagOffersController {
         List<Job> jobstotal = jobsRepository.findAll();
         int pageTotal = 1;
         if (jobstotal.size() > pageSize && pageSize > 0) {
-            if (Math.round(jobstotal.size() / pageSize) > 1) {
-                pageTotal = (int) Math.round(jobstotal.size() / pageSize) + 1;
+            double factor = (double)jobstotal.size() / (double)pageSize;
+            if (factor > 1) {
+                pageTotal = ((int)factor) + 1;
             }
         }
 
@@ -99,8 +100,9 @@ public class BagOffersController {
         List<Job> jobstotal = jobsRepository.findAll();
         int pageTotal = 1;
         if (jobstotal.size() > pageSize && pageSize > 0) {
-            if (Math.round(jobstotal.size() / pageSize) > 1) {
-                pageTotal = (int) Math.round(jobstotal.size() / pageSize) + 1;
+            double factor = (double)jobstotal.size() / (double)pageSize;
+            if (factor > 1) {
+                pageTotal = ((int)factor) + 1;
             }
         }
 
@@ -144,8 +146,9 @@ public class BagOffersController {
         int pageTotal = 1;
 
         if (jobstotal.size() > pageSize && pageSize > 0) {
-            if (Math.round(jobstotal.size() / pageSize) > 1) {
-                pageTotal = (int) Math.round(jobstotal.size() / pageSize) + 1;
+            double factor = (double)jobstotal.size() / (double)pageSize;
+            if (factor > 1) {
+                pageTotal = ((int)factor) + 1;
             }
         }
 
