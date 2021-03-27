@@ -5,6 +5,7 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Optional;
 
+import ar.org.cpci.bit.repository.CityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.http.HttpStatus;
@@ -34,6 +35,10 @@ public class BagRestController {
 
     @Autowired
     private JobRepository repositoryJob;
+
+    @Autowired
+    private CityRepository repositoryCity;
+
 
     /* === SCHMagic === functions using java generics === */
 
@@ -246,6 +251,11 @@ public class BagRestController {
     @GetMapping("/api/bag/job/{jid}")
     public ResponseEntity<Object> getJobById(@PathVariable("jid") Long jid) {
         return getResponseById(repositoryJob, jid);
+    }
+
+    @GetMapping("/api/bag/city/{cid}")
+    public ResponseEntity<Object> getCityById(@PathVariable("cid") Long cid) {
+        return getResponseById(repositoryCity, cid);
     }
 
 }

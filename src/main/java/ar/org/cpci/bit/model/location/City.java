@@ -1,5 +1,9 @@
 package ar.org.cpci.bit.model.location;
 
+
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -25,6 +29,7 @@ public class City {
     @Column(name = "description", nullable = true)
     private String description;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "state_id")
     private State state;

@@ -144,11 +144,11 @@ INSERT INTO city (state_id, name) VALUES (1, 'PARAJE CAMPO ALEGRE')
 INSERT INTO city (state_id, name) VALUES (1, 'PIRAY KM 18')
 INSERT INTO city (state_id, name) VALUES (1, 'MARIANO NECOCHEA')
 
-INSERT INTO "user" (username, password, email, first_name, last_name, education, skills, full_time, part_time, home_work, apply_for_job, disabled,birth_date) VALUES ('admin', '$2a$10$lZJNipBMsZj7S6Wq5tTb8uw7yMaYNCpKcyuAMmlysCmZ2LjIzeiUm', 'email1', 'first_name1', 'last_name1', 'education1', 'skills1', true, false, false, true, false,'2000-01-01')
+INSERT INTO "user" (username, password, email, first_name, last_name, education, skills, full_time, part_time, home_work, apply_for_job, disabled,birth_date, city_id) VALUES ('admin', '$2a$10$lZJNipBMsZj7S6Wq5tTb8uw7yMaYNCpKcyuAMmlysCmZ2LjIzeiUm', 'email1', 'first_name1', 'last_name1', 'education1', 'skills1', true, false, false, true, false,'2000-01-01', 18)
 
-INSERT INTO "user" (username, password, email, first_name, last_name, education, skills, full_time, part_time, home_work, apply_for_job, disabled,birth_date) VALUES ('user', '$2a$10$lZJNipBMsZj7S6Wq5tTb8uw7yMaYNCpKcyuAMmlysCmZ2LjIzeiUm', 'email2', 'first_name2', 'last_name2', 'education2', 'skills2', true, false, false, true, false,'2000-01-01')
+INSERT INTO "user" (username, password, email, first_name, last_name, education, skills, full_time, part_time, home_work, apply_for_job, disabled,birth_date, city_id) VALUES ('user', '$2a$10$lZJNipBMsZj7S6Wq5tTb8uw7yMaYNCpKcyuAMmlysCmZ2LjIzeiUm', 'email2', 'first_name2', 'last_name2', 'education2', 'skills2', true, false, false, true, false,'2000-01-01', 23)
 
-INSERT INTO "user" (username, password, email, first_name, last_name, education, skills, full_time, part_time, home_work, apply_for_job, disabled,birth_date) VALUES ('pepe', '$2a$10$lZJNipBMsZj7S6Wq5tTb8uw7yMaYNCpKcyuAMmlysCmZ2LjIzeiUm', 'email3', 'first_name3', 'last_name3', 'education3', 'skills3', true, false, false, true, false,'2000-01-01')
+INSERT INTO "user" (username, password, email, first_name, last_name, education, skills, full_time, part_time, home_work, apply_for_job, disabled,birth_date, city_id) VALUES ('pepe', '$2a$10$lZJNipBMsZj7S6Wq5tTb8uw7yMaYNCpKcyuAMmlysCmZ2LjIzeiUm', 'email3', 'first_name3', 'last_name3', 'education3', 'skills3', true, false, false, true, false,'2000-01-01', 57)
 
 INSERT INTO job (title, description, expiration, full_time, part_time, home_work, independent, dependent, disabled, user_id) VALUES ('ADMINISTRACION', 'Busco personal administrativo para empresa dedicada al rubro medicina.', '2021-04-30 04:06:12', true, false, false, true, false, FALSE, 1)
 

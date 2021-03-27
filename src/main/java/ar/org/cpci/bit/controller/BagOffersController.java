@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import ar.org.cpci.bit.model.Job;
 import ar.org.cpci.bit.repository.JobRepository;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -49,12 +51,8 @@ public class BagOffersController {
                                @RequestParam("page") Optional<Integer> p,
                                @RequestParam("size") Optional<Integer> s) {
 
-
-
         Iterable<Job> jobs = jobsRepository.findAllActiveJobs(page);
-
         model.addAttribute("jobs", jobs);
-
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         CurrentUserDetails userDetail = (CurrentUserDetails)auth.getPrincipal();
@@ -71,15 +69,90 @@ public class BagOffersController {
             pageTotal = (int) Math.round(jobstotal.size() / pageSize) + 1;
         }
 
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("pageSize", pageSize);
+        model.addAttribute("pageTotal", pageTotal);
+        model.addAttribute("filtro", "");
+        return "bag_offers";
+    }
+
+
+    @GetMapping("/bagoffers/text/{filterText}")
+    public String getBagOffersTextFiltered(Model model, @PageableDefault(size = 4) Pageable page,
+                                       @RequestParam("page") Optional<Integer> p,
+                                       @RequestParam("size") Optional<Integer> s,
+                                       @PathVariable String filterText) {
+
+
+         Iterable<Job> jobs = jobsRepository.findTextFilteredJobs(page, filterText);
+        model.addAttribute("jobs", jobs);
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        CurrentUserDetails userDetail = (CurrentUserDetails)auth.getPrincipal();
+        String username = userDetail.getUsername();
+        User user = userRepository.findByUsername(username);
+        model.addAttribute("user", user);
+
+        int currentPage = p.orElse(0);
+        int pageSize = s.orElse(4);
+
+        List<Job> jobstotal = jobsRepository.findAll();
+        int pageTotal = 1;
+        if (jobstotal.size() > pageSize && pageSize > 0) {
+            pageTotal = (int) Math.round(jobstotal.size() / pageSize) + 1;
+        }
 
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("pageSize", pageSize);
         model.addAttribute("pageTotal", pageTotal);
-
+        model.addAttribute("filtro", "text");
 
         return "bag_offers";
     }
 
+    @GetMapping("/bagoffers/city/{filterCity}")
+    public String getBagOffersCityFiltered(Model model, @PageableDefault(size = 100) Pageable page,
+                                       @RequestParam("page") Optional<Integer> p,
+                                       @RequestParam("size") Optional<Integer> s,
+                                       @PathVariable Boolean filterCity) {
+
+        //busco el usuario
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        CurrentUserDetails userDetail = (CurrentUserDetails)auth.getPrincipal();
+        String username = userDetail.getUsername();
+        User user = userRepository.findByUsername(username);
+        model.addAttribute("user", user);
+
+        //cargo la ciudad para el filtro si es necesario
+        long fCity = 0;
+        if (filterCity) {
+            fCity = user.getCity().getId();
+        }
+
+        Iterable<Job> jobs = jobsRepository.findCityFilteredJobs(page, fCity);
+        model.addAttribute("jobs", jobs);
+
+
+        int currentPage = p.orElse(0);
+        int pageSize = s.orElse(100);
+
+        List<Job> jobstotal = jobsRepository.findAll();
+        int pageTotal = 1;
+
+        if (jobstotal.size() > pageSize && pageSize > 0) {
+            if (Math.round(jobstotal.size() / pageSize) > 1) {
+                pageTotal = (int) Math.round(jobstotal.size() / pageSize) + 1;
+            }
+        }
+
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("pageSize", pageSize);
+        model.addAttribute("pageTotal", pageTotal);
+        model.addAttribute("filtro", "city");
+
+
+        return "bag_offers";
+    }
 
 
 }

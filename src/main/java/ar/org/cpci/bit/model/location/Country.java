@@ -5,13 +5,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 @Entity(name = "country")
 public class Country {
@@ -26,6 +20,7 @@ public class Country {
 
     @Column(name = "description", nullable = true)
     private String description;
+
 
     @OneToMany(mappedBy = "country", fetch = FetchType.EAGER)
     private Set<State> states;
