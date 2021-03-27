@@ -24,19 +24,14 @@ public class RootController {
 
     @GetMapping("/")
     public String home(Model model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        try {
-            CurrentUserDetails user = (CurrentUserDetails) auth.getPrincipal();
-            model.addAttribute("userTargetUrl", Utils.getAuthSuccessUrl(user.isEmployer()));
-        } catch (ClassCastException e) {
-            model.addAttribute("userTargetUrl", null);
-        }
+        model.addAttribute("userTargetUrl", Utils.getUserTargetUrl());
         model.addAttribute("cities", repositoryCity.findAll());
         return "home";
     }
 
     @GetMapping("/login")
     public String login(Model model) {
+        model.addAttribute("userTargetUrl", Utils.getUserTargetUrl());
         model.addAttribute("cities", repositoryCity.findAll());
         return "system/login";
     }

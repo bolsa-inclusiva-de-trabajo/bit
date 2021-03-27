@@ -2,7 +2,7 @@
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <br th:replace="fragments/head :: head"/>
 <body>
-<br th:replace="fragments/header :: header(null)"/>
+<br th:replace="fragments/header :: header(~{fragments/header_login :: menu})"/>
 
     <div class="container py-special" id="mainVerticalAdjFooter">
 
@@ -25,9 +25,11 @@
                     </a>
                 </div>
 
-                <div th:if="${param.error}" class="row justify-content-around mx-auto mt-sm-3">
-                    <span class="alert alert-danger" role="alert" th:text="#{login.error}"></span>
-                </div>
+                <div th:if="${param.error}" class="alert alert-danger" role="alert"
+                     th:text="#{login.loginError}"></div>
+
+                <div th:if="${errors}" class="alert alert-danger" role="alert"
+                     th:text="#{login.logupError}"></div>
 
                 <form action="/login" method="POST">
 
@@ -44,8 +46,8 @@
                             </div>
                             <input th:value="${newUsername}"
                                    class="form-control" id="loginInputUsername"
-                                   name="username" type="text" data-focus="true"
-                                   required>
+                                   name="username" type="text" required
+                                   data-focus="true">
                         </div>
                     </div>
 
@@ -71,7 +73,7 @@
                         <div class="row justify-content-md-center mb-n1 mb-md-3">
                             <div class="col">
                                 <a href="" class="btn btn-secondary btn-block"
-                                   data-toggle="modal" data-target="#ModalCRUDProfileUser"
+                                   data-toggle="modal" data-target="#ModalCRUDProfile"
                                    th:text="#{logup.iniAction}">register</a>
                             </div>
                             <div class="col">
@@ -91,6 +93,21 @@
 <br th:replace="fragments/logup :: modal"/>
 <br th:replace="fragments/footer :: footer"/>
 <br th:replace="fragments/javascript :: javascript"/>
+
+<script src="/static/public/js/scripts_logup.js" type="text/javascript" ></script>
+
+<script th:inline="javascript"
+        th:with="idFocus=${newUsername == null ? '#loginInputUsername' : '#loginInputPassword'}">
+    /*<![CDATA[*/
+
+        setTimeout(function() {
+            $(function() {
+                $(/*[[${idFocus}]]*/).trigger('focus');
+            });
+        }, 100);
+
+    /*]]>*/
+</script>
 
 </body>
 </html>

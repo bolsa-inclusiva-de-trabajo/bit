@@ -373,9 +373,12 @@ public class User {
     /* ---- */
 
     public boolean isEmployer() {
+        if (!createdJobs.isEmpty()) {
+            return true;
+        }
         boolean texts = (education != null && !education.isEmpty()) ||
                         (skills != null && !skills.isEmpty());
-        return !createdJobs.isEmpty() || !(fullTime || partTime || homeWork || applyForJob || texts);
+        return !(fullTime || partTime || homeWork || applyForJob || texts);
     }
 
     /* ---- */

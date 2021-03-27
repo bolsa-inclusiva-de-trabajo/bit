@@ -19,7 +19,7 @@
         </button>
 
         <div th:if="${menu} != null" class="collapse navbar-collapse" id="headerNavbar">
-            <th:block th:if="${menu} == 'home'" th:replace="fragments/header_home :: menu"></th:block>
+            <div th:replace="${menu}"></div>
         </div>
     </div>
 </nav>
