@@ -1,289 +1,228 @@
 <!DOCTYPE html>
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-    <div th:fragment="modal" class="modal" id="ModalCRUDProfileUser">
+    <div th:fragment="modal" class="modal fade" tabindex="-1" id="ModalCRUDProfile">
 
         <script th:inline="javascript">
             /*<![CDATA[*/
 
-            document.workspace = /*[[#{workspace}]]*/ "";
-
             document.texts = {
-                INVALID_EMPTY: 'No puede dejar el campo vacio',
-                INVALID_USERNAME_ALREADY_EXISTS: 'El nombre de usuario ya existe',
-                INVALID_EMAIL_ALREADY_EXISTS: 'El correo electrónico ya existe',
-                INVALID_PASSWORD_NOT_EQUAL: 'Las contraseñas deben ser iguales'
+                notEmpty:              /*[[#{logup.notEmpty}]]*/ '«notEmpty»',
+                usernameAlreadyExists: /*[[#{logup.usernameAlreadyExists}]]*/ '«usernameAlreadyExists»',
+                emailAlreadyExists:    /*[[#{logup.emailAlreadyExists}]]*/ '«emailAlreadyExists»',
+                passwordsNotEqual:     /*[[#{logup.passwordsNotEqual}]]*/ '«passwordsNotEqual»',
             };
 
             /*]]>*/
         </script>
 
-        <form action="/api/user/edit" method="POST">
-
-            <div class="modal-dialog" id="CRUDProfileUser">
-                <div class="modal-content">
-
-                    <div class="modal-header">
-                        <div class="modal-title h4">Perfil de Postulante</div>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-
-                    <div class="modal-body">
-                        <div class="progress">
-                            <div class="progress-bar w-0" role="progressbar"
-                                 aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                            </div>
-                        </div>
-                        <div class="form-group mb-4">
-                            <label for="inputUserName">Nombre de Usuario:</label>
-                            <input class="form-control" id="inputUserName"
-                                   name="username" type="text" placeholder="Nombre de Usuario"/>
-                            <div class="invalid-feedback" id="invalid-feedback-UserName"></div>
-                        </div>
-                        <div class="form-group mb-4">
-                            <label for="inputEMail">Correo Electrónico:</label>
-                            <input class="form-control" id="inputEMail"
-                                   name="email" type="text" placeholder="Correo Electrónico"/>
-                            <div class="invalid-feedback" id="invalid-feedback-EMail"></div>
-                        </div>
-                        <div class="form-group mb-4">
-                            <label for="inputPassword">Contraseña:</label>
-                            <input class="form-control" id="inputPassword"
-                                   name="password" type="password" placeholder="Contraseña"/>
-                            <div class="invalid-feedback" id="invalid-feedback-password"></div>
-                        </div>
-                        <div class="form-group mb-4">
-                            <label for="inputPassword2">Repetir Contraseña:</label>
-                            <input class="form-control" id="inputPassword2"
-                                   type="password" placeholder="Repetir Contraseña"/>
-                            <div class="invalid-feedback" id="invalid-feedback-password2"></div>
-                        </div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" id="SubmitCRUDProfileUser"
-                                type="button">Siguiente</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="modal-dialog" id="CRUDProfileUserData" style="display: none;">
+        <form action="/api/user/edit" method="POST" id="CRUDProfileSubmit">
+            <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <div class="modal-title h4">Perfil de Postulante</div>
-                        <button class="close" type="button" data-dismiss="modal">&times;</button>
+                        <div class="modal-title h4 mb-2" th:text="#{logup.title}">title</div>
+                        <button class="close mt-n2b" type="button" data-dismiss="modal">&times;</button>
                     </div>
-
                     <div class="modal-body">
-                        <div class="progress">
-                            <div class="progress-bar w-16" role="progressbar"
-                                 aria-valuenow="16" aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress mt-n4b mb-4" id="CRUDProfileProgressbarContainer">
+                            <div class="progress-bar w-1" role="progressbar" id="CRUDProfileProgressbar"
+                                 aria-valuenow="1" aria-valuemin="0" aria-valuemax="100">
                             </div>
                         </div>
-                        <div class="form-group mb-4">
-                            <label for="inputName">Nombre:</label>
-                            <input class="form-control" id="inputName"
-                                   name="firstName" type="text" placeholder="Nombre"/>
-                            <div class="invalid-feedback">No puede dejar el campo vacio.</div>
-                        </div>
-                        <div class="form-group mb-4">
-                            <label for="inputLastName">Apellido:</label>
-                            <input class="form-control" id="inputLastName"
-                                   name="lastName" type="text" placeholder="Apellido"/>
-                            <div class="invalid-feedback">No puede dejar el campo vacio.</div>
-                        </div>
-                        <div class="form-group mb-4">
-                            <label for="inputBirthDate">Fecha Nacimiento:</label>
-                            <input class="form-control" id="inputBirthDate"
-                                   name="birthDate" type="text" placeholder="Fecha Nacimiento">
-                            <div class="invalid-feedback">Formato incorrecto</div>
-                        </div>
-                    </div>
 
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" id="PrevCRUDProfileUserData"
-                                type=button >Anterior</button>
-                        <button class="btn btn-secondary"  id="SubmitCRUDProfileUserData"
-                                type=button >Siguiente</button>
-                    </div>
-                </div>
-            </div>
+                        <!-- START BODIES -->
 
-            <div class="modal-dialog" id="CRUDProfileCity" style="display: none;">
-                <div class="modal-content">
-
-                    <div class="modal-header">
-                        <div class="modal-title h4">Perfil de Postulante</div>
-                        <button class="close" type="button" data-dismiss="modal">&times;</button>
-                    </div>
-
-                    <div class="modal-body">
-                        <div class="progress">
-                            <div class="progress-bar w-32" role="progressbar"
-                                 aria-valuenow="32" aria-valuemin="0" aria-valuemax="100">
+                        <div id="CRUDProfileUserBody" class="d-block">
+                            <div class="form-group mb-3">
+                                <label class="mb-0" for="inputUserName"
+                                       th:text="#{username.text}">username</label>
+                                <input class="form-control" id="inputUserName"
+                                       name="username" type="text"/>
+                                <div class="invalid-feedback" id="invalid-feedback-UserName"></div>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="mb-0" for="inputEMail"
+                                       th:text="#{email.text}">email</label>
+                                <input class="form-control" id="inputEMail"
+                                       name="email" type="text"/>
+                                <div class="invalid-feedback" id="invalid-feedback-EMail"></div>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="mb-0" for="inputPassword"
+                                       th:text="#{password.text}">password</label>
+                                <input class="form-control" id="inputPassword"
+                                       name="password" type="password"/>
+                                <div class="invalid-feedback" id="invalid-feedback-password"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="mb-0" for="inputPassword2"
+                                       th:text="#{repeatPassword.text}">repeat password</label>
+                                <input class="form-control" id="inputPassword2"
+                                       type="password"/>
+                                <div class="invalid-feedback" id="invalid-feedback-password2"></div>
                             </div>
                         </div>
-                        <div class="form-group mb-4">
-                            <label for="inputCountry">País:</label>
-                            <select class="form-control" id="inputCountry" name="country">
-                                <option>Argentina</option>
-                            </select>
-                        </div>
-                        <div class="form-group mb-4">
-                            <label for="inputState">Provincia:</label>
-                            <select class="form-control" id="inputState" name="state">
-                                <option>Misiones</option>
-                            </select>
-                        </div>
-                        <div class="form-group mb-4">
-                            <label for="inputCity">Ciudad:</label>
-                            <select class="form-control" id="inputCity" name="city">
-                                <option th:each="city: ${cities}"
-                                        th:text="${city.name}"
-                                        th:value="${city.id}"></option>
-                            </select>
-                        </div>
-                    </div>
 
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" id="prevCRUDProfileCity"
-                                type="button">Anterior</button>
-                        <button class="btn btn-secondary" id="submitCRUDProfileCity"
-                                type="button">Siguiente</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="modal-dialog" id="CRUDProfileStudy" style="display: none;">
-                <div class="modal-content">
-
-                    <div class="modal-header">
-                        <div class="modal-title h4">Perfil de Postulante</div>
-                        <button class="close" type="button" data-dismiss="modal">&times;</button>
-                    </div>
-
-                    <div class="modal-body">
-                        <div class="progress">
-                            <div class="progress-bar w-48" role="progressbar"
-                                 aria-valuenow="48" aria-valuemin="0" aria-valuemax="100">
+                        <div id="CRUDProfilePersonBody" class="d-none">
+                            <div class="form-group mb-3">
+                                <label class="mb-0" for="inputFirstName"
+                                       th:text="#{logup.firstName}">first_name</label>
+                                <input class="form-control" id="inputFirstName"
+                                       name="firstName" type="text" />
+                                <div class="invalid-feedback" th:text="#{logup.notEmpty}">not empty</div>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="mb-0" for="inputLastName"
+                                       th:text="#{logup.lastName}">last_name</label>
+                                <input class="form-control" id="inputLastName"
+                                       name="lastName" type="text" />
+                                <div class="invalid-feedback" th:text="#{logup.notEmpty}">not empty</div>
+                            </div>
+                            <div class="form-group">
+                                <label class="mb-0" for="inputBirthDate"
+                                       th:text="#{logup.birthDate}">birth_date</label>
+                                <input class="form-control" id="inputBirthDate"
+                                       name="birthDate" type="text" />
+                                <div class="invalid-feedback"
+                                     th:text="#{logup.wrongFormat}">wrong format</div>
                             </div>
                         </div>
-                        <div class="form-group mb-4">
-                            <label for="inputStudy">Estudios:</label>
-                            <textarea class="form-control" id="inputStudy"
-                                      name="education" rows="4"></textarea>
-                            <div class="invalid-feedback">No puede dejar el campo vacio.</div>
-                        </div>
-                    </div>
 
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" id="prevCRUDProfileStudy"
-                                type=button>Anterior</button>
-                        <button class="btn btn-secondary" id="submitCRUDProfileStudy"
-                                type=button>Siguiente</button>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="modal-dialog" id="CRUDProfileSkill" style="display: none;">
-                <div class="modal-content">
-
-                    <div class="modal-header">
-                        <div class="modal-title h4">Perfil de Postulante</div>
-                        <button class="close" type="button" data-dismiss="modal">&times;</button>
-                    </div>
-
-                    <div class="modal-body">
-                        <div class="progress">
-                            <div class="progress-bar w-64" role="progressbar"
-                                 aria-valuenow="64" aria-valuemin="0" aria-valuemax="100">
+                        <div id="CRUDProfileLocationBody" class="d-none">
+                            <div class="form-group mb-3">
+                                <label class="mb-0" for="inputCountry"
+                                       th:text="#{logup.country}">country</label>
+                                <select class="form-control" id="inputCountry" name="country">
+                                    <option>ARGENTINA</option>
+                                </select>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="mb-0" for="inputState"
+                                       th:text="#{logup.state}">state</label>
+                                <select class="form-control" id="inputState" name="state">
+                                    <option>MISIONES</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="mb-0" for="inputCity"
+                                       th:text="#{logup.city}">city</label>
+                                <select class="form-control" id="inputCity" name="city">
+                                    <option th:each="city: ${cities}"
+                                            th:text="${city.name}"
+                                            th:value="${city.id}"></option>
+                                </select>
                             </div>
                         </div>
-                        <div class="form-group mb-4">
-                            <label for="inputSkill">Habilidades:</label>
-                            <textarea class="form-control" id="inputSkill"
-                                      name="skills" rows="4"></textarea>
-                            <div class="invalid-feedback">No puede dejar el campo vacio.</div>
-                        </div>
-                    </div>
 
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" id="prevCRUDProfileSkill"
-                                type=button>Anterior</button>
-                        <button class="btn btn-secondary" id="submitCRUDProfileSkill"
-                                type=button>Siguiente</button>
-                    </div>
+                        <div id="CRUDProfileEducationBody" class="d-none">
 
-                </div>
-            </div>
+                            <div class="alert alert-info small text-center" role="alert"
+                                 th:text="#{logup.forWorker}"></div>
 
-            <div class="modal-dialog" id="CRUDProfileLastModal" style="display: none;">
-                <div class="modal-content">
-
-                    <div class="modal-header">
-                        <div class="modal-title h4">Perfil de Postulante</div>
-                        <button class="close" type="button" data-dismiss="modal">&times;</button>
-                    </div>
-
-                    <div class="modal-body">
-                        <div class="progress">
-                            <div class="progress-bar w-80" role="progressbar"
-                                 aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+                            <div class="form-group">
+                                <label class="mb-0" for="inputEducation"
+                                       th:text="#{logup.education}">education</label>
+                                <textarea class="form-control" id="inputEducation"
+                                          name="education" rows="4"></textarea>
                             </div>
                         </div>
-                        <div class="col-form-label col-sm-2 pt-0">Disponibilidad</div>
-                        <div class="form-group mb-4">
-                            <div class="form-check-inline">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="hidden"
-                                           name="fullTime" value="false"/>
+
+                        <div id="CRUDProfileSkillsBody" class="d-none">
+
+                            <div class="alert alert-info small text-center" role="alert"
+                                 th:text="#{logup.forWorker}"></div>
+
+                            <div class="form-group">
+                                <label class="mb-0" for="inputSkills"
+                                       th:text="#{logup.skills}">skills</label>
+                                <textarea class="form-control" id="inputSkills"
+                                          name="skills" rows="4"></textarea>
+                            </div>
+                        </div>
+
+                        <div id="CRUDProfileAvailabilityBody" class="d-none">
+
+                            <div class="alert alert-info small text-center" role="alert"
+                                 th:text="#{logup.forWorker}"></div>
+
+                            <div class="col-form-label col-sm-2 pt-0"
+                                 th:text="#{logup.availability}">availability</div>
+
+                            <div class="form-group my-2">
+                                <div class="form-check-inline">
                                     <input class="form-check-input" type="checkbox"
-                                           name="fullTime"value="true"/>
-                                    Tiempo Completo
-                                </label>
-                            </div>
-                            <div class="form-check-inline">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="hidden"
-                                           name="partTime"value="false"/>
+                                           name="fullTime" id="inputFullTime" value="true"/>
+                                    <label class="form-check-label" for="inputFullTime"
+                                    th:text="#{logup.fullTime}">fullTime</label>
+                                </div>
+                                <div class="form-check-inline">
                                     <input class="form-check-input" type="checkbox"
-                                           name="partTime"value="true"/>
-                                    Medio Tiempo
-                                </label>
-                            </div>
-                            <div class="form-check-inline">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="hidden"
-                                           name="homeWork" value="false">
+                                           name="partTime" id="inputPartTime" value="true"/>
+                                    <label class="form-check-label" for="inputPartTime"
+                                    th:text="#{logup.partTime}">partTime</label>
+                                </div>
+                                <div class="form-check-inline">
                                     <input class="form-check-input" type="checkbox"
-                                           name="homeWork" value="true">
-                                    Teletrabajo
-                                </label>
+                                           name="homeWork" id="inputHomeWork" value="true">
+                                    <label class="form-check-label" for="inputHomeWork"
+                                    th:text="#{logup.homeWork}">homeWork</label>
+                                </div>
                             </div>
+                            <input type="hidden" name="applyForJob" value="false" id="inputApplyForJob">
                         </div>
-                        <div class="mb-4">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="hidden"
-                                           name="applyForJob" value="false">
-                                    <input class="form-check-input" type="checkbox"
-                                           name="applyForJob" value="true">
-                                    Habilitar Perfil Laboral
-                                </label>
-                            </div>
-                        </div>
-                    </div>
 
+                        <!-- END BODIES -->
+
+                    </div>
                     <div class="modal-footer">
-                        <button class="btn btn-secondary" id="prevCRUDProfileLastModal"
-                                type=button>Anterior</button>
-                        <button class="btn btn-primary" id="submitCRUDProfileLastModal"
-                                type=submit>Guardar Perfil</button>
+
+                        <!-- START FOOTERS -->
+
+                        <div id="CRUDProfileUserFooter" class="d-block">
+                            <button class="btn btn-secondary" id="nextCRUDProfileUser"
+                                    type="button" th:text="#{action.next}">next</button>
+                        </div>
+
+                        <div id="CRUDProfilePersonFooter" class="d-none">
+                            <button class="btn btn-secondary" id="prevCRUDProfilePerson"
+                                    type="button" th:text="#{action.prev}">prev</button>
+                            <button class="btn btn-secondary" id="nextCRUDProfilePerson"
+                                    type="button" th:text="#{action.next}">next</button>
+                        </div>
+
+                        <div id="CRUDProfileLocationFooter" class="d-none">
+                            <button class="btn btn-secondary" id="prevCRUDProfileLocation"
+                                    type="button" th:text="#{action.prev}">prev</button>
+                            <button class="btn btn-secondary" id="nextCRUDProfileLocation"
+                                    type="button" th:text="#{action.next}">next</button>
+                        </div>
+
+                        <div id="CRUDProfileEducationFooter" class="d-none">
+                            <button class="btn btn-secondary" id="prevCRUDProfileEducation"
+                                    type="button" th:text="#{action.prev}">prev</button>
+                            <button class="btn btn-secondary" id="nextCRUDProfileEducation"
+                                    type="button" th:text="#{action.next}">next</button>
+                        </div>
+
+                        <div id="CRUDProfileSkillsFooter" class="d-none">
+                            <button class="btn btn-secondary" id="prevCRUDProfileSkills"
+                                    type="button" th:text="#{action.prev}">prev</button>
+                            <button class="btn btn-secondary" id="nextCRUDProfileSkills"
+                                    type="button" th:text="#{action.next}">next</button>
+                        </div>
+
+                        <div id="CRUDProfileAvailabilityFooter" class="d-none">
+                            <button class="btn btn-secondary" id="prevCRUDProfileAvailability"
+                                    type="button" th:text="#{action.prev}">prev</button>
+                            <button class="btn btn-primary" id="nextCRUDProfileAvailability"
+                                    type=button th:text="#{logup.endAction}">save</button>
+                        </div>
+
+                        <!-- end FOOTERS -->
+
                     </div>
                 </div>
             </div>
-
         </form>
     </div>
 

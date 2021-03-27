@@ -2,8 +2,12 @@ package ar.org.cpci.bit.shared;
 
 import java.util.Map;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import ar.org.cpci.bit.security.CurrentUserDetails;
 
 public final class Utils {
 
@@ -19,6 +23,16 @@ public final class Utils {
 
     public static String getAuthSuccessUrl(boolean isEmployer) {
         return isEmployer ? "/bagapplicants" : "/bagoffers";
+    }
+
+    public static String getUserTargetUrl() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        try {
+            CurrentUserDetails user = (CurrentUserDetails) auth.getPrincipal();
+            return Utils.getAuthSuccessUrl(user.isEmployer());
+        } catch (ClassCastException e) {
+            return null;
+        }
     }
 
     public static PasswordEncoder getPasswordEncoder() {

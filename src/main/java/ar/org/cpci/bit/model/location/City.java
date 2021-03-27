@@ -1,9 +1,5 @@
 package ar.org.cpci.bit.model.location;
 
-
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -14,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity(name = "city")
 public class City {
@@ -29,7 +27,7 @@ public class City {
     @Column(name = "description", nullable = true)
     private String description;
 
-    @JsonIgnore
+//    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "state_id")
     private State state;

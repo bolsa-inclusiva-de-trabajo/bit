@@ -21,6 +21,21 @@ a#joinus {
     padding-bottom: 3.0em !important;
 }
 
+.mt-n2b {
+    margin-top: -.65rem !important;
+}
+
+.mt-n4b {
+    margin-top: -2.35rem !important;
+}
+
+#CRUDProfileProgressbarContainer {
+    height: 9px;
+}
+
+.w-1 {
+    width: 1% !important;
+}
 .w-16 {
     width: 16% !important;
 }
@@ -35,6 +50,15 @@ a#joinus {
 }
 .w-80 {
     width: 80% !important;
+}
+
+.is-checking {
+    border-color: #0069d9;
+    padding-right: calc(1.5em + .75rem);
+    background-image: url(/static/public/img/loading.svg);
+    background-repeat: no-repeat;
+    background-position: right calc(.375em + .1875rem) center;
+    background-size: calc(.75em + .375rem) calc(.75em + .375rem);
 }
 
 /* CSS CLASSES FOR JOB OFFERS BAG */

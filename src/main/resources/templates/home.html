@@ -2,7 +2,7 @@
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <br th:replace="fragments/head :: head"/>
 <body>
-<br th:replace="fragments/header :: header('home')"/>
+<br th:replace="fragments/header :: header(~{fragments/header_home :: menu})"/>
 
     <div class="container-fluid" id="mainVerticalAdjFooter">
 
@@ -16,7 +16,7 @@
 
         <section class="row py-5 text-center">
             <div class="col-12 font-weight-bold display-4 mb-5"
-                 id="about">Quienes Somos</div>
+                 id="about" th:text="#{header.about}">about</div>
 
             <p class="col col-11 col-sm-8 mx-auto">Lorem ipsum dolor sit amet, consectetur
                adipiscing elit. Aenean blandit magna sit amet ex elementum, id ultricies est
@@ -31,7 +31,7 @@
 
         <section class="row py-5 bg-success">
             <div class="col col-12 font-weight-bold text-center display-4 mb-5"
-                 id="benefits">Beneficios</div>
+                 id="benefits"th:text="#{header.benefits}">benefits</div>
 
             <div class="col col-12 col-md-8 mx-auto media mb-4">
                 <i class="bi bi-camera align-self-center mb-4 mr-3 display-3"></i>
@@ -85,8 +85,7 @@
 
         <section class="row py-5">
             <div class="col col-12 font-weight-bold text-center display-4 mb-5"
-                 id="testimonials">Testimonios
-            </div>
+                 id="testimonials" th:text="#{header.testimonials}">testimonials</div>
             <div class="col col-11 col-sm-8 col-md-6 mx-auto">
                 <div class="carousel slide" id="testimonialsCarousel" data-ride="carousel">
                     <div class="carousel-inner">
@@ -124,8 +123,8 @@
 
         <section class="row py-5 bg-success">
             <div class="col-12 font-weight-bold text-center display-4 my-5">
-                <a href="" data-toggle="modal" data-target="#ModalCRUDProfileUser"
-                   id="joinus">¡Sumate!</a>
+                <a href="" data-toggle="modal" data-target="#ModalCRUDProfile"
+                   id="joinus" th:text="#{callToAction}">call to action</a>
             </div>
         </section>
 
@@ -134,6 +133,8 @@
 <br th:replace="fragments/logup :: modal"/>
 <br th:replace="fragments/footer :: footer"/>
 <br th:replace="fragments/javascript :: javascript"/>
+
+<script src="/static/public/js/scripts_logup.js" type="text/javascript" ></script>
 
 </body>
 </html>

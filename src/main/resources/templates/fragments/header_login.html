@@ -2,18 +2,6 @@
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
     <ul th:fragment="menu" class="nav navbar-nav ml-auto">
-        <li class="nav-item">
-            <a class="nav-link" href="#about" th:text="#{header.about}">about</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#benefits" th:text="#{header.benefits}">benefits</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#testimonials" th:text="#{header.testimonials}">testimonials</a>
-        </li>
-        <li th:if="${userTargetUrl} == null" class="nav-item">
-            <a class="nav-link" href="/login" th:text="#{login.action}">login</a>
-        </li>
         <li th:if="${userTargetUrl} != null" class="nav-item" th:title="#{workspace}">
             <a class="nav-link text-primary" th:href="${userTargetUrl}"
                th:text="${#httpServletRequest.remoteUser}">user</a>
