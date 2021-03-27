@@ -150,17 +150,17 @@ INSERT INTO "user" (username, password, email, first_name, last_name, education,
 
 INSERT INTO "user" (username, password, email, first_name, last_name, education, skills, full_time, part_time, home_work, apply_for_job, disabled,birth_date) VALUES ('pepe', '$2a$10$lZJNipBMsZj7S6Wq5tTb8uw7yMaYNCpKcyuAMmlysCmZ2LjIzeiUm', 'email3', 'first_name3', 'last_name3', 'education3', 'skills3', true, false, false, true, false,'2000-01-01')
 
-INSERT INTO job (title, description, expiration, full_time, part_time, home_work, independent, dependent, disabled, user_id) VALUES ('title1', 'description1', '2021-03-22 04:06:12', true, false, false, true, false, FALSE, 1)
+INSERT INTO job (title, description, expiration, full_time, part_time, home_work, independent, dependent, disabled, user_id) VALUES ('ADMINISTRACION', 'Busco personal administrativo para empresa dedicada al rubro medicina.', '2021-04-30 04:06:12', true, false, false, true, false, FALSE, 1)
 
-INSERT INTO job (title, description, expiration, full_time, part_time, home_work, independent, dependent, disabled, user_id) VALUES ('title2', 'description2', '2021-03-22 04:06:12', false, true, false, true, false, FALSE, 1)
+INSERT INTO job (title, description, expiration, full_time, part_time, home_work, independent, dependent, disabled, user_id) VALUES ('VENTAS EN LOCAL', 'Se necesita personal para venta al público, buena remuneración, horario comercial, Centro de Eldorado.', '2021-03-31 04:06:12', true, false, false, true, false, FALSE, 1)
 
-INSERT INTO job (title, description, expiration, full_time, part_time, home_work, independent, dependent, disabled, user_id) VALUES ('title3', 'description3', '2021-03-22 04:06:12', false, false, true, false, true, FALSE, 1)
+INSERT INTO job (title, description, expiration, full_time, part_time, home_work, independent, dependent, disabled, user_id) VALUES ('PLANTA PERMANENTE ELECTRICISTA', 'Vacante disponible para cubrir puesto de electricista planta permanente en importante secadero de yerba mate.', '2021-03-22 04:06:12', true, false, false, false, true, FALSE, 1)
 
-INSERT INTO job (title, description, expiration, full_time, part_time, home_work, independent, dependent, disabled, user_id) VALUES ('title4', 'description4', '2021-03-22 04:06:12', true, false, false, true, false, FALSE, 1)
+INSERT INTO job (title, description, expiration, full_time, part_time, home_work, independent, dependent, disabled, user_id) VALUES ('COCINA CASA DE RETIRO', 'Personal de cocina para establecimiento de retiro,', '2021-03-22 04:06:12', false, true, false, true, false, FALSE, 1)
 
-INSERT INTO job (title, description, expiration, full_time, part_time, home_work, independent, dependent, disabled, user_id) VALUES ('title5', 'description5', '2021-03-22 04:06:12', true, false, false, false, true, FALSE, 2)
+INSERT INTO job (title, description, expiration, full_time, part_time, home_work, independent, dependent, disabled, user_id) VALUES ('DESARROLLADOR MULTIPLATAFORMA', 'Trainee para Multiplataforma JAva, SpringBoot, ThyMyLeaf, Hybernate, Postgre SQL. ', '2021-03-22 04:06:12', false, false, true, false, true, FALSE, 2)
 
-INSERT INTO job (title, description, expiration, full_time, part_time, home_work, independent, dependent, disabled, user_id) VALUES ('title6', 'description6', '2021-03-22 04:06:12', false, false, true, true, false, FALSE, 2)
+INSERT INTO job (title, description, expiration, full_time, part_time, home_work, independent, dependent, disabled, user_id) VALUES ('CUIDADO DE NIÑOS', 'Personal para cuidar niños por la tarde.', '2021-03-22 04:06:12', false, true, false, true, false, FALSE, 2)
 
 INSERT INTO contact (user_1_id, user_2_id) VALUES (1, 2)
 

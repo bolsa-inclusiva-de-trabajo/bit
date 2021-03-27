@@ -1,10 +1,7 @@
 package ar.org.cpci.bit.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-import javax.validation.Valid;
 
 import ar.org.cpci.bit.model.User;
 import ar.org.cpci.bit.repository.UserRepository;
@@ -19,10 +16,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import ar.org.cpci.bit.model.Job;
 import ar.org.cpci.bit.repository.JobRepository;
@@ -43,16 +37,21 @@ public class BagOffersController {
     private ApplicationContext context;
 
 
+    @Query(value = "SELECT j.description FROM Job j WHERE Job.id = 1")
+    public List<Job> getDescriptionNotExpiredJob()
+    {
+        return jobsRepository.findAll();
+
+    }
+
     @GetMapping("/bagoffers")
     public String getBagOffers(Model model, @PageableDefault(size = 4) Pageable page,
                                @RequestParam("page") Optional<Integer> p,
                                @RequestParam("size") Optional<Integer> s) {
 
 
-       /**
-        @Query(value = "SELECT j.description FROM job j WHERE expiration > CURRENT_DATE")
-        String desc = jobsRepository.findAll();
-        **/
+        Iterable<Job> desc = getDescriptionNotExpiredJob();
+
 
 
         Iterable<Job> jobs = jobsRepository.findAll(page);
