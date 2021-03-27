@@ -65,6 +65,41 @@ $(document).ready(function() {
         placement : 'top'
     });
 
+   		$('#inputExpiration').datepicker({
+   		    format: "dd/mm/yyyy"
+   		});
+   		$("#SubmitCRUDJob").click(function() {
+   			let noError=0;
+   			noError|=checkEmpty('#inputTitleJob');
+   			noError|=checkEmpty('#inputDescription');
+   			if(moment($("#inputExpiration").val(), "DD/MM/YYYY", true).isValid())
+       		{
+        		$("#inputExpiration").removeClass("is-invalid");
+        		$("#inputExpiration").addClass("is-valid");
+       		}
+        	else
+       		{
+        		$("#inputExpiration").removeClass("is-valid");
+        		$("#inputExpiration").addClass("is-invalid");
+        		noError=3;
+       		}
+   			if(noError===0)
+        	{
+        		$('.modal-dialog').hide();
+      			$('#CRUDJobLastModal').show();
+        	}
+
+   		});
+      $("#submitCRUDJobLastModal").click(function() {
+        CRUDJobSetCheckbox('fullTime');
+        CRUDJobSetCheckbox('partTime');
+        CRUDJobSetCheckbox('homeWork');
+        CRUDJobSetCheckbox('dependent');
+        CRUDJobSetCheckbox('independent');
+        $("#CRUDJobForm").submit();
+      });
+
+
 
 });
 
@@ -438,3 +473,33 @@ function bagFilterMyOffers(e) {
     alert('myoffers');
 }
 
+function checkEmpty(input)
+{
+  let empty=0;
+  console.log($(input));
+  if($(input).val().length === 0)
+  {
+    $(input).removeClass("is-valid");
+    $(input).addClass("is-invalid");
+    empty=1;
+  }
+  else
+{
+    $(input).removeClass("is-invalid");
+    $(input).addClass("is-valid");
+}
+  return empty;
+}
+function CRUDJobSetCheckbox(id) {
+    // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Input/checkbox#Note_2
+    const checkbox = document.getElementById(id);
+    if (!checkbox.checked) {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = id[5].toLocaleLowerCase() + id.slice(6);
+        input.value = false;
+        document.getElementById('CRUDJobForm').appendChild(input);
+        return false;
+    }
+    return true;
+}

@@ -55,21 +55,7 @@ public class JobController {
         return "job_edit";
     }
 
-    @PostMapping("/api/job/edit")
-    public String jobEdit(@Valid Job job, BindingResult bindingResult) {
-    	System.out.println(job.getTitle()+job.getDescription()+job.getExpiration());
-        if (!bindingResult.hasErrors()) {
-        	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            CurrentUserDetails userDetail = (CurrentUserDetails)auth.getPrincipal();
-            String username = userDetail.getUsername();
-            User user = userRepository.findByUsername(username);
-            job.setOwner(user);
-            job.setDisabled(false);
-            repositoryJob.save(job); 
-            return "redirect:/job"; 
-        }
-        return "crud_offers";
-    }
+    
     @GetMapping("/crud_offers")
     public String crudOffers( ) {
         return "crud_offers";
