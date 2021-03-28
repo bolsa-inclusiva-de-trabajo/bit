@@ -91,20 +91,108 @@ $(document).ready(function() {
 
    		});
       $("#submitCRUDJobLastModal").click(function() {
-        CRUDJobSetCheckbox('JobFullTime');
-        CRUDJobSetCheckbox('JobPartTime');
-        CRUDJobSetCheckbox('JobHomeWork');
-        CRUDJobSetCheckbox('JobDependent');
-        CRUDJobSetCheckbox('JobIndependent');
+        CRUDJobSetCheckbox('JobFullTime','CRUDJobForm','fullTime');
+        CRUDJobSetCheckbox('JobPartTime','CRUDJobForm','partTime');
+        CRUDJobSetCheckbox('JobHomeWork','CRUDJobForm','homeWork');
+        CRUDJobSetCheckbox('JobDependent','CRUDJobForm','dependent');
+        CRUDJobSetCheckbox('JobIndependent','CRUDJobForm','independent');
         $("#CRUDJobForm").submit();
       });
       $("#prevCRUDJobLastModal").click(function() {
         $('.modal-dialog').hide();
         $('#CRUDJob').show();
       });
-
-
-
+	  $('#inputBirthDateEditUser').datepicker({
+   		    format: "dd/mm/yyyy"
+   		});
+	$('#inputCountryEditUser').selectpicker({liveSearch:true});
+	$('#inputStateEditUser').selectpicker({liveSearch:true});
+	$('#inputCityEditUser').selectpicker({liveSearch:true});
+//	$('#inputEMailEditUser').focusout(function() {
+//		checkEMail(this);
+//	});
+	$("#nextEditProfileUser").click(function() {
+		let noError=0;
+		noError|=checkEmpty('#inputNameEditUser');
+		noError|=checkEmpty('#inputLastNameEditUser');
+		
+		
+		if(moment($("#inputBirthDateEditUser").val(), "DD/MM/YYYY", true).isValid())
+		{
+			$("#inputBirthDateEditUser").removeClass("is-invalid");
+			$("#inputBirthDateEditUser").addClass("is-valid");
+		}
+		else
+		{
+			$("#inputBirthDateEditUser").removeClass("is-valid");
+			$("#inputBirthDateEditUser").addClass("is-invalid");
+			noError=3;
+		}
+//		noError|=checkEMail('#inputEMailEditUser');
+		if(noError==0)
+		{
+			$('.modal-dialog').hide();
+	    	$('#editProfileCity').show();	
+		}
+	  });
+		$("#prevEditProfileCity").click(function() {
+        	$('.modal-dialog').hide();
+        	$('#EditProfileUser').show();
+  		});
+		$("#nextEditProfileCity").click(function() {
+        	$('.modal-dialog').hide();
+        	$('#editProfileStudy').show();
+  		});
+		$("#prevEditProfileStudy").click(function() {
+        	$('.modal-dialog').hide();
+        	$('#EditProfileCity').show();
+  		});
+		$("#nextEditProfileStudy").click(function() {
+			if(checkEmpty("#inputStudyEditUser")==0)
+			{
+				$('.modal-dialog').hide();
+        		$('#editProfileSkill').show();	
+			}
+  		});
+		$("#prevEditProfileSkill").click(function() {
+        	$('.modal-dialog').hide();
+        	$('#EditProfileStudy').show();
+  		});
+		$("#nextEditProfileSkill").click(function() {
+			if(checkEmpty("#inputSkillEditUser")==0)
+			{
+	        	$('.modal-dialog').hide();
+	        	$('#editProfileAvailability').show();
+			}
+  		});
+		$("#prevEditProfileAvailability").click(function() {
+        	$('.modal-dialog').hide();
+        	$('#EditProfileSkill').show();
+  		});
+//		$("#nextEditProfileAvailability").click(function() {
+////        	$('.modal-dialog').hide();
+////        	$('#editProfileAvailability').show();
+//  		});
+		$("#savePassword").click(function() {
+			if(checkEmpty('#inputPasswordEditUser'))
+			{
+				$("#invalid-feedback-password").html("No puede dejar el campo vacio.");
+			}
+			if(checkEmpty('#inputPassword2EditUser'))
+			{
+				$("#invalid-feedback-password2").html("No puede dejar el campo vacio.");
+			}
+			else if($("#inputPasswordEditUser").val()!=$("#inputPassword2EditUser").val())
+			{
+				$("#inputPassword2EditUser").removeClass("is-valid");
+				$("#inputPassword2EditUser").addClass("is-invalid");
+				$("#invalid-feedback-password2").html("Las contraseñas deben ser iguales");
+			}
+			else{
+				$("#formEditPassword").submit();
+			}
+  		});
+	
 });
 
 /*
@@ -522,15 +610,15 @@ function checkEmpty(input)
   return empty;
 }
 
-function CRUDJobSetCheckbox(id) {
+function CRUDJobSetCheckbox(id,form,name) {
     // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Input/checkbox#Note_2
     const checkbox = document.getElementById(id);
     if (!checkbox.checked) {
         const input = document.createElement('input');
         input.type = 'hidden';
-        input.name = id[3].toLocaleLowerCase() + id.slice(4);
+        input.name = name;
         input.value = false;
-        document.getElementById('CRUDJobForm').appendChild(input);
+        document.getElementById(form).appendChild(input);
         return false;
     }
     return true;
@@ -592,6 +680,15 @@ function clearModalJob() {
   $("#JobHomeWork").attr('checked', false);
   $("#JobDependent").attr('checked', false);
 }
+function clearModalEditPassword() {
+  $("#inputPasswordEditUser").val("");
+  $("#inputPassword2EditUser").val("");
+  $("#inputPasswordEditUser").removeClass("is-valid");
+  $("#inputPasswordEditUser").removeClass("is-invalid");
+  $("#inputPassword2EditUser").removeClass("is-valid");
+  $("#inputPassword2EditUser").removeClass("is-invalid");
+
+}
 function showModalCreateJob() {
   clearModalJob();
   $("#TitleModalCRUDJob").text("Alta de oferta laboral");
@@ -617,4 +714,83 @@ function deleteJob(e) {
           });
       }
   });
+}
+function checkEMail(elementEmail)
+   	    {
+   			let noError=0;
+			let email = $(elementEmail).val();
+
+   			if(email.length==0)
+			{
+   				$(elementEmail).removeClass("is-valid");
+				$(elementEmail).addClass("is-invalid");
+				$("#invalid-feedback").html("No puede dejar el campo vacio.");
+				noError=1;
+			}
+   			else
+   			{
+   				fetch('/api/existsByEMail/' + email).then(function(response) {
+   	   				response.json().then(function(data) {
+   	   					if(data)
+   	 					{
+   	   						$(elementEmail).removeClass("is-valid");
+   	   						$(elementEmail).addClass("is-invalid");
+   	   						$("#invalid-feedback").html("El correo electrónico ya existe");
+   	   						noError=2;
+   	   					}
+   	   					else
+ 	   					{
+   	   						$(elementEmail).removeClass("is-invalid");
+	   						$(elementEmail).addClass("is-valid");
+   	   					}
+   	   				});
+   				});
+  			}
+   			return noError;
+   	    }
+function edit_user_profile(uid)
+{
+	 const urlUser = "/api/user/" + uid;
+  	fetch(urlUser).then( function(response) {
+		if (response.ok) {
+			response.json().then(function(data) {
+				console.log(data)
+			  $("#inputNameEditUser").val(data.firstName);
+		      $("#inputLastNameEditUser").val(data.lastName);
+		      $("#inputBirthDateEditUser").val(data.birthDate);
+//		      $("#inputEMailEditUser").val(data.email);
+			  $("#inputCityEditUser").val(data.city.id)
+ 			  $("#inputCityEditUser").selectpicker('refresh');
+			  $("#inputStudyEditUser").text(data.education);
+			  $("#inputSkillEditUser").text(data.skills);
+			  $("#idEditUser").val(data.id);
+		      data.fullTime ? $("#inputFullTimeEditUser").attr('checked', true) : $("#inputFullTimeEditUser").attr('checked', false);
+		      data.partTime ? $("#inputPartTimeEditUser").attr('checked', true) : $("#inputPartTimeEditUser").attr('checked', false);
+		      data.homeWork ? $("#inputHomeWorkEditUser").attr('checked', true) : $("#inputHomeWorkEditUser").attr('checked', false);
+			  data.applyForJob ? $("#inputapplyForJobEditUser").attr('checked', true) : $("#inputapplyForJobEditUser").attr('checked', false);
+			  
+			});
+		}
+	});
+	$('.modal-dialog').hide();
+	$('#EditProfileUser').show();	
+	$("#ModalEditProfileUser").modal('show');
+	
+}
+function edit_user_password(uid)
+{
+	clearModalEditPassword();
+	$("#ModalEditPasswordUser").modal('show');
+}
+function enable_user_profile(uid)
+{
+	
+	$("#disabledEditUser").val(false);
+	$("#formDisabledProfile").submit();
+}
+function disable_user_profile(uid)
+{
+	
+	$("#disabledEditUser").val(true);
+	$("#formDisabledProfile").submit();
 }

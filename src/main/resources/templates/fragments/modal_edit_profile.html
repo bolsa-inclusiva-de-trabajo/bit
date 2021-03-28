@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+
+<div th:fragment="modal" class="modal" id="ModalEditProfileUser">
+	<form action="/user/edit_part_profile" method="POST">
+	<input
+            type="hidden"
+            th:name="${_csrf.parameterName}"
+            th:value="${_csrf.token}" />
+            <input
+            type="hidden"
+            name="id"
+            id="idEditUser"
+            value=0 />
+    <div class="modal-dialog" id="EditProfileUser">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">Editar Perfil</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                  aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                  <span class="sr-only">0%</span>
+                </div>
+              </div>
+              		<div class="form-group mb-4">
+                        <label for="inputNameEditUser">Nombre:</label>
+                        <input name="firstName" type="text" class="form-control" id="inputNameEditUser" placeholder="Nombre">
+                        <div class="invalid-feedback">No puede dejar el campo vacio.</div>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="inputLastNameEditUser">Apellido:</label>
+                        <input name="lastName" type="text" class="form-control" id="inputLastNameEditUser" placeholder="Apellido">
+                        <div class="invalid-feedback">No puede dejar el campo vacio.</div>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="inputBirthDateEditUser">Fecha Nacimiento:</label>
+                        <input name="birthDate" type="text" class="form-control" id="inputBirthDateEditUser" placeholder="Fecha Nacimiento">
+                        <div class="invalid-feedback">Formato incorrecto</div>
+                    </div>
+<!--                     <div class="form-group mb-4"> -->
+<!--                         <label for="inputEMailEditUser">Correo Electrónico:</label> -->
+<!--                         <input name="email" type="text" class="form-control" id="inputEMailEditUser" placeholder="Correo Electrónico"> -->
+<!--                         <div id="invalid-feedback" class="invalid-feedback"></div> -->
+<!--                     </div> -->
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" id="nextEditProfileUser" class="btn btn-secondary">Siguiente</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal-dialog" id="editProfileCity" style="display: none;">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">Editar Perfil</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                  aria-valuemin="0" aria-valuemax="100" style="width:20%">
+                  <span class="sr-only">0%</span>
+                </div>
+              </div>
+            	<div class="form-group mb-4">
+                   <label for="inputCountryEditUser">País:</label>
+                   <select class="form-control" id="inputCountryEditUser">
+                      <option>Argentina</option>
+                   </select>
+                </div>
+                <div class="form-group mb-4">
+                   <label for="inputStateEditUser">Provincia:</label>
+                   <select class="form-control" id="inputStateEditUser">
+                      <option>Misiones</option>
+                   </select>
+                </div>
+                <div class="form-group mb-4">
+                   <label for="inputCityEditUser">Ciudad:</label>
+                   <select name="city"  class="form-control" id="inputCityEditUser">
+                      <option th:each="city: ${cities}" th:value=${city.id} th:text="${city.name}"></option>
+                   </select>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+            	<button type="button" id="prevEditProfileCity" class="btn btn-secondary">Anterior</button>
+                <button type="button" id="nextEditProfileCity" class="btn btn-secondary">Siguiente</button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal-dialog" id="editProfileStudy" style="display: none;">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">Editar Perfil</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                  aria-valuemin="0" aria-valuemax="100" style="width:40%">
+                  <span class="sr-only">0%</span>
+                </div>
+              </div>
+                  <div class="form-group mb-4">
+                      <label for="inputStudyEditUser">Estudios:</label>
+                      <textarea name="education" class="form-control" rows="4" id="inputStudyEditUser"></textarea>
+                      <div class="invalid-feedback">No puede dejar el campo vacio.</div>
+                  </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type=button id="prevEditProfileStudy" class="btn btn-secondary">Anterior</button>
+                <button type=button id="nextEditProfileStudy" class="btn btn-secondary">Siguiente</button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal-dialog" id="editProfileSkill" style="display: none;">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">Editar Perfil</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                  aria-valuemin="0" aria-valuemax="100" style="width:60%">
+                  <span class="sr-only">0%</span>
+                </div>
+              </div>
+                  <div class="form-group mb-4">
+                      <label for="inputSkillEditUser">Habilidades:</label>
+                      <textarea name="skills" class="form-control" rows="4" id="inputSkillEditUser"></textarea>
+                      <div class="invalid-feedback">No puede dejar el campo vacio.</div>
+                  </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type=button id="prevEditProfileSkill" class="btn btn-secondary">Anterior</button>
+                <button type=button id="nextEditProfileSkill" class="btn btn-secondary">Siguiente</button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal-dialog" id="editProfileAvailability" style="display: none;">
+        <div class="modal-content">
+
+            <div class="modal-header">
+              <h4 class="modal-title">Editar Perfil</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                  aria-valuemin="0" aria-valuemax="100" style="width:80%">
+                  <span class="sr-only">0%</span>
+                </div>
+              </div>
+                  <legend class="col-form-label col-sm-2 pt-0">Disponibilidad</legend>
+                  <div class="form-group mb-4">
+                    <div class="form-check-inline">
+                      <label class="form-check-label">
+                        <input id="inputFullTimeEditUser" name="fullTime" type="checkbox" class="form-check-input" value="true">Tiempo Completo
+                      </label>
+                    </div>
+                    <div class="form-check-inline">
+                      <label class="form-check-label">
+                        <input id="inputPartTimeEditUser" name="partTime" type="checkbox" class="form-check-input" value="true">Medio Tiempo
+                      </label>
+                    </div>
+                    <div class="form-check-inline">
+                      <label class="form-check-label">
+                        <input id="inputHomeWorkEditUser" name="homeWork" type="checkbox" class="form-check-input" value="true">Teletrabajo
+                      </label>
+                    </div>
+                  </div>
+                  <div class="mb-4">
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input id="inputapplyForJobEditUser" name="applyForJob" type="checkbox" class="form-check-input" value="true">Habilitar Perfil Laboral
+                      </label>
+                    </div>
+                  </div>
+            </div>
+
+            <div class="modal-footer">
+            	<button type=button id="prevEditProfileAvailability" class="btn btn-secondary">Anterior</button>
+                <button type=submit id="nextEditProfileAvailability" class="btn btn-primary">Editar Perfil</button>
+            </div>
+
+        </div>
+    </div>
+</form>
+</div>
+</html>
+
