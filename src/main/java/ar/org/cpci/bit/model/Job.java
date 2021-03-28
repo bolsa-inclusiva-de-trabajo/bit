@@ -255,4 +255,8 @@ public class Job {
         return Objects.equals(id, other.id);
     }
 
+    public String getCityName() {
+        return owner.getCity().getName();
+    }
+
 }

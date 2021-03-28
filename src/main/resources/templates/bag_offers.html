@@ -35,7 +35,7 @@
                                         <tr >
                                             <td >
                                                 <span class="h6">Filtro:</span>
-                                                <span class="h5 ml-2" th:text="${filterType} == 'text' ? ${filterContent} : ''">FILTER CONTENT</span>
+                                                <span class="h5 ml-2" th:text="${filterContent}">FILTER CONTENT</span>
                                             </td>
                                             <td style=" text-align: right;">
                                                 <i id="buttonPanelFilterClose" class="bi bi-x " onclick="closePanelFilter()"></i>
@@ -73,16 +73,16 @@
                                                                     </td>
                                                                 </tr>
                                                                 <tr >
+                                                                    <td colspan="4" >
+                                                                        <span class="offers_data_text" th:text="'Ciudad: ' + ${job.getCityName()}" >txt</span>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr >
                                                                     <td class="table align-left">
-                                                                   <!--
-                                                                        <p class="offers_data_text" th:text="#{bag_offer.valid} + ' ' + ${#temporals.day(job.expiration)} + '/' + ${#temporals.month(job.expiration)} + '/' + ${#temporals.year(job.expiration)}" >txt</p>
-                                                                    -->
                                                                         <p class="offers_data_text" th:text="#{bag_offer.valid} + ' ' + ${job.expiration}" >txt</p>
                                                                     </td>
                                                                     <td class="table align-right">
-                                                                          <!--  <input class="buttonInterest" type="button" value="createDeleteInterest" th:id="'interest_' + ${job.id} + '_' + + ${user.id}"/>-->
-
-                                                                        <i th:if="${!user.existCreatedJob({job.id})}" th:id="'interest_' + ${job.id} + '_' +  ${user.id}"
+                                                                         <i th:if="${!user.existCreatedJob({job.id})}" th:id="'interest_' + ${job.id} + '_' +  ${user.id}"
                                                                            th:class="${user.containsInterestingJob(job)} ? 'bi bi-hand-thumbs-up-fill ' : 'bi bi-hand-thumbs-up '"
                                                                            data-toggle="tooltip"
                                                                            th:data-original-title="#{bag_offer.interested}"

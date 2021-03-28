@@ -483,21 +483,21 @@ function closePanelFilter() {
 }
 
 function bagFilterCity(e) {
-         window.location.replace("/bagoffers/city/true");
+    window.location.replace("/bagoffers/city/true");
 }
 
 function bagFilterFullTime(e) {
-    alert('full');
+    window.location.replace("/bagoffers/fullparthome/full");
 }
 function bagFilterPartTime(e) {
-    alert('part');
+    window.location.replace("/bagoffers/fullparthome/part");
 }
 function bagFilterRemote(e) {
-    alert('remote');
+    window.location.replace("/bagoffers/fullparthome/home");
 }
 
 function bagFilterMyOffers(e) {
-    alert('myoffers');
+    window.location.replace("/bagoffers/my_offers/true");
 }
 
 function checkEmpty(input)

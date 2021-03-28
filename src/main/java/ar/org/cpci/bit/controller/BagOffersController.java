@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.thymeleaf.util.TextUtils;
 
 @Controller
 public class BagOffersController {
@@ -59,15 +60,8 @@ public class BagOffersController {
 
         int currentPage = p.orElse(0);
         int pageSize = s.orElse(4);
+        int pageTotal = findPageTotal(pageSize);
 
-        List<Job> jobstotal = jobsRepository.findAll();
-        int pageTotal = 1;
-        if (jobstotal.size() > pageSize && pageSize > 0) {
-            double factor = (double)jobstotal.size() / (double)pageSize;
-            if (factor > 1) {
-                pageTotal = ((int)factor) + 1;
-            }
-        }
 
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("pageSize", pageSize);
@@ -88,23 +82,13 @@ public class BagOffersController {
         Iterable<Job> jobs = jobsRepository.findTextFilteredJobs(page, filterText);
         model.addAttribute("jobs", jobs);
 
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        CurrentUserDetails userDetail = (CurrentUserDetails)auth.getPrincipal();
-        String username = userDetail.getUsername();
-        User user = userRepository.findByUsername(username);
+        User user = findUser();
+
         model.addAttribute("user", user);
 
         int currentPage = p.orElse(0);
         int pageSize = s.orElse(4);
-
-        List<Job> jobstotal = jobsRepository.findAll();
-        int pageTotal = 1;
-        if (jobstotal.size() > pageSize && pageSize > 0) {
-            double factor = (double)jobstotal.size() / (double)pageSize;
-            if (factor > 1) {
-                pageTotal = ((int)factor) + 1;
-            }
-        }
+        int pageTotal = findPageTotal(pageSize);
 
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("pageSize", pageSize);
@@ -121,16 +105,12 @@ public class BagOffersController {
                                        @RequestParam("size") Optional<Integer> s,
                                        @PathVariable Boolean filterCity) {
 
-        //busco el usuario
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        CurrentUserDetails userDetail = (CurrentUserDetails)auth.getPrincipal();
-        String username = userDetail.getUsername();
-        User user = userRepository.findByUsername(username);
+        User user = findUser();
         model.addAttribute("user", user);
 
         //cargo la ciudad para el filtro si es necesario
         long fCity = 0;
-
+        String sCity = user.getCity().getName();
         if (filterCity) {
             fCity = user.getCity().getId();
 
@@ -141,22 +121,14 @@ public class BagOffersController {
 
         int currentPage = p.orElse(0);
         int pageSize = s.orElse(100);
+        int pageTotal = findPageTotal(pageSize);
 
-        List<Job> jobstotal = jobsRepository.findAll();
-        int pageTotal = 1;
-
-        if (jobstotal.size() > pageSize && pageSize > 0) {
-            double factor = (double)jobstotal.size() / (double)pageSize;
-            if (factor > 1) {
-                pageTotal = ((int)factor) + 1;
-            }
-        }
 
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("pageSize", pageSize);
         model.addAttribute("pageTotal", pageTotal);
         model.addAttribute("filterType", "city");
-        model.addAttribute("filterContent", "");
+        model.addAttribute("filterContent", sCity);
         return "bag_offers";
     }
     
@@ -174,5 +146,97 @@ public class BagOffersController {
         }
         return "redirect:/bagoffers"; 
     }
+
+    private User findUser() {
+        //busco el usuario
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        CurrentUserDetails userDetail = (CurrentUserDetails)auth.getPrincipal();
+        String username = userDetail.getUsername();
+        User user = userRepository.findByUsername(username);
+        return user;
+    }
+
+    private int findPageTotal(int pageSize) {
+        List<Job> jobstotal = jobsRepository.findAll();
+        int pageTotal = 1;
+
+        if (jobstotal.size() > pageSize && pageSize > 0) {
+            double factor = (double)jobstotal.size() / (double)pageSize;
+            if (factor > 1) {
+                pageTotal = ((int)factor) + 1;
+            }
+        }
+        return pageTotal;
+    }
+
+
+    @GetMapping("/bagoffers/my_offers/{filterOffers}")
+    public String getBagMyOffersFiltered(Model model, @PageableDefault(size = 100) Pageable page,
+                                           @RequestParam("page") Optional<Integer> p,
+                                           @RequestParam("size") Optional<Integer> s,
+                                           @PathVariable Boolean filterOffers) {
+        User user = findUser();
+        model.addAttribute("user", user);
+
+        Iterable<Job> jobs = jobsRepository.findMyOffersFilteredJobs(page, user.getId());
+        model.addAttribute("jobs", jobs);
+
+        int currentPage = p.orElse(0);
+        int pageSize = s.orElse(100);
+        int pageTotal = findPageTotal(pageSize);
+
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("pageSize", pageSize);
+        model.addAttribute("pageTotal", pageTotal);
+        model.addAttribute("filterType", "my_offers");
+        model.addAttribute("filterContent", "SOLO MIS OFERTAS LABORALES");
+        return "bag_offers";
+    }
+
+    @GetMapping("/bagoffers/fullparthome/{filterType}")
+    public String getBagFullPartHomeFiltered(Model model, @PageableDefault(size = 100) Pageable page,
+                                         @RequestParam("page") Optional<Integer> p,
+                                         @RequestParam("size") Optional<Integer> s,
+                                         @PathVariable String filterType) {
+        User user = findUser();
+        model.addAttribute("user", user);
+        Iterable<Job> jobs = null;
+        String filterContent = "";
+
+            if (filterType.equals("full")) {
+                jobs = jobsRepository.findByFullTimeTrue(page);
+                filterContent = "OFERTAS LABORALES TIEMPO COMPLETO";
+            } else {
+                if (filterType.equals("part")) {
+                    jobs = jobsRepository.findByPartTimeTrue(page);
+                    filterContent = "OFERTAS LABORALES MEDIO TIEMPO";
+                } else {
+                    if (filterType.equals("home")) {
+                        jobs = jobsRepository.findByHomeWorkTrue(page);
+                        filterContent = "OFERTAS LABORALES REMOTAS";
+                    } else {
+                        jobs = jobsRepository.findAllActiveJobs(page);
+                        filterContent = "";
+                    }
+                }
+            }
+
+            model.addAttribute("jobs", jobs);
+
+            int currentPage = p.orElse(0);
+            int pageSize = s.orElse(100);
+            int pageTotal = findPageTotal(pageSize);
+
+            model.addAttribute("currentPage", currentPage);
+            model.addAttribute("pageSize", pageSize);
+            model.addAttribute("pageTotal", pageTotal);
+            model.addAttribute("filterType", filterType);
+            model.addAttribute("filterContent", filterContent);
+            return "bag_offers";
+
+
+
+    }
+
     
 }

@@ -1,5 +1,6 @@
 package ar.org.cpci.bit.repository;
 
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -28,11 +29,23 @@ public interface JobRepository extends JpaRepository<Job, Long> {
             "AND ( j.description LIKE %:text% ) ")
     public abstract Iterable<Job> findTextFilteredJobs(@Param("text") String text);
 
-
     @Query(value = "SELECT j FROM Job j INNER JOIN j.owner o INNER JOIN o.city c WHERE (j.expiration > CURRENT_DATE) " +
             "AND ( c.id = :city ) ")
-    public abstract Page<Job> findCityFilteredJobs(Pageable var1,
-                                               @Param("city") Long city);
+    public abstract Page<Job> findCityFilteredJobs(Pageable var1, @Param("city") Long city);
+
+    @Query(value = "SELECT j FROM Job j INNER JOIN j.owner o WHERE (j.expiration > CURRENT_DATE) " +
+            "AND ( o.id = :userid ) ")
+    public abstract Page<Job> findMyOffersFilteredJobs(Pageable var1, @Param("userid") Long userid);
+
+    @Query
+    public Page<Job> findByFullTimeTrue(Pageable var1);
+
+    @Query
+    public Page<Job> findByPartTimeTrue(Pageable var1);
+
+    @Query
+    public Page<Job> findByHomeWorkTrue(Pageable var1);
+
     @Modifying
     @Transactional
     @Query(value="delete from Job j where j.id = ?1")
