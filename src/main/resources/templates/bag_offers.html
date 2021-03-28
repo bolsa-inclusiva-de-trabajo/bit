@@ -28,8 +28,24 @@
                     <div class="col-8 col-sm-8 col-md-7  col_b" >
                         <div class="col">
                             <ul class="nav nav-pills nav-stacked ">
-                                <table class="table table-borderless align-middle" style="width: 100%;">
 
+
+                                <div id="panelFilter" class="modal-header w-100 " th:style="${filterType} == '' ? 'display: none;' : ''">
+                                    <table  class="table table-borderless panel_filter" style="width: 100%;">
+                                        <tr >
+                                            <td >
+                                                <span class="h6">Filtro:</span>
+                                                <span class="h5 ml-2" th:text="${filterType} == 'text' ? ${filterContent} : ''">FILTER CONTENT</span>
+                                            </td>
+                                            <td style=" text-align: right;">
+                                                <i id="buttonPanelFilterClose" class="bi bi-x " onclick="closePanelFilter()"></i>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+
+                                <table class="table table-borderless align-middle" style="width: 100%;">
 
                                     <tr th:id="'job_row_' +  ${job.id}" th:each="job: ${jobs}">
                                         <td colspan="3">

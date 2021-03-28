@@ -477,8 +477,13 @@ function bagFilterText(e) {
       }
 }
 
+function closePanelFilter() {
+    $('#panelFilter').hide();
+     window.location.replace("/bagoffers");
+}
+
 function bagFilterCity(e) {
-    alert('city');
+         window.location.replace("/bagoffers/city/true");
 }
 
 function bagFilterFullTime(e) {
@@ -512,6 +517,7 @@ function checkEmpty(input)
 }
   return empty;
 }
+
 function CRUDJobSetCheckbox(id) {
     // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Input/checkbox#Note_2
     const checkbox = document.getElementById(id);

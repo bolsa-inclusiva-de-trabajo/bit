@@ -174,5 +174,11 @@ a#joinus {
     width: 100%;
 }
 
+.panel_filter {
+  width: auto;
+  border-radius: 5px;
+  color: #e85d04;
+  background-color: #FEFAE0;
+}
 
 
