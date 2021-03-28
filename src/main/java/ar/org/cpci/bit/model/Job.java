@@ -17,6 +17,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -65,10 +67,12 @@ public class Job {
     private User owner;
 
     @JsonIgnore
+//    @OnDelete(action = OnDeleteAction.CASCADE)
     @ManyToMany(mappedBy = "interestingJobs", fetch = FetchType.EAGER)
     private Set<User> interestedUsers;
 
     @JsonIgnore
+//    @OnDelete(action = OnDeleteAction.CASCADE)
     @ManyToMany(mappedBy = "applyJobs", fetch = FetchType.EAGER)
     private Set<User> applyUsers;
 
