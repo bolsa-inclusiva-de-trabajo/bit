@@ -76,7 +76,7 @@ public class BagRestController {
      * @return            Returns an ResponseEntity object with a status and value,
      *                    described above.
      *
-     * @see               //getByIdFromRepo
+     * @see               getByIdFromRepo
      */
     private static <T1, T2> ResponseEntity<Object> processMethod(CrudRepository<T1, Long> repo1, Long id1,
                                                                  CrudRepository<T2, Long> repo2, Long id2,
@@ -118,7 +118,7 @@ public class BagRestController {
      *
      * @return            Returns an ResponseEntity object
      *
-     * @see               //processMethod
+     * @see               processMethod
      */
     private ResponseEntity<Object> getResponseUserJob(Long uid, Long jid, String methodName) {
         return processMethod(repositoryUser, uid, repositoryJob, jid, methodName);
@@ -134,7 +134,7 @@ public class BagRestController {
      *
      * @return            Returns an ResponseEntity object.
      *
-     * @see               //processMethod
+     * @see               processMethod
      */
     private ResponseEntity<Object> getResponseUserUser(Long uid1, Long uid2, String methodName) {
         return processMethod(repositoryUser, uid1, repositoryUser, uid2, methodName);
@@ -150,7 +150,7 @@ public class BagRestController {
      *
      * @return      Returns an ResponseEntity object.
      *
-     * @see         //getByIdFromRepo
+     * @see         getByIdFromRepo
      */
     private static <T> ResponseEntity<Object> getResponseById(CrudRepository<T, Long> repo, Long id) {
         T obj = getByIdFromRepo(repo, id);
@@ -267,6 +267,11 @@ public class BagRestController {
     	cityDTO.setDescription(city.getDescription());
     	cityDTO.setState(city.getState().getName());
         return ResponseEntity.ok().body(cityDTO);
+    }
+    @DeleteMapping(value = "/api/job/{id}")
+    public ResponseEntity<Long> deleteJob(@PathVariable Long id) {
+        repositoryJob.deleteById(id);
+        return new ResponseEntity<>(id, HttpStatus.OK);
     }
 
     @GetMapping("/api/bag/job/text/{filterText}")

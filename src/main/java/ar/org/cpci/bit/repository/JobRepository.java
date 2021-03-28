@@ -3,14 +3,13 @@ package ar.org.cpci.bit.repository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import ar.org.cpci.bit.model.Job;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Optional;
+import ar.org.cpci.bit.model.Job;
 
 @Repository
 public interface JobRepository extends JpaRepository<Job, Long> {
@@ -34,8 +33,10 @@ public interface JobRepository extends JpaRepository<Job, Long> {
             "AND ( c.id = :city ) ")
     public abstract Page<Job> findCityFilteredJobs(Pageable var1,
                                                @Param("city") Long city);
-
-
+    @Modifying
+    @Transactional
+    @Query(value="delete from Job j where j.id = ?1")
+    public void deleteById(Long id);
 }
 
 

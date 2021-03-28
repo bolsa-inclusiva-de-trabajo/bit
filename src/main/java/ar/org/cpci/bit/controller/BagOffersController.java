@@ -159,9 +159,9 @@ public class BagOffersController {
         model.addAttribute("filterContent", "");
         return "bag_offers";
     }
+    
     @PostMapping("/api/job/edit")
     public String jobEdit(@Valid Job job, BindingResult bindingResult, RedirectAttributes attrs) {
-    	System.out.println(job.getTitle()+job.getDescription()+job.getExpiration());
         if (!bindingResult.hasErrors()) {
         	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             CurrentUserDetails userDetail = (CurrentUserDetails)auth.getPrincipal();
@@ -172,8 +172,7 @@ public class BagOffersController {
             jobsRepository.save(job); 
             return "redirect:/bagoffers"; 
         }
-        attrs.addFlashAttribute("error_create_offer", 1);
         return "redirect:/bagoffers"; 
     }
-
+    
 }
