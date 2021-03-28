@@ -270,8 +270,17 @@ public class BagRestController {
     }
     @DeleteMapping(value = "/api/job/{id}")
     public ResponseEntity<Long> deleteJob(@PathVariable Long id) {
-        repositoryJob.deleteById(id);
-        return new ResponseEntity<>(id, HttpStatus.OK);
+        Optional<Job> oJob = repositoryJob.findById(id);
+        if(oJob.isPresent())
+        {
+        	Job job = oJob.get();
+        	job.remAllAplyUser();
+        	job.remAllInterestedUser();
+        	repositoryJob.save(job);
+        	repositoryJob.deleteById(id);
+        	return new ResponseEntity<>(id, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(id, HttpStatus.NOT_FOUND);       
     }
 
     @GetMapping("/api/bag/job/text/{filterText}")

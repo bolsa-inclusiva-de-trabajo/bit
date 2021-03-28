@@ -91,12 +91,16 @@ $(document).ready(function() {
 
    		});
       $("#submitCRUDJobLastModal").click(function() {
-        CRUDJobSetCheckbox('fullTime');
-        CRUDJobSetCheckbox('partTime');
-        CRUDJobSetCheckbox('homeWork');
-        CRUDJobSetCheckbox('dependent');
-        CRUDJobSetCheckbox('independent');
+        CRUDJobSetCheckbox('JobFullTime');
+        CRUDJobSetCheckbox('JobPartTime');
+        CRUDJobSetCheckbox('JobHomeWork');
+        CRUDJobSetCheckbox('JobDependent');
+        CRUDJobSetCheckbox('JobIndependent');
         $("#CRUDJobForm").submit();
+      });
+      $("#prevCRUDJobLastModal").click(function() {
+        $('.modal-dialog').hide();
+        $('#CRUDJob').show();
       });
 
 
@@ -524,10 +528,93 @@ function CRUDJobSetCheckbox(id) {
     if (!checkbox.checked) {
         const input = document.createElement('input');
         input.type = 'hidden';
-        input.name = id[5].toLocaleLowerCase() + id.slice(6);
+        input.name = id[3].toLocaleLowerCase() + id.slice(4);
         input.value = false;
         document.getElementById('CRUDJobForm').appendChild(input);
         return false;
     }
     return true;
+}
+function showModalEditJob(e) {
+  const ids = e.id.replace("edit_job_","");
+  var idJob = ids.split("_")[0];
+  var idUser = ids.split("_")[1];
+  const urlJob = "/api/bag/job/" + idJob;
+  fetch(urlJob).then( function(response) {
+      if (response.ok) {
+          response.json().then(function(data) {
+          if(data) {
+              clearModalJob();
+              $("#TitleModalCRUDJob").text("Editar oferta laboral");
+              $("#submitCRUDJobLastModal").text("Editar Oferta");
+              $("#inputTitleJob").val(data.title);
+              $("#inputDescription").val(data.description);
+              $("#inputExpiration").val(data.expiration);
+              if(data.fullTime)
+              {
+                $("#JobFullTime").attr('checked', true);
+              }
+              if (data.partTime)
+              {
+                $("#JobPartTime").attr('checked', true);
+              }
+              if (data.homeWork)
+              {
+                $("#JobHomeWork").attr('checked', true);
+              }
+              if (data.dependent)
+              {
+                $("#JobDependent").attr('checked', true);
+              }
+              if (data.independent)
+              {
+                $("#JobIndependent").attr('checked', true);
+              }
+              $("#inputIdJob").val(data.id);
+              $('#ModalCRUDJob').modal('show');
+          }
+          });
+      }
+  });
+}
+function clearModalJob() {
+  $("#inputTitleJob").val("");
+  $("#inputDescription").val("");
+  $("#inputExpiration").val("");
+  $("#inputTitleJob").removeClass("is-valid");
+  $("#inputTitleJob").removeClass("is-invalid");
+  $("#inputDescription").removeClass("is-valid");
+  $("#inputDescription").removeClass("is-invalid");
+  $("#inputExpiration").removeClass("is-valid");
+  $("#inputExpiration").removeClass("is-invalid");
+  $("#JobFullTime").attr('checked', false);
+  $("#JobPartTime").attr('checked', false);
+  $("#JobHomeWork").attr('checked', false);
+  $("#JobDependent").attr('checked', false);
+}
+function showModalCreateJob() {
+  clearModalJob();
+  $("#TitleModalCRUDJob").text("Alta de oferta laboral");
+  $("#submitCRUDJobLastModal").text("Guardar");
+  $("#inputIdJob").val(0);
+  $('#ModalCRUDJob').modal('show');
+}
+function deleteJob(e) {
+  const ids = e.id.replace("delete_job_","");
+  var idJob = ids.split("_")[0];
+  var idUser = ids.split("_")[1];
+  const urlJob = "/api/job/" + idJob;
+  fetch(urlJob,{
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: null}
+      ).then( function(response) {
+      if (response.ok) {
+          response.json().then(function(data) {
+          $("#job_row_"+data).hide();
+          });
+      }
+  });
 }

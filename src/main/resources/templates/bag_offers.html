@@ -13,7 +13,7 @@
 
 
                     <div class="col-4 col-sm-4 col-md-2 col_a " >
-                        <button id="addOffersButton" type="button" class="btn btn-primary mt-2" data-toggle="modal" data-target="#ModalCRUDJob" th:text="#{bag_offer.addOfferButton}">add</button>
+                        <button id="addOffersButton" type="button" class="btn btn-primary mt-2" onclick="showModalCreateJob()" th:text="#{bag_offer.addOfferButton}">add</button>
                         <div class="container panel_news mt-2">
                             <p class="h6">NOVEDADES</p>
                             <table>
@@ -100,15 +100,16 @@
 
                                                                     </td>
                                                                     <td class="table align-right">
-                                                                            <i th:if="${user.existCreatedJob({job.id})}" class="bi bi-pencil ml-2" 
-                                                                            	data-toggle="tooltip" th:data-original-title="#{bag_offer.editOffer}" 
-                                                                            	th:id="'edit_' + ${job.id} + '_' +  ${user.id}"
+                                                                            <i th:if="${user.existCreatedJob({job.id})}" class="bi bi-pencil ml-2"
+                                                                            	data-toggle="tooltip" th:data-original-title="#{bag_offer.editOffer}"
+                                                                            	th:id="'edit_job_' + ${job.id} + '_' +  ${user.id}"
                                                                             	onclick="showModalEditJob(this)"></i>
                                                                     </td>
                                                                     <td class="table align-right">
-                                                                        <a th:if="${user.existCreatedJob({job.id})}" href="">
-                                                                            <i class="bi bi-trash ml-2" data-toggle="tooltip" th:data-original-title="#{bag_offer.deleteOffer}"></i>
-                                                                        </a>
+                                                                            <i th:if="${user.existCreatedJob({job.id})}" class="bi bi-trash ml-2"
+                                                                            data-toggle="tooltip" th:data-original-title="#{bag_offer.deleteOffer}"
+                                                                            th:id="'delete_job_' + ${job.id} + '_' +  ${user.id}"
+                                                                            onclick="deleteJob(this)"></i>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
