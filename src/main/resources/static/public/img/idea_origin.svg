@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="37cm" height="17cm" viewBox="59 79 722 322" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g id="Fondo">
+    <g>
+      <ellipse style="fill: #d0d0d0; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #404040" cx="420" cy="240" rx="360" ry="160"/>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="420" y="243.881">
+        <tspan x="420" y="243.881"></tspan>
+      </text>
+    </g>
+    <g>
+      <ellipse style="fill: #a9a9a9; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #404040" cx="450" cy="280" rx="270" ry="100"/>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="450" y="283.881">
+        <tspan x="450" y="283.881"></tspan>
+      </text>
+    </g>
+    <g>
+      <ellipse style="fill: #717171; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #333333" cx="470" cy="310" rx="170" ry="50"/>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="470" y="313.881">
+        <tspan x="470" y="313.881"></tspan>
+      </text>
+    </g>
+    <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="420" y="240">
+      <tspan x="420" y="240"></tspan>
+    </text>
+    <text font-size="22.5778" style="fill: #1a1a1a; fill-opacity: 1; stroke: none;text-anchor:start;font-family:Bitstream Vera Sans;font-style:normal;font-weight:700" x="200" y="160">
+      <tspan x="200" y="160">Problemática de la inclusión</tspan>
+    </text>
+    <text font-size="22.5778" style="fill: #1a1a1a; fill-opacity: 1; stroke: none;text-anchor:start;font-family:Bitstream Vera Sans;font-style:normal;font-weight:700" x="280" y="240">
+      <tspan x="280" y="240">Selección de personal</tspan>
+    </text>
+    <text font-size="22.5778" style="fill: #1a1a1a; fill-opacity: 1; stroke: none;text-anchor:start;font-family:Bitstream Vera Sans;font-style:normal;font-weight:700" x="360" y="320">
+      <tspan x="360" y="320">Selección inclusiva</tspan>
+    </text>
+  </g>
+</svg>

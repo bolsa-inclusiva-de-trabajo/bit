@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<br th:replace="fragments/head :: head"/>
+<body>
+
+<header class="fixed-top bg-dark p-2">
+    <div class="d-flex align-items-center text-white px-2">
+        <img class="mr-1" alt="BIT" width="32px" height="32px" src="/static/public/logo/favicon-32x32.png"/>
+        <span class="font-weight-bold">Bolsa Inclusiva de Trabajo</span>
+        <span class="font-weight-bold ml-auto" id="bit-presentation-section"></span>
+    </div>
+</header>
+
+<main class="presentation vw-100 vh-95 carousel slide" data-ride="carousel" data-interval="false"
+      id="bit-presentation">
+    <div class="carousel-inner h-100">
+
+        <!-- Title -->
+
+        <section class="h-100 carousel-item active" id="presentation-title">
+            <div class="h-100 d-flex align-items-center justify-content-center">
+
+                <img class="mr-3" width="128px" alt="BIT" src="/static/public/logo/android-chrome-192x192.png"/>
+                <span class="display-3 font-weight-bold" id="bit-presentation-title">
+                    Bolsa Inclusiva de Trabajo
+                </span>
+
+            </div>
+        </section>
+
+        <!-- Work team -->
+
+        <section class="h-100 carousel-item" id="presentation-workteam">
+            <div class="h-100 d-flex align-items-center justify-content-between">
+                <div></div>
+
+                <div class="card w-card-team">
+                    <img class="card-img-top" alt="Winnik Vanina Ayelen" src="/static/public/img/photo.svg"/>
+                    <div class="card-body">
+                        <p class="card-title h5">Winnik Vanina Ayelen</p>
+                        <p class="card-text">text</p>
+                    </div>
+                </div>
+
+                <div class="card w-card-team">
+                    <img class="card-img-top" alt="Pablo Andrés" src="/static/public/img/photo.svg"/>
+                    <div class="card-body">
+                        <p class="card-title h5">Smola Pablo Andrés</p>
+                        <p class="card-text">text</p>
+                    </div>
+                </div>
+
+                <div class="card w-card-team">
+                    <img class="card-img-top" alt="Rodriguez Rafael Horacio" src="/static/public/img/photo.svg"/>
+                    <div class="card-body">
+                        <p class="card-title h5">Rodriguez Rafael Horacio</p>
+                        <p class="card-text">text</p>
+                    </div>
+                </div>
+
+                <div class="card w-card-team">
+                    <img class="card-img-top" alt="Schmidt Cristian Hernán" src="/static/public/img/photo.svg"/>
+                    <div class="card-body">
+                        <p class="card-title h5">Schmidt Cristian Hernán</p>
+                        <p class="card-text">text</p>
+                    </div>
+                </div>
+
+                <div></div>
+            </div>
+        </section>
+
+        <!-- Idea origin -->
+
+        <section class="h-100 carousel-item" id="presentation-ideaorigin">
+            <div class="h-100 d-flex align-items-center justify-content-center">
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-8 mx-auto">
+                            <img class="w-100" alt="Idea origin" src="/static/public/img/idea_origin.svg"/>
+                            <div class="d-flex align-items-center justify-content-end">
+                                <img class="mr-2" alt="BIT" width="44px" src="/static/public/logo/favicon-32x32.png"/>
+                                <span class="h5 mb-0 font-weight-bold">Bolsa Inclusiva de Trabajo</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Technologies -->
+
+        <section class="h-100 carousel-item" id="presentation-technologies">
+            <div class="h-100 d-flex flex-column align-items-center justify-content-between">
+
+                <div></div>
+
+                <div class="d-flex flex-row align-items-center justify-content-between">
+                    <div></div>
+                    <img class="w-18" alt="Java" src="/static/public/img/java.png"/>
+                    <img class="w-25" alt="Hibernate" src="/static/public/img/hibernate.png"/>
+                    <img class="w-20" alt="Spring Boot" src="/static/public/img/spring-boot.png"/>
+                    <div></div>
+                </div>
+
+                <div class="d-flex flex-row align-items-center justify-content-between">
+                    <div></div>
+                    <img class="w-30" alt="Thymeleaf" src="/static/public/img/thymeleaf.png"/>
+                    <div class="w-30 d-flex text-center align-items-center">
+                        <img class="w-20 ml-auto" alt="Bootstrap" src="/static/public/img/bootstrap.png"/>
+                        <span class="ml-2 mr-auto mb-0 h2 font-weight-bold">Bootstrap</span>
+                    </div>
+                    <div></div>
+                </div>
+
+                <div class="d-flex flex-row align-items-center justify-content-between">
+                    <div></div>
+                    <img class="w-30" alt="Heroku" src="/static/public/img/heroku.svg"/>
+                    <div></div>
+                </div>
+
+                <div class="d-flex flex-column align-items-center justify-content-between
+                            alert alert-success mt-4 mb-3 shadow-sm">
+                    <div></div>
+                    <a class="h6" href="/">
+                        <strong>Página:</strong> https://bit-bolsa-inclusiva-de-trabajo.herokuapp.com
+                    </a>
+                    <a class="h6 mb-0" href="https://github.com/bolsa-inclusiva-de-trabajo/bit">
+                        <strong>Código:</strong> https://github.com/bolsa-inclusiva-de-trabajo/bit
+                    </a>
+                    <div></div>
+                </div>
+
+                <div></div>
+
+            </div>
+        </section>
+
+    </div>
+</main>
+
+<footer class="container-fluid fixed-bottom p-3">
+    <div class="row align-items-center">
+        <div class="col text-center">
+            <img alt="Silicon Misiones" height="44px" src="/static/public/img/silicon-misiones.png"/>
+        </div>
+        <div class="col text-center">
+            <img alt="DirMOD" height="44px" src="/static/public/img/dirmod.png"/>
+        </div>
+        <div class="col text-center">
+            <img alt="CPCI" height="44px" src="/static/public/img/cpci.png"/>
+        </div>
+        <div class="col text-center">
+            <img alt="UTN BA" height="44px" src="/static/public/img/utn-ba.png"/>
+        </div>
+    </div>
+</footer>
+
+<a id="bit-presentation-prev"><i class="bi bi-chevron-double-left"></i></a>
+<a id="bit-presentation-next"><i class="bi bi-chevron-double-right"></i></a>
+
+<br th:replace="fragments/javascript :: javascript"/>
+<script type="text/javascript" src="/static/public/js/presentation.js"></script>
+
+</body>
+</html>
