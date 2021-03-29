@@ -195,37 +195,20 @@ a#joinus {
   background-color: #FEFAE0;
 }
 
-.bag_applicants_background {
-
-    background: url(/static/public/img/people.png) no-repeat top center fixed;
-       background-size: cover;
-       margin: 0;
-       padding: 0;
-       height: 100%;
-       width: 100%;
-}
-
-.bag_offers_background {
-
-    background: url(/static/public/img/empresa.png) no-repeat top center fixed;
-       background-size: cover;
-       margin: 0;
-       padding: 0;
-       height: 100%;
-       width: 100%;
-}
-
-.matches_background {
-
-    background: url(/static/public/img/fist.png) no-repeat top center fixed;
-       background-size: cover;
-       margin: 0;
-       padding: 0;
-       height: 100%;
-       width: 100%;
-}
 .title-post {
 	background-color: darkgreen;
+	color: white;
+	border-radius: 5px 5px 0 0
+}
+
+.title-offer-post {
+	background-color: blueviolet;
+	color: white;
+	border-radius: 5px 5px 0 0
+}
+
+.title-matches-post {
+	background-color: crimson;
 	color: white;
 	border-radius: 5px 5px 0 0
 }

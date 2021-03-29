@@ -30,12 +30,25 @@
                                 <td colspan="3">
                                     <div class="container mt-2 panel_offers">
 
-                                        <p class="h6"  th:text="${usr.username} + ' - ' + ${usr.firstName} + ' ' + ${usr.lastName}">NOMBRE</p>
+
+
+                                        <table class="title-matches-post align-middle" style=" width: 100%;">
+                                            <tr>
+                                                <td style="width: 20%; ">
+                                                    <i class="bi bi-person-circle h3"></i>
+                                                    <i class="bi bi-building h3"></i>
+                                                </td>
+                                                <td>
+                                                    <p style="padding-top: 5px;" class="h6"  th:text="${usr.username} + ' - ' + ${usr.firstName} + ' ' + ${usr.lastName}">NOMBRE</p>
+                                                </td>
+                                            </tr>
+                                        </table>
 
 
                                         <table class="table table-borderless" style=" width: 100%;">
+
                                             <tr >
-                                                <td>
+                                                <td >
                                                     <p th:if="${usr.skills} != ''" class="applicant_title h6" th:text="#{bag_applicants.skillsTitle}">SKILLS</p>
                                                     <p th:if="${usr.skills} != ''" class="applicant_text" th:text="${usr.skills}"></p>
                                                     <p th:if="${usr.education} != ''" class="applicant_title h6" th:text="#{bag_applicants.studiesTitle}">STUDIES</p>
@@ -46,20 +59,19 @@
                                             </tr>
 
                                             <tr>
-                                                <td>
+                                                <td >
                                                     <table class="table table-borderless align-middle" style="width: 100%;" >
                                                         <tr >
-                                                            <td colspan="2" >
+                                                            <td style="text-align: left;" >
                                                                 <span class="offers_data_text" th:text="${usr.fullTime} ? #{bag_offer.fullTime} : ''" >txt</span>
                                                                 <span class="offers_data_text" th:text="${usr.partTime} ? #{bag_offer.partTime} : ''" >txt</span>
                                                                 <span class="offers_data_text" th:text="${usr.homeWork} ? #{bag_offer.remote} : ''" >txt</span>
                                                             </td>
-                                                        </tr>
-                                                        <tr >
-                                                            <td colspan="2" >
+                                                            <td  style="text-align: right;">
                                                                 <span class="offers_data_text ml-5" th:text="'E-MAIL: ' + ${usr.email}" >email</span>
                                                             </td>
                                                         </tr>
+
 
                                                         <tr >
                                                             <td colspan="2" >

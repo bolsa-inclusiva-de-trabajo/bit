@@ -55,9 +55,19 @@
                                             <div class="container mt-2 panel_offers">
 
 
-                                                <div class="text-center ">
-                                                    <p class="h5"  th:text="${job.title} ?: #{bag_offer.noTitle}">JOB TITLE</p>
-                                                </div>
+
+
+                                                <table class="title-offer-post align-middle" style=" width: 100%;">
+                                                    <tr>
+                                                        <td style="width: 10%; "><i class="bi bi-building h3"></i></td>
+                                                        <td>
+                                                            <p style="padding-top: 5px;"  class="h5"  th:text="${job.title} ?: #{bag_offer.noTitle}">JOB TITLE</p>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+
+
+
                                                 <table  style=" width: 100%;">
                                                     <tr>
                                                         <td>
