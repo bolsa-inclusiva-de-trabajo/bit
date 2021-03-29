@@ -155,6 +155,8 @@ a#joinus {
     width: 100%;
     border-radius: 5px;
     background-color: #C9C9C9;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 .offers_title {
@@ -193,8 +195,3 @@ a#joinus {
   background-color: #FEFAE0;
 }
 
-.title-post {
-	background-color: darkgreen;
-	color: white;
-	border-radius: 5px 5px 0 0
-}
