@@ -68,7 +68,8 @@
                                                                                                     <td style="text-align: right;">
 
                                                                                                         <a th:href="'mailto:' + ${usr.email}">
-                                                                                                            <i class="bi bi-envelope"></i>
+                                                                                                            <i class="bi bi-envelope" data-toggle="tooltip"
+                                                                                                               th:data-original-title="#{matches.mailto}"></i>
                                                                                                         </a>
 
                                                                                                     </td>
