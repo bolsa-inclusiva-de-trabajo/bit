@@ -14,6 +14,7 @@ username.text=Username
 password.text=Password
 repeatPassword.text=Repeat password
 
+logup.aleas=We recommend using an aleas
 login.loginError=Wrong user or password
 login.logupError=Account could not be created
 login.action=Sign in
@@ -76,7 +77,7 @@ bag_offer.pagerText=Page
 bag_offer.pagerConnector=of
 bag_offer.myAplies=MY APPLIES
 bag_offer.btnSearch=Search
-bag_offer.editOffer= Edit offer
+bag_offer.editOffer=Edit offer
 
 bag_applicants.newsTitle=NEWS
 bag_applicants.skillsTitle=PERSONAL SKILLS
