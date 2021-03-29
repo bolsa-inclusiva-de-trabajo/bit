@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="header">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top font-weight-bold">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{/}">
+                <img class="pb-1" alt="BIT" width=32 height=32 th:src="@{/static/public/logo/favicon-32x32.png}">
+                <span class="mb-0">Bolsa Inclusiva de Trabajo - Perfil de usuario</span>
+            </a>
+
+            <button class="navbar-toggler p-1 px-sm-2"
+                    id="navbar-toggler-button"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#headerNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="headerNavbar">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            <i class="bi bi-house" data-toggle="tooltip" data-original-title="Inicio"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/bagapplicants">Postulantes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/bagoffers">Trabajos</a>
+                    </li>
+                    <li class="nav-item ">
+                        <table>
+                            <tr>
+                                <td>
+                                    <p class="nav-link"  th:href="'/profile/' + ${#authentication.name}" th:text="${#authentication.name}">John</p>
+                                </td>
+                                <td>
+                                    <p class="nav-link "  th:href="'/profile/' + ${#authentication.name}">
+                                </td>
+                                
+                                <td>
+
+                                    <form th:action="@{/logout}" method="POST" id='form-logout' class="mx-0">
+                                        <input type="hidden"/>
+                                        <i class="nav-link bi bi-box-arrow-right" data-toggle="tooltip" data-original-title="Salir" onclick="document.getElementById('form-logout').submit();"></i>
+
+                                    </form>
+
+                                </td>
+
+                                </td>
+                            </tr>
+                        </table>
+                        <!-- <a class="nav-link" href=""
+                           data-toggle="modal" data-target="#logIn">JOhn Doe </a>
+                           -->
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+</div>
+</html>

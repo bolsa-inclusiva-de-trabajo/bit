@@ -20,7 +20,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // http.authorizeRequests().antMatchers("/**").permitAll(); // sacar logueo
 
         final String login = "/login";
-        final String[] safe = new String[] { "/", login, "/user", "/api/**", "/static/**",
+        final String[] safe = new String[] { "/", login, "/api/**", "/static/**",
                                              "/error", "/presentation" };
 
         http.formLogin()

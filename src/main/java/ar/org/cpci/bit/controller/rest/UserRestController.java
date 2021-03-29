@@ -1,6 +1,10 @@
 package ar.org.cpci.bit.controller.rest;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,10 +30,17 @@ public class UserRestController {
 	        boolean exist = repositoryUser.existsByEmail(email);
 	        return exist;
 	 }
+	 @GetMapping("/api/user/{uid}")
+	    public ResponseEntity<Object> getUser(@PathVariable Long uid) {
+	    	
+		Optional<User> user = repositoryUser.findById(uid);
+        if (user.isPresent()) {
+            return ResponseEntity.ok().body(user.get());
+        }
+        return new ResponseEntity<>(uid, HttpStatus.NOT_FOUND);
+	 }
 	 @PostMapping("/api/user")
 	 public User crear(@RequestBody String user){
-		 System.out.println(user);
 		 return this.repositoryUser.findById((long) 1).get();
-//	        return  this.repository.save(encuesta);
 	    }
 }

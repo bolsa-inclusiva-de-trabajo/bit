@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<br th:replace="fragments/head :: head"/>
+<body>
+<br th:replace="fragments/user_profile_header :: header"/>
+
+
+<div class="container-fluid py-special" id="mainVerticalAdjFooter">
+<div class="container mt-4 ">
+
+<div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_content">
+              <div class="col-md-12 col-sm-3 col-xs-12 profile_center">
+                
+                <h3 th:text="${user.firstName}+' '+${user.lastName}">Nombre</h3>
+
+                <ul class="list-unstyled user_data">
+                  <li><i th:text="${user.username}" class="bi bi-person"></i>
+                  </li>
+                  <li>
+                    <i th:text="${#dates.format(user.birthDate, 'dd/MM/yyyy')}" class="bi bi-calendar-event"></i> 
+                  </li>
+                  <li>
+					<i th:text="${user.city.name}" class="bi bi-geo-alt"></i> 
+                  </li>
+                  <li class="m-top-xs">
+                    <i class="bi bi-envelope"></i>
+                    <a th:href="'mailto:' +${user.email}" target="_blank" th:text="${user.email}"></a>
+                  </li>
+                  <li>
+                  	<h5>Educación</h5>
+                    <i th:text="${user.education}" class="fa fa-briefcase user-profile-icon"></i> 
+                  </li>
+                  <li>
+                  	<h5>Habilidades</h5>
+                    <i th:text="${user.skills}" class="fa fa-briefcase user-profile-icon"></i> 
+                  </li>
+                  <li>
+                  	<h5>Disponibilidad</h5>
+                    <i th:if="${user.fullTime}" class="fa fa-briefcase user-profile-icon">Tiempo completo</i> 
+                    <i th:if="${user.partTime}" class="fa fa-briefcase user-profile-icon">Medio tiempo</i>
+                    <i th:if="${user.homeWork}" class="fa fa-briefcase user-profile-icon">Teletrabajo</i>
+                    <i th:if="${user.applyForJob}" class="fa fa-briefcase user-profile-icon">Disponible Laboralmente</i>
+                  </li>
+                </ul>
+
+                <a class="btn btn-primary" th:onclick="'edit_user_profile(\''+ ${user.id} +'\');'" ><i class="bi bi-edit m-right-xs"></i>Editar Perfil</a>
+                <a class="btn btn-primary" th:onclick="'edit_user_password(\''+ ${user.id} +'\');'" ><i class="bi bi-edit m-right-xs"></i>Editar Contraseña</a>
+                <br>
+                <form id="formDisabledProfile" action="/user/edit_disabled_user" method="POST">
+                <input
+		            type="hidden"
+		            th:name="${_csrf.parameterName}"
+		            th:value="${_csrf.token}" />
+		            <input
+		            type="hidden"
+		            name="id"
+		            th:value="${user.id}" />
+		            <input
+		            type="hidden"
+		            name="disabled"
+		            id="disabledEditUser"
+		            value="" />
+                <a th:if="!${user.disabled}" class="btn btn-danger" th:onclick="'javascript:disable_user_profile(\''+ ${user.id} +'\');'" ><i class="fa fa-edit m-right-xs"></i>Deshabilitar Perfil</a>
+                <a th:if="${user.disabled}" class="btn btn-success" th:onclick="'javascript:enable_user_profile(\''+ ${user.id} +'\');'" ><i class="fa fa-edit m-right-xs"></i>Habilitar Perfil</a>
+                </form>
+                <br />
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+</div>
+<br th:replace="fragments/modal_edit_profile :: modal"/>
+<br th:replace="fragments/modal_edit_password :: modal"/>
+<br th:replace="fragments/footer :: footer"/>
+<br th:replace="fragments/javascript :: javascript"/>
+</body>
+</html>
