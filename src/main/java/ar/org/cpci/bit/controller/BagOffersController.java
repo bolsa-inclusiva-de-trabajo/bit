@@ -1,6 +1,7 @@
 package ar.org.cpci.bit.controller;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -52,10 +53,7 @@ public class BagOffersController {
         Iterable<Job> jobs = jobsRepository.findAllActiveJobs(page);
         model.addAttribute("jobs", jobs);
 
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        CurrentUserDetails userDetail = (CurrentUserDetails)auth.getPrincipal();
-        String username = userDetail.getUsername();
-        User user = userRepository.findByUsername(username);
+        User user = findUser();
         model.addAttribute("user", user);
 
         int currentPage = p.orElse(0);
@@ -79,7 +77,7 @@ public class BagOffersController {
                                        @PathVariable String filterText) {
 
 
-        Iterable<Job> jobs = jobsRepository.findTextFilteredJobs(page, filterText);
+        Iterable<Job> jobs = jobsRepository.findTextFilteredJobs(page, filterText.toLowerCase(Locale.ROOT));
         model.addAttribute("jobs", jobs);
 
         User user = findUser();

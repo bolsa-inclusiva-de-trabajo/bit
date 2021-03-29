@@ -15,10 +15,10 @@
                     <div class="col-4 col-sm-4 col-md-2 col_a " >
                         <button id="addOffersButton" type="button" class="btn btn-primary mt-2" onclick="showModalCreateJob()" th:text="#{bag_offer.addOfferButton}">add</button>
                         <div class="container panel_news mt-2">
-                            <p class="h6">NOVEDADES</p>
+                            <p class="h6" th:text="#{bag_applicants.newsTitle}">NOVEDADES</p>
                             <table>
                                 <tr>
-                                    <td><p class="news_content" th:text="#{bag_offer.newsTitle}">news</p></td>
+                                    <td><p class="news_content" >news</p></td>
                                 </tr>
                             </table>
                         </div>
@@ -170,7 +170,7 @@
 
                         <!-- <form class="row" >         is-checking -->
                             <table class="table table ">
-                                <tr style="vertical-align: middle;">
+                                <tr style="vertical-align: middle; width: 100%">
                                     <td colspan="4">
                                         <input id="txtSearch" type="text" class="form-control" >
                                     </td>
@@ -178,7 +178,7 @@
                                         <i id="btnSearch"
                                                 class="bi bi-search ml-2" data-toggle="tooltip"
                                            th:data-original-title="#{bag_offer.btnSearch}"
-                                        onclick="bagFilterText(this)"></i>
+                                        onclick="bagFilterText()"></i>
 
                                     </td>
                                 </tr>

@@ -227,9 +227,7 @@ public class Job {
     }
 
     //@JsonIgnore
-    public int getApplyUsersCount() {
-        return applyUsers.size();
-    }
+    public int getApplyUsersCount() { return applyUsers.size(); }
 
     /* ---- */
 

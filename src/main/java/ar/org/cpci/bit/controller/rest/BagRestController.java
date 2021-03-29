@@ -4,9 +4,11 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Optional;
 
 import ar.org.cpci.bit.model.Job;
+import ar.org.cpci.bit.model.User;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
@@ -288,9 +290,24 @@ public class BagRestController {
         HashMap<String, Boolean> map = new HashMap<>();
         HttpStatus status = HttpStatus.NOT_FOUND;
         map.put("success", false);
-        Iterable<Job> jobs = repositoryJob.findTextFilteredJobs(filterText);
+        Iterable<Job> jobs = repositoryJob.findTextFilteredJobs(filterText.toLowerCase(Locale.ROOT));
         if ( jobs instanceof Collection) {
             if (((Collection<?>) jobs).size() > 0 ) {
+                map.replace("success", true);
+                status =  HttpStatus.OK;
+            }
+        }
+        return ResponseEntity.status(status).body(map);
+    }
+
+    @GetMapping("/api/bag/user/text/{filterText}")
+    public ResponseEntity<Object> getUserByTextFilter(@PathVariable("filterText") String filterText) {
+        HashMap<String, Boolean> map = new HashMap<>();
+        HttpStatus status = HttpStatus.NOT_FOUND;
+        map.put("success", false);
+        Iterable<User> users = repositoryUser.findTextFilteredUsers(filterText.toLowerCase(Locale.ROOT));
+        if ( users instanceof Collection) {
+            if (((Collection<?>) users).size() > 0 ) {
                 map.replace("success", true);
                 status =  HttpStatus.OK;
             }

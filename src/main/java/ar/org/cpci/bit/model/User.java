@@ -342,6 +342,9 @@ public class User {
         return applyJobs.contains(job);
     }
 
+    public int getApplyJobsCount() { return applyJobs.size(); }
+
+
     /* ---- */
 
     public Set<User> getContacts() {
@@ -370,6 +373,9 @@ public class User {
     public boolean containsContact(User user) {
         return contacts.contains(user);
     }
+
+    public int getContactsCount() { return contacts.size(); }
+
 
     /* ---- */
 
@@ -409,5 +415,10 @@ public class User {
         User other = (User) obj;
         return Objects.equals(id, other.id);
     }
+
+    public String getCityName() {
+        return city.getName();
+    }
+
 
 }

@@ -1,174 +1,341 @@
 <!DOCTYPE html>
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<br th:replace="fragments/head :: head"/>
-<body>
-<br th:replace="fragments/bag_applicants_header :: header"/>
-
-<div class="container-fluid py-special" id="mainVerticalAdjFooter">
-
-
-    <div class="container mt-4 ">
-
-        <div class="row" >
+    <br th:replace="fragments/head :: head"/>
+    <body>
+        <br th:replace="fragments/bag_applicants_header :: header"/>
+        <div class="container-fluid py-special" id="mainVerticalAdjFooter">
+            <div class="container mt-4 ">
+                <div class="row" >
 
 
-            <div class="col-4 col-sm-4 col-md-2 col_a " align="center" >
-                <div class="container m-1 panel_news">
-                    <p class=" h6">NOVEDADES</p>
-                    <table>
-                        <tr>
-                            <td><p class="news_content">NOVEDAD</p></td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
+                    <div class="col-4 col-sm-4 col-md-2 col_a " >
+                        <div class="container panel_news mt-2">
+                            <p class="h6" th:text="#{bag_applicants.newsTitle}">NOVEDADES</p>
+                            <table>
+                                <tr>
+                                    <td><p class="news_content" >news</p></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
 
 
-            <div class="col-8 col-sm-8 col-md-7  col_b" >
-                <div class="col">
-                    <ul class="nav nav-pills nav-stacked anyClass">
-                        <table>
+                    <div class="col-8 col-sm-8 col-md-7  col_b" >
+                        <div class="col">
+                            <ul class="nav nav-pills nav-stacked ">
+
+
+                                <div id="panelFilter" class="modal-header w-100 " th:style="${filterType} == '' ? 'display: none;' : ''">
+                                    <table  class="table table-borderless panel_filter" style="width: 100%;">
+                                        <tr >
+                                            <td >
+                                                <span class="h6">Filtro:</span>
+                                                <span class="h5 ml-2" th:text="${filterContent}">FILTER CONTENT</span>
+                                            </td>
+                                            <td style=" text-align: right;">
+                                                <i id="buttonPanelFilterClose" class="bi bi-x " onclick="closePanelFilter()"></i>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+
+                                <table class="table table-borderless align-middle" style="width: 100%;">
+
+                                    <tr th:if="${!usr.disabled} and ${usr.applyForJob}" th:id="'user_row_' +  ${usr.id}" th:each="usr: ${users}">
+                                        <td colspan="3">
+                                            <div class="container mt-2 panel_offers">
+
+                                                <p class="h6"  th:text="${usr.username}?: #{bag_offer.noTitle}">USERNAME</p>
+
+
+                                                <table class="table table-borderless" style=" width: 100%;">
+                                                    <tr >
+                                                        <td>
+                                                            <p class="applicant_title h6" th:text="#{bag_applicants.skillsTitle}">SKILLS</p>
+                                                            <p class="applicant_text" th:text="${usr.skills}"></p>
+                                                            <p class="applicant_title h6" th:text="#{bag_applicants.studiesTitle}">STUDIES</p>
+                                                            <p class="applicant_text"  th:text="${usr.education}"></p>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>
+                                                            <table class="table table-borderless align-middle" style="width: 100%;" >
+                                                                <tr >
+                                                                    <td colspan="2" >
+                                                                        <span class="offers_data_text" th:text="${usr.fullTime} ? #{bag_offer.fullTime} : ''" >txt</span>
+                                                                        <span class="offers_data_text" th:text="${usr.partTime} ? #{bag_offer.partTime} : ''" >txt</span>
+                                                                        <span class="offers_data_text" th:text="${usr.homeWork} ? #{bag_offer.remote} : ''" >txt</span>
+                                                                    </td>
+                                                                </tr>
+
+                                                                <tr >
+                                                                    <td colspan="2" >
+                                                                        <span class="offers_data_text" th:text="'Ciudad: ' + ${usr.getCityName()}" >txt</span>
+                                                                    </td>
+                                                                    <td style="text-align: right;">
+
+                                                                        <i th:id="'contact_' + ${usr.id} + '_' +  ${user.id}"
+                                                                                th:class="${usr.containsContact(usr)} ? 'bi bi-telephone-plus-fill ml-2 ' : 'bi bi-telephone-plus '"
+                                                                           data-toggle="tooltip"
+                                                                           th:data-original-title="#{bag_applicants.contactButtonText}"
+                                                                           onclick="createDeleteContact(this)"></i>
+
+
+                                                                    </td>
+                                                                </tr>
+
+
+                                                               <tr>
+                                                                   <td colspan="2">
+                                                                               <span class="offers_data_text" th:text="${usr.getContactsCount() > 0}  ? (
+                                                                                           ${usr.getContactsCount()} + ' ' +
+                                                                                           (${usr.getContactsCount() > 1} ? #{bag_applicants.contactPlural} : #{bag_applicants.contactSingle})
+                                                                               )">contacts</span>
+
+                                                                       <span class="offers_data_text ml-4" th:text="${usr.getApplyJobsCount() > 0}  ? (
+                                                                                           ${usr.getApplyJobsCount()} + ' ' +
+                                                                                           (${usr.getApplyJobsCount() > 1} ? #{bag_applicants.applyPlural} : #{bag_applicants.applySingle})
+                                                                               )">nominees</span>
+
+                                                                   </td>
+                                                               </tr>
 
 
 
-                            <tr>
-                                <td>
-                                    <div class="container mt-2 panel_applicant">
-                                        <p class="applicant_title">USERNAME</p>
-                                        <table>
-                                            <tr>
-                                                <td>
-                                                    <p >
 
-                                                    <p class="applicant_title">SKILLS</p>
 
-                                                    <p class="applicant_text">Lorem ipsum dolor sit amet consectetur adipiscing elit, ullamcorper curae est nibh montes. Convallis erat montes pharetra turpis non suscipit sagittis pellentesque, integer feugiat magna eu mollis cras placerat porttitor, risus nam quam sociosqu lectus massa cum. Primis cras orci in luctus ultricies porttitor malesuada, cubilia donec sollicitudin sagittis viverra mattis penatibus, vitae placerat conubia himenaeos egestas netus.
-                                                    </p>
-                                                    <p class="applicant_title">STUDIES</p>
 
-                                                    <p class="applicant_text">Lorem ipsum dolor sit amet consectetur adipiscing elit.
-                                                    </p>
 
-                                                    </p>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <table class="tlb_applicant_data" >
-                                                        <tr >
-                                                            <td ><p class="applicant_data_text">Medio tiempo/Tiempo completo/etc.</p></td>
-                                                            <td>
 
-                                                            </td>
-                                                            <td rowspan="3" align="right">
-                                                                <!--<button class="btn btn-secondary">CONTACTAR</button>-->
-                                                                <a href="/contactar">
-                                                                    <i class="bi bi-telephone-plus" data-toggle="tooltip" data-original-title="Contactar"></i>
-                                                                </A>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><p class="applicant_data_text">Activo hace #####.</p></td>
-                                                            <td>
-                                                                <a href="/meinteresaestepostulante">
-                                                                    <i class="bi bi-hand-thumbs-up" data-toggle="tooltip" data-original-title="Me interesa"></i>
-                                                                </a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr >
-                                                            <td><p class="applicant_data_text">Ha recibido contactos de ## empleadores.  -  Se postuló a ## empleos.</p></td>
-                                                            <td></td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                        </table>
-                                    </div>
+
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+
+                                                </table>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr  >
+                                        <td >
+                                            <a th:if="${currentPage > 0}" th:href="'/bagapplicants?page=' + ${currentPage - 1} + '&size=' + ${pageSize}">
+                                                <button type="button" class="btn btn-primary mt-2" th:text="#{bag_offer.buttonPrevious}">previous</button>
+                                            </a>
+
+                                        </td>
+                                        <td class="justify-content-center" >
+                                            <span align="align-center" th:text="#{bag_offer.pagerText} + ' ' + ${currentPage + 1} + ' ' + #{bag_offer.pagerConnector} + ' ' + ${pageTotal}"></span>
+                                        </td>
+                                        <td  >
+                                            <a th:if="${currentPage < pageTotal -1}" th:href="'/bagapplicants?page=' + ${currentPage + 1} + '&size=' + ${pageSize}">
+                                                <button type="button" class="btn btn-primary mt-2" th:text="#{bag_offer.buttonNext}">next</button>
+                                            </a>
+
+                                        </td>
+                                    </tr>
+
+
+
+                                </table>
+
+
+
+                            </ul>
+                        </div>
+                    </div>
+
+
+                    <div class="col-0 col-sm col-md-3 col-c" >
+
+                        <table class="table table.borderless ">
+                            <tr style="vertical-align: middle; width: 100%">
+                                <td colspan="3">
+                                    <input id="txtSearch" type="text" class="form-control" >
+                                </td>
+                                <td colspan="1">
+                                    <i id="btnSearchUser"
+                                       class="bi bi-search ml-2" data-toggle="tooltip"
+                                       th:data-original-title="#{bag_offer.btnSearch}"
+                                        onclick="bagApplicantsFilterText()"></i>
+
                                 </td>
                             </tr>
+                            <tr >
+                                <td style="text-align: center;">
+
+                                    <svg id="btnOnlyMyCity"
+                                         xmlns="http://www.w3.org/2000/svg"
+                                         width="16" height="16" fill="black"
+                                         class="bi bi-map" viewBox="0 0 16 16"
+                                         data-toggle="tooltip"
+                                         th:data-original-title="#{bag_offer.mycity}"
+                                        onclick="bagApplicantsFilterCity(this)">
+                                        <path fill-rule="evenodd" d="M15.817.113A.5.5 0 0 1 16 .5v14a.5.5 0 0 1-.402.49l-5 1a.502.502 0 0 1-.196 0L5.5 15.01l-4.902.98A.5.5 0 0 1 0 15.5v-14a.5.5 0 0 1 .402-.49l5-1a.5.5 0 0 1 .196 0L10.5.99l4.902-.98a.5.5 0 0 1 .415.103zM10 1.91l-4-.8v12.98l4 .8V1.91zm1 12.98l4-.8V1.11l-4 .8v12.98zm-6-.8V1.11l-4 .8v12.98l4-.8z"/>
+                                    </svg>
 
 
+                                <td>
+
+                                <td style="text-align: center;">
+                                    <svg id="btnFullTime"
+                                         xmlns="http://www.w3.org/2000/svg"
+                                         width="16" height="16" fill="black"
+                                         class="bi bi-clock-fill" viewBox="0 0 16 16"
+                                         data-toggle="tooltip"
+                                         th:data-original-title="#{bag_offer.fullTime}"
+                                        onclick="bagApplicantsFilterFullTime(this)">
+                                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+                                    </svg>
 
 
+                                </td>
+
+                                <td style="text-align: center;">
+                                    <svg id="btnPartTime"
+                                         xmlns="http://www.w3.org/2000/svg"
+                                         width="16" height="16" fill="black"
+                                         class="bi bi-clock-history" viewBox="0 0 16 16"
+                                         data-toggle="tooltip"
+                                         th:data-original-title="#{bag_offer.partTime}"
+                                        onclick="bagApplicantsFilterPartTime(this)">
+                                        <path d="M8.515 1.019A7 7 0 0 0 8 1V0a8 8 0 0 1 .589.022l-.074.997zm2.004.45a7.003 7.003 0 0 0-.985-.299l.219-.976c.383.086.76.2 1.126.342l-.36.933zm1.37.71a7.01 7.01 0 0 0-.439-.27l.493-.87a8.025 8.025 0 0 1 .979.654l-.615.789a6.996 6.996 0 0 0-.418-.302zm1.834 1.79a6.99 6.99 0 0 0-.653-.796l.724-.69c.27.285.52.59.747.91l-.818.576zm.744 1.352a7.08 7.08 0 0 0-.214-.468l.893-.45a7.976 7.976 0 0 1 .45 1.088l-.95.313a7.023 7.023 0 0 0-.179-.483zm.53 2.507a6.991 6.991 0 0 0-.1-1.025l.985-.17c.067.386.106.778.116 1.17l-1 .025zm-.131 1.538c.033-.17.06-.339.081-.51l.993.123a7.957 7.957 0 0 1-.23 1.155l-.964-.267c.046-.165.086-.332.12-.501zm-.952 2.379c.184-.29.346-.594.486-.908l.914.405c-.16.36-.345.706-.555 1.038l-.845-.535zm-.964 1.205c.122-.122.239-.248.35-.378l.758.653a8.073 8.073 0 0 1-.401.432l-.707-.707z"/>
+                                        <path d="M8 1a7 7 0 1 0 4.95 11.95l.707.707A8.001 8.001 0 1 1 8 0v1z"/>
+                                        <path d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z"/>
+                                    </svg>
+
+
+                                </td>
+
+                                <td style="text-align: center;">
+                                    <svg id="btnHomeWorking"
+                                         xmlns="http://www.w3.org/2000/svg"
+                                         width="16" height="16" fill="black"
+                                         class="bi bi-laptop" viewBox="0 0 16 16"
+                                         data-toggle="tooltip"
+                                         th:data-original-title="#{bag_offer.remote}"
+                                    onclick="bagApplicantsFilterRemote(this)">
+                                        <path d="M13.5 3a.5.5 0 0 1 .5.5V11H2V3.5a.5.5 0 0 1 .5-.5h11zm-11-1A1.5 1.5 0 0 0 1 3.5V12h14V3.5A1.5 1.5 0 0 0 13.5 2h-11zM0 12.5h16a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 12.5z"/>
+                                    </svg>
+
+                                </td>
+
+
+                            </tr>
                         </table>
-                    </ul>
+
+
+                        <div class="container mt-2 panel_contact">
+                            <p class="h6" th:text="#{bag_applicants.myContacts}">My Contacts</p>
+                            <table id="contactTable" style="width: 100%;">
+                                <tr  th:id="'contact_row_' +  ${cnt.id} + '_'+ ${user.id}" th:each="cnt: ${user.contacts}">
+                                    <td style="width: auto;" class="align-middle">
+                                        <p class="contact_content align-middle" th:text="${cnt.username} ?: #{bag_offer.noTitle}">APPLY TITLE</p>
+                                    </td>
+
+                                    <td style="width: 40px;" class="align-middle">
+
+                                        <i  th:id="'btn_show_contact_' + ${cnt.id} + '_'+ ${user.id}"
+                                            class="bi bi-eye"
+                                            data-toggle="tooltip"
+                                            th:data-original-title="#{bag_applicants.viewContact}"
+                                            onclick="showModalContact(this)">
+
+                                        </i>
+
+                                    </td>
+                                    <td style="width: 40px;" class="align-middle">
+
+                                        <i th:id="'btn_delete_contact_' + ${cnt.id} + '_'+ ${user.id}"
+                                           class="bi bi-trash" data-toggle="tooltip"
+                                           onclick="deleteContact(this)"
+                                           th:data-original-title="#{bag_applicants.deleteContact}"></i>
+
+                                    </td>
+
+                                </tr>
+                            </table>
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="modal" id="modalContact">
+                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                            <div class="modal-content">
+
+                                <div class="modal-header">
+                                    <table  class="table table-borderless" style="width: 100%;">
+                                        <tr>
+                                            <td>
+                                                <div class="h6">Contactaste a:</div>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <div id="modalContactTitle" class="modal-title h3">JOB TITLE</div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="modal-body">
+
+                                    <table class="table table-borderless align-middle" style=" width: 100%;">
+                                        <tr>
+                                            <td>
+                                                <p id="modalContactSkillsTitle" class="applicant_title h6" th:text="#{bag_applicants.skillsTitle}">SKILLS</p>
+                                                <p id="modalContactSkillsText" class="applicant_text"></p>
+                                                <p id="modalContactStudiesTitle" class="applicant_title h6" th:text="#{bag_applicants.studiesTitle}">STUDIES</p>
+                                                <p id="modalContactStudiesText" class="applicant_text"></p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div id="modalContactFullTime" class="offers_data_text" text="FULL TIME" >txt</div>
+                                                <div id="modalContactPartTime" class="offers_data_text" text="PART TIME" >txt</div>
+                                                <div id="modalContactRemote" class="offers_data_text" text="REMOTE" >txt</div>
+
+                                            </td>
+                                    </table>
+
+
+
+                                </div>
+
+                                <div class="modal-footer">
+                                    <div class="d-flex flex-row justify-content-start">
+                                        <div class="p-2">
+                                            <span id="modalContacted" class="offers_data_text " text="Interested people">interested people</span>
+                                        </div>
+                                        <div class="p-2">
+                                                <span id="modalNominees" class="offers_data_text ml-4" text="nominees">nominees</span>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
                 </div>
             </div>
-
-
-            <div class="col-0 col-sm col-md-3  col_c" >
-                <table>
-                    <tr>
-                        <td>
-                            <form class="row">
-                                <table>
-                                    <tr style="vertical-align: middle;">
-                                        <td>
-                                            <input type="text" class="form-control" id="txtSearch">
-                                        </td>
-                                        <td>
-                                            <button type="submit" class="btn btn-primary">
-                                                <i class="bi bi-search"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr aria-colspan="2">
-                                        <td>
-
-                                            <input type="checkbox" id="chkMyCity"  onclick="">
-                                            <label class="ml-2" >Mi ciudad</label>
-
-                                        </td>
-                                    </tr>
-                                    <tr aria-colspan="2">
-                                        <td>
-                                            <input type="checkbox"  id="chkFullTime">
-                                            <label class="ml-2">Full Time</label>
-                                        </td>
-                                    </tr>
-                                    <tr aria-colspan="2">
-                                        <td>
-                                            <input type="checkbox"  id="chkPartTime">
-                                            <label class="ml-2" >Medio Tiempo</label>
-                                        </td>
-                                    </tr>
-                                    <tr aria-colspan="2">
-                                        <td>
-                                            <input type="checkbox" id="chkHomeWorking">
-                                            <label class="ml-2" >Desde casa</label>
-                                        </td>
-                                    </tr>
-                                </table>
-
-
-
-
-                            </form>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <div class="container mt-2  panel_contact">
-                                <p class="h6">MIS CONTACTOS</p>
-                                <table>
-                                    <tr>
-                                        <td><p class="contact_content">CONTACTO</p></td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </div>
         </div>
-    </div>
-
-
-
-
-</div>
-
-<br th:replace="fragments/footer :: footer"/>
-<br th:replace="fragments/javascript :: javascript"/>
-</body>
+        <br th:replace="fragments/footer :: footer"/>
+        <br th:replace="fragments/javascript :: javascript"/>
+    </body>
 </html>

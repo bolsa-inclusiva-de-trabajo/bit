@@ -1,5 +1,9 @@
 INSERT INTO country (name) VALUES ('ARGENTINA');
 INSERT INTO state (country_id, name) VALUES (1, 'MISIONES');
+INSERT INTO city (state_id, name) VALUES (1, 'POSADAS')
+INSERT INTO city (state_id, name) VALUES (1, 'JARDIN AMERICA')
+INSERT INTO city (state_id, name) VALUES (1, 'ELDORADO')
+INSERT INTO city (state_id, name) VALUES (1, 'GARUPA')
 INSERT INTO city (state_id, name) VALUES (1, 'ACARAGUA')
 INSERT INTO city (state_id, name) VALUES (1, 'ALBA POSSE')
 INSERT INTO city (state_id, name) VALUES (1, 'APOSTOLES')
@@ -45,18 +49,15 @@ INSERT INTO city (state_id, name) VALUES (1, 'CUÑA PIRU')
 INSERT INTO city (state_id, name) VALUES (1, 'DESEADO')
 INSERT INTO city (state_id, name) VALUES (1, 'EL ALCAZAR')
 INSERT INTO city (state_id, name) VALUES (1, 'EL SOBERBIO')
-INSERT INTO city (state_id, name) VALUES (1, 'ELDORADO')
 INSERT INTO city (state_id, name) VALUES (1, 'FACHINAL')
 INSERT INTO city (state_id, name) VALUES (1, 'FRACRAN')
 INSERT INTO city (state_id, name) VALUES (1, 'GARUHAPE')
-INSERT INTO city (state_id, name) VALUES (1, 'GARUPA')
 INSERT INTO city (state_id, name) VALUES (1, 'GOBERNADOR ROCA')
 INSERT INTO city (state_id, name) VALUES (1, 'GUARAYPO')
 INSERT INTO city (state_id, name) VALUES (1, 'GUAYABERA')
 INSERT INTO city (state_id, name) VALUES (1, 'ISLA SAN LUCAS')
 INSERT INTO city (state_id, name) VALUES (1, 'ITACARUARE')
 INSERT INTO city (state_id, name) VALUES (1, 'ITAEMBRE MINI')
-INSERT INTO city (state_id, name) VALUES (1, 'JARDIN AMERICA')
 INSERT INTO city (state_id, name) VALUES (1, 'MBOPICUA')
 INSERT INTO city (state_id, name) VALUES (1, 'MESA REDONDA')
 INSERT INTO city (state_id, name) VALUES (1, 'MOCONA')
@@ -71,7 +72,6 @@ INSERT INTO city (state_id, name) VALUES (1, 'PICADA LIBERTAD')
 INSERT INTO city (state_id, name) VALUES (1, 'PINDAPOY')
 INSERT INTO city (state_id, name) VALUES (1, 'PIÑALITO NORTE')
 INSERT INTO city (state_id, name) VALUES (1, 'PIÑALITO SUR')
-INSERT INTO city (state_id, name) VALUES (1, 'POSADAS')
 INSERT INTO city (state_id, name) VALUES (1, 'PROFUNDIDAD')
 INSERT INTO city (state_id, name) VALUES (1, 'PUEBLO SALTO')
 INSERT INTO city (state_id, name) VALUES (1, 'PUERTO AZARA')
@@ -144,34 +144,27 @@ INSERT INTO city (state_id, name) VALUES (1, 'PARAJE CAMPO ALEGRE')
 INSERT INTO city (state_id, name) VALUES (1, 'PIRAY KM 18')
 INSERT INTO city (state_id, name) VALUES (1, 'MARIANO NECOCHEA')
 
-INSERT INTO "user" (username, password, email, first_name, last_name, education, skills, full_time, part_time, home_work, apply_for_job, disabled,birth_date, city_id) VALUES ('admin', '$2a$10$lZJNipBMsZj7S6Wq5tTb8uw7yMaYNCpKcyuAMmlysCmZ2LjIzeiUm', 'email1', 'first_name1', 'last_name1', 'education1', 'skills1', true, false, false, true, false,'2000-01-01', 18)
-
-INSERT INTO "user" (username, password, email, first_name, last_name, education, skills, full_time, part_time, home_work, apply_for_job, disabled,birth_date, city_id) VALUES ('user', '$2a$10$lZJNipBMsZj7S6Wq5tTb8uw7yMaYNCpKcyuAMmlysCmZ2LjIzeiUm', 'email2', 'first_name2', 'last_name2', 'education2', 'skills2', true, false, false, true, false,'2000-01-01', 23)
-
-INSERT INTO "user" (username, password, email, first_name, last_name, education, skills, full_time, part_time, home_work, apply_for_job, disabled,birth_date, city_id) VALUES ('pepe', '$2a$10$lZJNipBMsZj7S6Wq5tTb8uw7yMaYNCpKcyuAMmlysCmZ2LjIzeiUm', 'email3', 'first_name3', 'last_name3', 'education3', 'skills3', true, false, false, true, false,'2000-01-01', 57)
+INSERT INTO "user" (username, password, email, first_name, last_name, education, skills, full_time, part_time, home_work, apply_for_job, disabled,birth_date, city_id) VALUES ('admin', '$2a$10$lZJNipBMsZj7S6Wq5tTb8uw7yMaYNCpKcyuAMmlysCmZ2LjIzeiUm', 'admin@bit.com', 'Admin', 'istrator', '', '', false, false, false, false, false,'2000-01-01', 1)
+INSERT INTO "user" (username, password, email, first_name, last_name, education, skills, full_time, part_time, home_work, apply_for_job, disabled,birth_date, city_id) VALUES ('rafa', '$2a$10$lZJNipBMsZj7S6Wq5tTb8uw7yMaYNCpKcyuAMmlysCmZ2LjIzeiUm', 'info@vdsys.net', 'Rafael', 'Rodriguez', 'Análisis de Sistemas', 'Programador', false, true, false, true, false,'1976-12-11', 3)
+INSERT INTO "user" (username, password, email, first_name, last_name, education, skills, full_time, part_time, home_work, apply_for_job, disabled,birth_date, city_id) VALUES ('pablo', '$2a$10$lZJNipBMsZj7S6Wq5tTb8uw7yMaYNCpKcyuAMmlysCmZ2LjIzeiUm', 'pablo@bit.com', 'Pablo', 'Smola', 'Ingeniería electrónico', 'Electronica', true, false, false, true, false,'2000-01-01', 2)
+INSERT INTO "user" (username, password, email, first_name, last_name, education, skills, full_time, part_time, home_work, apply_for_job, disabled,birth_date, city_id) VALUES ('cristian', '$2a$10$lZJNipBMsZj7S6Wq5tTb8uw7yMaYNCpKcyuAMmlysCmZ2LjIzeiUm', 'cristian@bit.com', 'Cristian', 'Schmidt', 'Ingeniería químico', 'Química, programación', false, false, true, true, false,'2000-01-01', 4)
+INSERT INTO "user" (username, password, email, first_name, last_name, education, skills, full_time, part_time, home_work, apply_for_job, disabled,birth_date, city_id) VALUES ('vanina', '$2a$10$lZJNipBMsZj7S6Wq5tTb8uw7yMaYNCpKcyuAMmlysCmZ2LjIzeiUm', 'vanina@gbit.com', 'Vanina', 'Winnik', 'Ingeniería en sistemas', 'Programación, Bases de datos.', false, false, true, true, false,'2000-01-01', 1)
+INSERT INTO "user" (username, password, email, first_name, last_name, education, skills, full_time, part_time, home_work, apply_for_job, disabled,birth_date, city_id) VALUES ('eze', '$2a$10$lZJNipBMsZj7S6Wq5tTb8uw7yMaYNCpKcyuAMmlysCmZ2LjIzeiUm', 'ezequiel@gmail.com', 'Ezequiel', 'Sosa', 'Ing. en varias cosas, Master en otras.', 'Programación', false, false, true, true, false,'2000-01-01', 1)
+INSERT INTO "user" (username, password, email, first_name, last_name, education, skills, full_time, part_time, home_work, apply_for_job, disabled,birth_date, city_id) VALUES ('picard', '$2a$10$lZJNipBMsZj7S6Wq5tTb8uw7yMaYNCpKcyuAMmlysCmZ2LjIzeiUm', 'jeanluck@starfleet.com', 'Jean Luck', 'Picard', 'Starfleet academy', 'Captain', true, false, false, true, false,'2000-01-01', 1)
 
 INSERT INTO job (title, description, expiration, full_time, part_time, home_work, independent, dependent, disabled, user_id) VALUES ('ADMINISTRACION', 'Busco personal administrativo para empresa dedicada al rubro medicina.', '2021-04-30 04:06:12', true, false, false, true, false, FALSE, 1)
-
 INSERT INTO job (title, description, expiration, full_time, part_time, home_work, independent, dependent, disabled, user_id) VALUES ('VENTAS EN LOCAL', 'Se necesita personal para venta al público, buena remuneración, horario comercial, Centro de Eldorado.', '2021-03-31 04:06:12', true, false, false, true, false, FALSE, 1)
-
 INSERT INTO job (title, description, expiration, full_time, part_time, home_work, independent, dependent, disabled, user_id) VALUES ('PLANTA PERMANENTE ELECTRICISTA', 'Vacante disponible para cubrir puesto de electricista planta permanente en importante secadero de yerba mate.', '2021-05-22 04:06:12', true, false, false, false, true, FALSE, 1)
-
 INSERT INTO job (title, description, expiration, full_time, part_time, home_work, independent, dependent, disabled, user_id) VALUES ('COCINA CASA DE RETIRO', 'Personal de cocina para establecimiento de retiro,', '2021-06-22 04:06:12', false, true, false, true, false, FALSE, 1)
-
 INSERT INTO job (title, description, expiration, full_time, part_time, home_work, independent, dependent, disabled, user_id) VALUES ('DESARROLLADOR MULTIPLATAFORMA', 'Trainee para Multiplataforma JAva, SpringBoot, ThyMyLeaf, Hybernate, Postgre SQL. ', '2021-04-22 04:06:12', false, false, true, false, true, FALSE, 2)
-
 INSERT INTO job (title, description, expiration, full_time, part_time, home_work, independent, dependent, disabled, user_id) VALUES ('CUIDADO DE NIÑOS', 'Personal para cuidar niños por la tarde.', '2021-04-22 04:06:12', false, true, false, true, false, FALSE, 2)
 
 INSERT INTO contact (user_1_id, user_2_id) VALUES (1, 2)
 
 INSERT INTO interest (user_id, job_id) VALUES (2, 2)
-
 INSERT INTO interest (user_id, job_id) VALUES (1, 2)
-
 INSERT INTO interest (user_id, job_id) VALUES (2, 4)
 
 INSERT INTO apply (user_id, job_id) VALUES (1, 2)
-
 INSERT INTO apply (user_id, job_id) VALUES (2, 2)
-
 INSERT INTO apply (user_id, job_id) VALUES (1, 1)

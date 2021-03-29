@@ -107,6 +107,19 @@ $(document).ready(function() {
 
 });
 
+$(document).keyup(function (e) {
+    if ($(".btnSearch:focus") && (e.keyCode === 13)) {
+       bagFilterText();
+    }
+ });
+
+$(document).keyup(function (e) {
+    if ($(".btnSearchUser:focus") && (e.keyCode === 13)) {
+       bagApplicantsFilterText();
+    }
+ });
+
+
 /*
 function hide (elements) {
     elements = elements.length ? elements : [elements];
@@ -464,8 +477,8 @@ function deleteApply(e) {
     }
 
 
-function bagFilterText(e) {
-      setChecking(e.id);
+function bagFilterText() {
+      setChecking("txtSearch");
       if ($('#txtSearch').val() == "") {
             setValid("#txtSearch", false);
       } else {
@@ -618,3 +631,193 @@ function deleteJob(e) {
       }
   });
 }
+
+function createDeleteContact(e) {
+
+        const ids = e.id.replace("contact_","");
+        var idUsr = ids.split("_")[0];
+        var idUser = ids.split("_")[1];
+        ///api/bag/user/{uid1}/user/{uid2}/contact
+        const urlContact = "/api/bag/user/"+idUser+"/user/"+idUsr+"/contact";
+
+        fetch(urlContact).then(function(response) {
+
+            if (response.ok) {
+                            fetch(urlContact, {method: 'DELETE'}).then( function(response) {
+                               if (response.ok) {
+                                    var ee = document.getElementById(e.id);
+                                   $(ee).removeClass("bi-telephone-plus-fill");
+                                   $(ee).addClass("bi-telephone-plus");
+
+                                    var objId = "contact_row_"+idUsr+"_"+idUser;
+                                    var element = document.getElementById(objId);
+                                    element.remove();
+
+
+                               } else {
+                                    var ee = document.getElementById(e.id);
+                                    $(ee).removeClass("bi-telephone-plus");
+                                   $(ee).addClass("bi-telephone-plus-fill");
+                               }
+                            });
+
+            } else {
+                fetch(urlContact, {method: 'POST'}).then( function(response) {
+                   if (response.ok) {
+                        var ee = document.getElementById(e.id);
+                       $(ee).removeClass("bi-telephone-plus");
+                       $(ee).addClass("bi-telephone-plus-fill");
+
+
+                     var urlUser = "/api/bag/user/" + idUsr;
+
+                        fetch(urlUser).then( function(response) {
+                            if (response.ok) {
+                                response.json().then(function(data) {
+                                    if(data) {
+
+                                          var t = document.getElementById('contactTable'),
+                                              tr = document.createElement('tr');
+
+                                              tr.id= "contact_row_" + idUsr  + '_'+ idUser;
+
+                                              tr.innerHTML = "<td style=\"width: auto;\" class=\"align-middle\">"
+                                                +"<p class=\"contact_content align-middle\" text=\"\">"+data.username+"</p>"
+                                                +"</td>"
+                                                +"<td style=\"width: 40px;\" class=\"align-middle\">"
+                                                +"<i id=\"btn_show_contact_"+idUsr+"_"+idUser+"\""
+                                                +"class=\"bi bi-eye\""
+                                                +"data-toggle=\"tooltip\""
+                                                +"data-original-title=\"Ver contacto\""
+                                                +"onclick=\"showModalContact(this)\">"
+                                                +"</i>"
+                                                +"</td>"
+                                                +"<td style=\"width: 40px;\" class=\"align-middle\">"
+                                                +"<i id=\"btn_delete_contact_"+idUsr+"_"+idUser+"\" "
+                                                +"class=\"bi bi-trash\" data-toggle=\"tooltip\" data-original-title=\"Eliminar\" onclick=\"deleteContact(this)\"></i>"
+                                                +"</td>";
+                                          t.appendChild(tr);
+
+                                    }
+                                });
+                            }
+                        });
+
+                   } else {
+                        var ee = document.getElementById(e.id);
+                       $(ee).removeClass("bi-telephone-plus-fill");
+                       $(ee).addClass("bi-telephone-plus");
+                   }
+                });
+            }
+        });
+
+}
+
+
+function showModalContact(e) {
+
+  const ids = e.id.replace("btn_show_contact_","");
+  var idUsr = ids.split("_")[0];
+  var idUser = ids.split("_")[1];
+  const urlUser = "/api/bag/user/" + idUsr;
+
+    fetch(urlUser).then( function(response) {
+        if (response.ok) {
+            response.json().then(function(data) {
+   	   			if(data) {
+   	   			    var contactTitle = document.getElementById("modalContactTitle");
+                    contactTitle.innerText = data.username;
+
+   	   			    var userSkills = document.getElementById("modalContactSkillsText");
+                    userSkills.innerText = data.skills;
+   	   			    var userStudies = document.getElementById("modalContactStudiesText");
+                    userStudies.innerText = data.education;
+
+                    var userFullTime = document.getElementById("modalContactFullTime");
+                    userFullTime.innerText = data.fullTime ? "Tiempo Completo" : "";
+                    var userPartTime = document.getElementById("modalContactPartTime");
+                    userPartTime.innerText = data.partTime ? "Medio Tiempo" : "";
+                    var userRemote = document.getElementById("modalContactRemote");
+                    userRemote.innerText = data.homeWork ? "Trabajo remoto" : "";
+
+                    var userContacted = document.getElementById("modalContacted");
+                    userContacted.innerText = data.contactsCount > 0 ?  data.contactsCount +
+                    (data.contactsCount > 1 ? " Contactaron a esta persona" : " Contacto a esta persona")
+                    : "";
+
+                    var userNominees = document.getElementById("modalNominees");
+                    userNominees.innerText = data.applyJobsCount > 0 ?  data.applyJobsCount +
+                     (data.applyJobsCount > 1 ? " Postulaciones" : " postulación")
+                     : "";
+
+                    $('#modalContact').modal('show');
+   	   			}
+            });
+        }
+    });
+}
+
+
+function deleteContact(e) {
+
+        const ids = e.id.replace("btn_delete_contact_","");
+        var idUsr = ids.split("_")[0];
+        var idUser = ids.split("_")[1];
+        const urlContact = "/api/bag/user/"+idUser+"/user/"+idUsr+"/contact";
+
+
+        fetch(urlContact).then(function(response) {
+
+            if (response.ok) {
+                            fetch(urlContact, {method: 'DELETE'}).then( function(response) {
+                               if (response.ok) {
+
+                                    var objId = "contact_row_"+idUsr+"_"+idUser;
+                                    var element = document.getElementById(objId);
+                                    element.remove();
+
+                                     var idContactButton =  "contact_"+idUsr+"_"+idUser;
+                                     var contactButton = document.getElementById(idContactButton);
+                                     if (typeof contactButton !== 'undefined' && contactButton !== null) {
+                                        $(contactButton).removeClass("bi-hand-thumbs-up-fill");
+                                        $(contactButton).addClass("bi-hand-thumbs-up");
+                                    }
+                               }
+                            });
+            }
+        });
+
+}
+
+function bagApplicantsFilterText() {
+      setChecking("txtSearch");
+      if ($('#txtSearch').val() == "") {
+            setValid("#txtSearch", false);
+      } else {
+          var urlFilter = "/api/bag/user/text/" + $('#txtSearch').val();
+          fetch(urlFilter).then(function(response) {
+                if (response.ok) {
+                     setValid("#txtSearch", true);
+                     window.location.replace("/bagapplicants/text/"+$('#txtSearch').val());
+                } else {
+                    setValid("#txtSearch", false);
+                }
+          });
+      }
+}
+
+function bagApplicantsFilterCity(e) {
+    window.location.replace("/bagapplicants/city/true");
+}
+
+function bagApplicantsFilterFullTime(e) {
+    window.location.replace("/bagapplicants/fullparthome/full");
+}
+function bagApplicantsFilterPartTime(e) {
+    window.location.replace("/bagapplicants/fullparthome/part");
+}
+function bagApplicantsFilterRemote(e) {
+    window.location.replace("/bagapplicants/fullparthome/home");
+}
+
