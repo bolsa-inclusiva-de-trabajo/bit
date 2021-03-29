@@ -34,61 +34,63 @@
                                         <p class="h6"  th:text="${usr.username} + ' - ' + ${usr.firstName} + ' ' + ${usr.lastName}">NOMBRE</p>
 
 
-                                                                                <table class="table table-borderless" style=" width: 100%;">
-                                                                                    <tr >
-                                                                                        <td>
-                                                                                            <p th:if="${usr.skills} != ''" class="applicant_title h6" th:text="#{bag_applicants.skillsTitle}">SKILLS</p>
-                                                                                            <p th:if="${usr.skills} != ''" class="applicant_text" th:text="${usr.skills}"></p>
-                                                                                            <p th:if="${usr.education} != ''" class="applicant_title h6" th:text="#{bag_applicants.studiesTitle}">STUDIES</p>
-                                                                                            <p th:if="${usr.education} != ''" class="applicant_text"  th:text="${usr.education}"></p>
-                                                                                        </td>
-                                                                                    </tr>
+                                        <table class="table table-borderless" style=" width: 100%;">
+                                            <tr >
+                                                <td>
+                                                    <p th:if="${usr.skills} != ''" class="applicant_title h6" th:text="#{bag_applicants.skillsTitle}">SKILLS</p>
+                                                    <p th:if="${usr.skills} != ''" class="applicant_text" th:text="${usr.skills}"></p>
+                                                    <p th:if="${usr.education} != ''" class="applicant_title h6" th:text="#{bag_applicants.studiesTitle}">STUDIES</p>
+                                                    <p th:if="${usr.education} != ''" class="applicant_text"  th:text="${usr.education}"></p>
+                                                    <p  class="applicant_title h6" th:text="'EMPLEO: '+${usr.jobShowInContacts.title}">STUDIES</p>
+                                                    <p  class="applicant_text"  th:text="${usr.jobShowInContacts.description}"></p>
+                                                </td>
+                                            </tr>
 
-                                                                                    <tr>
-                                                                                        <td>
-                                                                                            <table class="table table-borderless align-middle" style="width: 100%;" >
-                                                                                                <tr >
-                                                                                                    <td colspan="2" >
-                                                                                                        <span class="offers_data_text" th:text="${usr.fullTime} ? #{bag_offer.fullTime} : ''" >txt</span>
-                                                                                                        <span class="offers_data_text" th:text="${usr.partTime} ? #{bag_offer.partTime} : ''" >txt</span>
-                                                                                                        <span class="offers_data_text" th:text="${usr.homeWork} ? #{bag_offer.remote} : ''" >txt</span>
-                                                                                                    </td>
-                                                                                                </tr>
-                                                                                                <tr >
-                                                                                                    <td colspan="2" >
+                                            <tr>
+                                                <td>
+                                                    <table class="table table-borderless align-middle" style="width: 100%;" >
+                                                        <tr >
+                                                            <td colspan="2" >
+                                                                <span class="offers_data_text" th:text="${usr.fullTime} ? #{bag_offer.fullTime} : ''" >txt</span>
+                                                                <span class="offers_data_text" th:text="${usr.partTime} ? #{bag_offer.partTime} : ''" >txt</span>
+                                                                <span class="offers_data_text" th:text="${usr.homeWork} ? #{bag_offer.remote} : ''" >txt</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr >
+                                                            <td colspan="2" >
+                                                                <span class="offers_data_text ml-5" th:text="'E-MAIL: ' + ${usr.email}" >email</span>
+                                                            </td>
+                                                        </tr>
 
-                                                                                                        <span class="offers_data_text ml-5" th:text="'E-MAIL: ' + ${usr.email}" >email</span>
-                                                                                                    </td>
-                                                                                                </tr>
+                                                        <tr >
+                                                            <td colspan="2" >
+                                                                <span class="offers_data_text" th:text="'Ciudad: ' + ${usr.getCityName()}" >txt</span>
+                                                            </td>
+                                                            <td style="text-align: right;">
 
-                                                                                                <tr >
-                                                                                                    <td colspan="2" >
-                                                                                                        <span class="offers_data_text" th:text="'Ciudad: ' + ${usr.getCityName()}" >txt</span>
-                                                                                                    </td>
-                                                                                                    <td style="text-align: right;">
+                                                                <a th:href="'mailto:' + ${usr.email}">
+                                                                    <i class="bi bi-envelope" data-toggle="tooltip"
+                                                                       th:data-original-title="#{matches.mailto}"></i>
+                                                                </a>
 
-                                                                                                        <a th:href="'mailto:' + ${usr.email}">
-                                                                                                            <i class="bi bi-envelope"></i>
-                                                                                                        </a>
-
-                                                                                                    </td>
-                                                                                                </tr>
+                                                            </td>
+                                                        </tr>
 
 
-                                                                                                <tr>
-                                                                                                    <td colspan="2">
+                                                        <tr>
+                                                            <td colspan="2">
                                                                                                                        <span class="offers_data_text" th:text="${usr.getContactsCount() > 0}  ? (
                                                                                                                                    ${usr.getContactsCount()} + ' ' +
                                                                                                                                    (${usr.getContactsCount() > 1} ? #{bag_applicants.contactPlural} : #{bag_applicants.contactSingle})
                                                                                                                        )">contacts</span>
 
-                                                                                                        <span class="offers_data_text ml-4" th:text="${usr.getApplyJobsCount() > 0}  ? (
+                                                                <span class="offers_data_text ml-4" th:text="${usr.getApplyJobsCount() > 0}  ? (
                                                                                                                                    ${usr.getApplyJobsCount()} + ' ' +
                                                                                                                                    (${usr.getApplyJobsCount() > 1} ? #{bag_applicants.applyPlural} : #{bag_applicants.applySingle})
                                                                                                                        )">nominees</span>
 
-                                                                                                    </td>
-                                                                                                </tr>
+                                                            </td>
+                                                        </tr>
 
 
 
@@ -98,11 +100,11 @@
 
 
 
-                                                                                            </table>
-                                                                                        </td>
-                                                                                    </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
 
-                                                                                </table>
+                                        </table>
 
                                     </div>
                                 </td>

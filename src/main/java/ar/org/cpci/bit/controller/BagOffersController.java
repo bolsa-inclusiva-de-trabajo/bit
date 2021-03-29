@@ -266,8 +266,10 @@ public class BagOffersController {
                 if (postulant.getId() != user.getId()) {
                     if (postulant.containsApplyJob(job)) {
                         if (user.containsContact(postulant)) {
-                            // aparecio una coincidencia
-                            matches.add(postulant);
+                            if (postulant.getApplyForJob()) {
+                                postulant.setJobShowInContacts(job);
+                                matches.add(postulant);
+                            }
                         }
                     }
                 }
@@ -278,7 +280,11 @@ public class BagOffersController {
 
         for(Job apply: user.getApplyJobs() ) {
             if (apply.getOwner().containsContact(user)) {
-                matches.add(apply.getOwner());
+                if (apply.getOwner().getApplyForJob()) {
+                    User u = apply.getOwner();
+                    u.setJobShowInContacts(apply);
+                    matches.add(u);
+                }
             }
         }
 
