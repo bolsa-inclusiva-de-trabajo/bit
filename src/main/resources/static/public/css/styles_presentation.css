@@ -4,8 +4,14 @@
     background-color: #f6f5f4 !important;
 }
 
-#bit-presentation-title {
+#bit-presentation-title, #bit-presentation-objetive {
     text-shadow: 0.1em 0.1em 0.1em gray !important;
+}
+
+#bit-presentation-objetive {
+    position: absolute !important;
+    top: 55% !important;
+    left: 25% !important;
 }
 
 footer {
@@ -15,8 +21,8 @@ footer {
 #bit-presentation-prev, #bit-presentation-next {
     font-size: x-large !important;
     position: absolute !important;
-    color: #0002 !important;
-    top: 43% !important;
+    color: #0003 !important;
+    top: 45% !important;
 }
 
 #bit-presentation-prev:hover, #bit-presentation-next:hover {
@@ -25,21 +31,19 @@ footer {
 }
 
 #bit-presentation-prev {
-    left: 0% !important;
+    left: 0.5% !important;
 }
 
 #bit-presentation-next {
-    right: 0% !important;
-}
-
-.w-card-team {
-    width: 23% !important;
+    right: 0.5% !important;
 }
 
 .vh-95 {
     height: 95vh !important;
 }
-
+.h-10 {
+    height: 10% !important;
+}
 .w-15 {
     width: 15% !important;
 }
@@ -51,6 +55,9 @@ footer {
 }
 .w-22 {
     width: 22% !important;
+}
+.w-28 {
+    width: 28% !important;
 }
 .w-30 {
     width: 30% !important;
@@ -71,8 +78,8 @@ footer {
     width: 85% !important;
 }
 .w-card-team {
-	height: 97%;
+    height: 97%;
 }
 .card-footer {
-	padding: .5rem 3.25rem;
+    padding: .5rem 3.25rem;
 }

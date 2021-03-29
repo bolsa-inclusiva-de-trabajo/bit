@@ -2,15 +2,13 @@
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
     <nav th:fragment="footer" id="verticalAdjFooter"
-         class="navbar navbar-expand-lg navbar-dark bg-dark font-weight-bold fixed-bottom">
+         class="navbar navbar-expand-lg navbar-dark bg-dark font-weight-bold fixed-bottom py-0">
         <div class="container">
-            <a class="navbar-brand row ml-auto text-center py-0 mb-1"
-                href="https://github.com/bolsa-inclusiva-de-trabajo/bit"
-                title="Código fuente de esta página" target="_blank">
-                <i class="bi bi-code-slash"></i>
-            </a>
-            <a class="navbar-brand row mr-auto text-center py-0" href="/">
-                <span class="h6 d-block mb-0" th:text="#{title}">Bolsa Inclusiva de Trabajo</span>
+            <a class="navbar-brand row mx-auto text-center py-0"
+               href="https://github.com/bolsa-inclusiva-de-trabajo/bit"
+               title="Ir al código fuente del proyecto" target="_blank">
+                <i class="bi bi-code-slash mb-1"></i>
+                <span class="h6 mb-0" th:text="#{title}">Bolsa Inclusiva de Trabajo</span>
             </a>
             <div class="navbar row justify-content-around mx-auto">
                 <a href="" class="nav-link h4 text-light pt-0 pb-1 my-0"><i class="bi bi-linkedin"></i></a>

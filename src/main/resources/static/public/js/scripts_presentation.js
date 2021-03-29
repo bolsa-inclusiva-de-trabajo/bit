@@ -13,7 +13,7 @@ $(function() {
             '',
             'Equipo de trabajo',
             'Origen de la idea',
-            'Tecnologías utilizadas',
+            'Tecnologías utilizadas'
         ];
         this.index = 0;
         this.stop = this.titles.length - 1;
