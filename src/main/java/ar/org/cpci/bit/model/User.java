@@ -20,6 +20,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import ar.org.cpci.bit.repository.UserRepository;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -116,6 +117,7 @@ public class User {
         interestingJobs = new HashSet<>();
         applyJobs = new HashSet<>();
         contacts = new HashSet<>();
+
     }
 
     public Long getId() {

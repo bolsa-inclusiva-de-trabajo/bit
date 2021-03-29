@@ -1,8 +1,6 @@
 package ar.org.cpci.bit.controller;
 
-import java.util.List;
-import java.util.Locale;
-import java.util.Optional;
+import java.util.*;
 
 import javax.validation.Valid;
 
@@ -167,6 +165,17 @@ public class BagOffersController {
         return pageTotal;
     }
 
+    private int findPageTotal(int pageSize, List<User> matches) {
+        int pageTotal = 1;
+
+        if (matches.size() > pageSize && pageSize > 0) {
+            double factor = (double)matches.size() / (double)pageSize;
+            if (factor > 1) {
+                pageTotal = ((int)factor) + 1;
+            }
+        }
+        return pageTotal;
+    }
 
     @GetMapping("/bagoffers/my_offers/{filterOffers}")
     public String getBagMyOffersFiltered(Model model, @PageableDefault(size = 100) Pageable page,
@@ -236,5 +245,55 @@ public class BagOffersController {
 
     }
 
-    
+    @GetMapping("/matches")
+    public String getMatch(Model model, @PageableDefault(size = 4) Pageable page,
+                                             @RequestParam("page") Optional<Integer> p,
+                                             @RequestParam("size") Optional<Integer> s) {
+        User user = findUser();
+        model.addAttribute("user", user);
+
+        List<User> matches = new ArrayList<>();
+
+
+
+
+        /* PROCESO PARA ENCONTRAR COINCIDENCIAS DEL LADO DEL EMPLEADOR */
+
+        Iterable<User> postulants = userRepository.findByApplyForJobTrueAndDisabledFalse(page);
+        for(Job job: user.getCreatedJobs() ) {
+            for(User postulant: postulants ) {
+                //solo si no soy yo.
+                if (postulant.getId() != user.getId()) {
+                    if (postulant.containsApplyJob(job)) {
+                        if (user.containsContact(postulant)) {
+                            // aparecio una coincidencia
+                            matches.add(postulant);
+                        }
+                    }
+                }
+            }
+        }
+
+        /* PROCESO PARA ENCONTRAR COINCIDENCIAS DEL LADO DEL POSTULANTE */
+
+        for(Job apply: user.getApplyJobs() ) {
+            if (apply.getOwner().containsContact(user)) {
+                matches.add(apply.getOwner());
+            }
+        }
+
+
+        model.addAttribute("users", (Iterable<User>)matches);
+
+        int currentPage = p.orElse(0);
+        int pageSize = s.orElse(4);
+        int pageTotal = findPageTotal(pageSize, matches);
+
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("pageSize", pageSize);
+        model.addAttribute("pageTotal", pageTotal);
+
+        return "matches";
+
+    }
 }
