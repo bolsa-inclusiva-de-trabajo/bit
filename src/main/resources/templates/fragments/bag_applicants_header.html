@@ -28,10 +28,10 @@
                         <a class="nav-link" href="/bagoffers">Trabajos</a>
                     </li>
                     <li class="nav-item ml-2">
-                        <p class="nav-link"  th:href="'/profile/' + ${#authentication.name}" th:text="${#authentication.name}">John</p>
+                        <p class="nav-link"  th:text="${#authentication.name}">John</p>
                     </li>
                     <li class="nav-item ml-2">
-                        <a class="nav-link"  th:href="'/profile/' + ${#authentication.name}" >
+                        <a class="nav-link"  href="/user" >
                             <i class="text-primary bi bi-gear" data-toggle="tooltip" data-original-title="Mi perfil"></i>
                         </a>
                     </li>

@@ -42,7 +42,7 @@
 
                                 <table class="table table-borderless align-middle" style="width: 100%;">
 
-                                    <tr th:if="${!usr.disabled} and ${usr.applyForJob}" th:id="'user_row_' +  ${usr.id}" th:each="usr: ${users}">
+                                    <tr th:if="${!usr.disabled} and ${usr.applyForJob} and ${usr.id}!=${user.id}" th:id="'user_row_' +  ${usr.id}" th:each="usr: ${users}">
                                         <td colspan="3">
                                             <div class="container mt-2 panel_offers">
 

@@ -31,28 +31,13 @@
                         <a class="nav-link" href="/bagoffers">Trabajos</a>
                     </li>
                     <li class="nav-item ">
-                        <table>
-                            <tr>
-                                <td>
-                                    <p class="nav-link"  th:href="'/profile/' + ${#authentication.name}" th:text="${#authentication.name}">John</p>
-                                </td>
-                                <td>
-                                    <p class="nav-link "  th:href="'/profile/' + ${#authentication.name}">
-                                </td>
-                                
-                                <td>
-
-                                    <form th:action="@{/logout}" method="POST" id='form-logout' class="mx-0">
-                                        <input type="hidden"/>
-                                        <i class="nav-link bi bi-box-arrow-right" data-toggle="tooltip" data-original-title="Salir" onclick="document.getElementById('form-logout').submit();"></i>
-
-                                    </form>
-
-                                </td>
-
-                                </td>
-                            </tr>
-                        </table>
+                        <li class="nav-item ml-2">
+                         <form th:action="@{/logout}" method="POST">
+                             <button type="submit" class="btn px-0">
+                                 <i class="text-primary bi bi-box-arrow-right"></i>
+                             </button>
+                         </form>
+                     </li>
                         <!-- <a class="nav-link" href=""
                            data-toggle="modal" data-target="#logIn">JOhn Doe </a>
                            -->
