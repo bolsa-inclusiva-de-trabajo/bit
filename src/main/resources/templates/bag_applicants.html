@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <br th:replace="fragments/head :: head"/>
-    <body>
+    <body class="bag_applicants_background">
         <br th:replace="fragments/bag_applicants_header :: header"/>
         <div class="container-fluid py-special" id="mainVerticalAdjFooter">
+
+
             <div class="container mt-4 ">
                 <div class="row" >
 
@@ -44,7 +46,7 @@
                                         <td colspan="3">
                                             <div class="container mt-2 panel_offers">
 
-                                                <p class="h6"  th:text="${usr.username}?: #{bag_offer.noTitle}">USERNAME</p>
+                                                <p class="h6  text-center"  th:text="${usr.username}?: #{bag_offer.noTitle}">USERNAME</p>
 
 
                                                 <table class="table table-borderless" style=" width: 100%;">
@@ -229,7 +231,7 @@
 
 
                         <div class="container mt-2 panel_contact">
-                            <p class="h6" th:text="#{bag_applicants.myContacts}">My Contacts</p>
+                            <p class="h6 text-center" th:text="#{bag_applicants.myContacts}">My Contacts</p>
                             <table id="contactTable" style="width: 100%;">
                                 <tr  th:id="'contact_row_' +  ${cnt.id} + '_'+ ${user.id}" th:each="cnt: ${user.contacts}">
                                     <td style="width: auto;" class="align-middle">

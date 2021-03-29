@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <br th:replace="fragments/head :: head"/>
-<body>
+<body class="bag_offers_background">
 <br th:replace="fragments/bag_offers_header :: header"/>
 
 <div class="container-fluid py-special" id="mainVerticalAdjFooter">
@@ -55,8 +55,9 @@
                                             <div class="container mt-2 panel_offers">
 
 
-
-                                                <p class="h6"  th:text="${job.title} ?: #{bag_offer.noTitle}">JOB TITLE</p>
+                                                <div class="text-center ">
+                                                    <p class="h5"  th:text="${job.title} ?: #{bag_offer.noTitle}">JOB TITLE</p>
+                                                </div>
                                                 <table  style=" width: 100%;">
                                                     <tr>
                                                         <td>
@@ -263,7 +264,7 @@
 
 
                         <div class="container mt-2 panel_contact">
-                            <p class="h6" th:text="#{bag_offer.myInterests}">My interests</p>
+                            <p class="h6  text-center" th:text="#{bag_offer.myInterests}">My interests</p>
                             <table id="interestsTable" style="width: 100%;">
                                 <tr  th:id="'interest_row_' +  ${interest.id} + '_'+ ${user.id}"
                                      th:each="interest: ${user.interestingJobs}">
@@ -294,7 +295,7 @@
                         </div>
 
                         <div class="container mt-2 panel_contact">
-                            <p class="h6" th:text="#{bag_offer.myAplies}">My Applies</p>
+                            <p class="h6 text-center" th:text="#{bag_offer.myAplies}">My Applies</p>
                             <table id="applyTable" style="width: 100%;">
                                 <tr  th:id="'apply_row_' +  ${apply.id} + '_'+ ${user.id}"
                                      th:each="apply: ${user.applyJobs}">

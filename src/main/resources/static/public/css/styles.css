@@ -81,7 +81,7 @@ a#joinus {
 }
 
 .col_b {
-    background-color: #ffffff;
+    /*background-color: #ffffff;*/
     height: 100%;
 }
 
@@ -95,12 +95,12 @@ a#joinus {
 }
 
 .news_title {
-    font-size: 10px;
+    font-size: 14px;
     font-weight: bold;
 }
 
 .news_content {
-    font-size: 10px;
+    font-size: 12px;
 }
 
 .panel_contact {
@@ -138,11 +138,11 @@ a#joinus {
 }
 
 .applicant_text {
-    font-size: 10px;
+    font-size: 12px;
 }
 
 .applicant_data_text {
-    font-size: 10px;
+    font-size: 12px;
 }
 
 
@@ -163,12 +163,12 @@ a#joinus {
 }
 
 .offers_text {
-    font-size: 10px;
+    font-size: 12px;
 
 }
 
 .offers_data_text {
-    font-size: 10px;
+    font-size: 12px;
 }
 
 .tbl_offer_data {
@@ -193,4 +193,32 @@ a#joinus {
   background-color: #FEFAE0;
 }
 
+.bag_applicants_background {
 
+    background: url(/static/public/img/people.png) no-repeat top center fixed;
+       background-size: cover;
+       margin: 0;
+       padding: 0;
+       height: 100%;
+       width: 100%;
+}
+
+.bag_offers_background {
+
+    background: url(/static/public/img/empresa.png) no-repeat top center fixed;
+       background-size: cover;
+       margin: 0;
+       padding: 0;
+       height: 100%;
+       width: 100%;
+}
+
+.matches_background {
+
+    background: url(/static/public/img/fist.png) no-repeat top center fixed;
+       background-size: cover;
+       margin: 0;
+       padding: 0;
+       height: 100%;
+       width: 100%;
+}
