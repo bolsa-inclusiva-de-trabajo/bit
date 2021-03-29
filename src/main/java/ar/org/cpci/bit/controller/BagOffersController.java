@@ -266,7 +266,8 @@ public class BagOffersController {
                 if (postulant.getId() != user.getId()) {
                     if (postulant.containsApplyJob(job)) {
                         if (user.containsContact(postulant)) {
-                            if (!postulant.getApplyForJob()) {
+                            if (postulant.getApplyForJob()) {
+                                postulant.setJobShowInContacts(job);
                                 matches.add(postulant);
                             }
                         }
@@ -280,7 +281,9 @@ public class BagOffersController {
         for(Job apply: user.getApplyJobs() ) {
             if (apply.getOwner().containsContact(user)) {
                 if (apply.getOwner().getApplyForJob()) {
-                    matches.add(apply.getOwner());
+                    User u = apply.getOwner();
+                    u.setJobShowInContacts(apply);
+                    matches.add(u);
                 }
             }
         }
