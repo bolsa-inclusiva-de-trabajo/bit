@@ -60,7 +60,7 @@
                                                 <table  style=" width: 100%;">
                                                     <tr>
                                                         <td>
-                                                            <p class="offers_text" th:text="${job.description}  ?: #{bag_offer.noDescription}">JOB DESCRIPTION</p>
+                                                            <p class="offers_text mb-0" th:text="${job.description}  ?: #{bag_offer.noDescription}">JOB DESCRIPTION</p>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -82,7 +82,7 @@
                                                                 </tr>
                                                                 <tr >
                                                                     <td class="table align-left">
-                                                                        <p class="offers_data_text" th:text="#{bag_offer.valid} + ' ' + ${job.expiration}" >txt</p>
+                                                                        <p class="offers_data_text mb-0" th:text="#{bag_offer.valid} + ' ' + ${job.expiration}" >txt</p>
                                                                     </td>
                                                                     <td class="table align-right">
                                                                          <i th:if="${!user.existCreatedJob({job.id})}" th:id="'interest_' + ${job.id} + '_' +  ${user.id}"
@@ -174,12 +174,12 @@
                         <!-- <form class="row" >         is-checking -->
                             <table class="table table-borderless">
                                 <tr style="vertical-align: middle; width: 100%">
-                                    <td colspan="4">
+                                    <td colspan="5">
                                         <input id="txtSearch" type="text" class="form-control" >
                                     </td>
-                                    <td colspan="1">
+                                    <td colspan="1" style="vertical-align: middle; width: 100%">
                                         <i id="btnSearch"
-                                                class="bi bi-search ml-2" data-toggle="tooltip"
+                                                class="bi bi-search" data-toggle="tooltip"
                                            th:data-original-title="#{bag_offer.btnSearch}"
                                         onclick="bagFilterText()"></i>
 
@@ -199,7 +199,7 @@
                                         </svg>
 
 
-                                    <td>
+                                    <td></td>
 
                                     <td>
                                         <svg id="btnFullTime"
@@ -268,7 +268,7 @@
                                 <tr  th:id="'interest_row_' +  ${interest.id} + '_'+ ${user.id}"
                                      th:each="interest: ${user.interestingJobs}">
                                     <td style="width: auto;" class="align-middle">
-                                        <p class="contact_content align-middle" th:text="${interest.title} ?: #{bag_offer.noTitle}">JOB TITLE</p>
+                                        <p class="contact_content align-middle mb-0" th:text="${interest.title} ?: #{bag_offer.noTitle}">JOB TITLE</p>
                                     </td>
                                     <td style="width: 40px;" class="align-middle">
 
@@ -299,7 +299,7 @@
                                 <tr  th:id="'apply_row_' +  ${apply.id} + '_'+ ${user.id}"
                                      th:each="apply: ${user.applyJobs}">
                                     <td style="width: auto;" class="align-middle">
-                                        <p class="contact_content align-middle" th:text="${apply.title} ?: #{bag_offer.noTitle}">APPLY TITLE</p>
+                                        <p class="contact_content align-middle mb-0" th:text="${apply.title} ?: #{bag_offer.noTitle}">APPLY TITLE</p>
                                     </td>
                                     <td style="width: 40px;" class="align-middle">
 

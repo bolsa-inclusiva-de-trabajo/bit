@@ -50,10 +50,10 @@
                                                 <table class="table table-borderless" style=" width: 100%;">
                                                     <tr >
                                                         <td>
-                                                            <p class="applicant_title h6" th:text="#{bag_applicants.skillsTitle}">SKILLS</p>
-                                                            <p class="applicant_text" th:text="${usr.skills}"></p>
-                                                            <p class="applicant_title h6" th:text="#{bag_applicants.studiesTitle}">STUDIES</p>
-                                                            <p class="applicant_text"  th:text="${usr.education}"></p>
+                                                            <p class="applicant_title h6 mb-0" th:text="#{bag_applicants.skillsTitle}">SKILLS</p>
+                                                            <p class="applicant_text mb-0" th:text="${usr.skills}"></p>
+                                                            <p class="applicant_title h6 mb-0" th:text="#{bag_applicants.studiesTitle}">STUDIES</p>
+                                                            <p class="applicant_text mb-0"  th:text="${usr.education}"></p>
                                                         </td>
                                                     </tr>
 
@@ -151,12 +151,12 @@
 
                         <table class="table table-borderless">
                             <tr style="vertical-align: middle; width: 100%">
-                                <td colspan="3">
+                                <td colspan="6">
                                     <input id="txtSearchApplicants" type="text" class="form-control" >
                                 </td>
-                                <td colspan="1">
+                                <td colspan="1" style="vertical-align: middle; width: 100%">
                                     <i id="btnSearchUser"
-                                       class="bi bi-search ml-2" data-toggle="tooltip"
+                                       class="bi bi-search" data-toggle="tooltip"
                                        th:data-original-title="#{bag_offer.btnSearch}"
                                         onclick="bagApplicantsFilterText()"></i>
 
@@ -176,7 +176,9 @@
                                     </svg>
 
 
-                                <td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
 
                                 <td style="text-align: center;">
                                     <svg id="btnFullTime"
@@ -231,7 +233,7 @@
                             <table id="contactTable" style="width: 100%;">
                                 <tr  th:id="'contact_row_' +  ${cnt.id} + '_'+ ${user.id}" th:each="cnt: ${user.contacts}">
                                     <td style="width: auto;" class="align-middle">
-                                        <p class="contact_content align-middle" th:text="${cnt.username} ?: #{bag_offer.noTitle}">APPLY TITLE</p>
+                                        <p class="contact_content align-middle mb-0" th:text="${cnt.username} ?: #{bag_offer.noTitle}">APPLY TITLE</p>
                                     </td>
 
                                     <td style="width: 40px;" class="align-middle">
@@ -288,10 +290,10 @@
                                     <table class="table table-borderless align-middle" style=" width: 100%;">
                                         <tr>
                                             <td>
-                                                <p id="modalContactSkillsTitle" class="applicant_title h6" th:text="#{bag_applicants.skillsTitle}">SKILLS</p>
-                                                <p id="modalContactSkillsText" class="applicant_text"></p>
-                                                <p id="modalContactStudiesTitle" class="applicant_title h6" th:text="#{bag_applicants.studiesTitle}">STUDIES</p>
-                                                <p id="modalContactStudiesText" class="applicant_text"></p>
+                                                <p id="modalContactSkillsTitle" class="applicant_title h6 mb-0" th:text="#{bag_applicants.skillsTitle}">SKILLS</p>
+                                                <p id="modalContactSkillsText" class="applicant_text mb-0"></p>
+                                                <p id="modalContactStudiesTitle" class="applicant_title h6 mb-0" th:text="#{bag_applicants.studiesTitle}">STUDIES</p>
+                                                <p id="modalContactStudiesText" class="applicant_text mb-0"></p>
                                             </td>
                                         </tr>
                                         <tr>
