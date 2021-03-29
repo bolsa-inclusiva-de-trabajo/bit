@@ -128,7 +128,7 @@
 
                                         </td>
                                         <td class="justify-content-center" >
-                                            <span align="align-center" th:text="#{bag_offer.pagerText} + ' ' + ${currentPage + 1} + ' ' + #{bag_offer.pagerConnector} + ' ' + ${pageTotal}"></span>
+                                            <span th:if="${pageTotal > 1}"  align="align-center" th:text="#{bag_offer.pagerText} + ' ' + ${currentPage + 1} + ' ' + #{bag_offer.pagerConnector} + ' ' + ${pageTotal}"></span>
                                         </td>
                                         <td  >
                                             <a th:if="${currentPage < pageTotal -1}" th:href="'/bagapplicants?page=' + ${currentPage + 1} + '&size=' + ${pageSize}">
@@ -154,7 +154,7 @@
                         <table class="table table.borderless ">
                             <tr style="vertical-align: middle; width: 100%">
                                 <td colspan="3">
-                                    <input id="txtSearch" type="text" class="form-control" >
+                                    <input id="txtSearchApplicants" type="text" class="form-control" >
                                 </td>
                                 <td colspan="1">
                                     <i id="btnSearchUser"

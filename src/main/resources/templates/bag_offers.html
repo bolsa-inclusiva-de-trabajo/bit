@@ -148,7 +148,7 @@
 
                                         </td>
                                         <td class="justify-content-center" >
-                                            <span align="align-center" th:text="#{bag_offer.pagerText} + ' ' + ${currentPage + 1} + ' ' + #{bag_offer.pagerConnector} + ' ' + ${pageTotal}"></span>
+                                            <span th:if="${pageTotal > 1}" align="align-center" th:text="#{bag_offer.pagerText} + ' ' + ${currentPage + 1} + ' ' + #{bag_offer.pagerConnector} + ' ' + ${pageTotal}"></span>
                                         </td>
                                         <td  >
                                             <a th:if="${currentPage < pageTotal -1}" th:href="'/bagoffers?page=' + ${currentPage + 1} + '&size=' + ${pageSize}">

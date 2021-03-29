@@ -198,17 +198,6 @@ $(document).ready(function() {
 
 });
 
-$(document).keyup(function (e) {
-    if ($(".btnSearch:focus") && (e.keyCode === 13)) {
-       bagFilterText();
-    }
- });
-
-$(document).keyup(function (e) {
-    if ($(".btnSearchUser:focus") && (e.keyCode === 13)) {
-       bagApplicantsFilterText();
-    }
- });
 
 
 /*
@@ -568,8 +557,8 @@ function deleteApply(e) {
     }
 
 
-function bagFilterText(e) {
-      setChecking(e.id);
+function bagFilterText() {
+      setChecking("txtSearch");
       if ($('#txtSearch').val() == "") {
             setValid("#txtSearch", false);
       } else {
@@ -970,17 +959,17 @@ function deleteContact(e) {
 }
 
 function bagApplicantsFilterText() {
-      setChecking("txtSearch");
-      if ($('#txtSearch').val() == "") {
-            setValid("#txtSearch", false);
+      setChecking("txtSearchApplicants");
+      if ($('#txtSearchApplicants').val() == "") {
+            setValid("#txtSearchApplicants", false);
       } else {
-          var urlFilter = "/api/bag/user/text/" + $('#txtSearch').val();
+          var urlFilter = "/api/bag/user/text/" + $('#txtSearchApplicants').val();
           fetch(urlFilter).then(function(response) {
                 if (response.ok) {
-                     setValid("#txtSearch", true);
-                     window.location.replace("/bagapplicants/text/"+$('#txtSearch').val());
+                     setValid("#txtSearchApplicants", true);
+                     window.location.replace("/bagapplicants/text/"+$('#txtSearchApplicants').val());
                 } else {
-                    setValid("#txtSearch", false);
+                    setValid("#txtSearchApplicants", false);
                 }
           });
       }
