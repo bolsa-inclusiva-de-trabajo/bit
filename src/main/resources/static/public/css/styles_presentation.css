@@ -38,11 +38,21 @@ footer {
     right: 0.5% !important;
 }
 
+.card-image {
+    width: 13em;
+}
+
 .vh-95 {
     height: 95vh !important;
 }
 .h-10 {
     height: 10% !important;
+}
+.h-94 {
+    height: 94% !important;
+}
+.h-95 {
+    height: 95% !important;
 }
 .w-15 {
     width: 15% !important;
@@ -55,6 +65,9 @@ footer {
 }
 .w-22 {
     width: 22% !important;
+}
+.w-23 {
+    width: 23% !important;
 }
 .w-28 {
     width: 28% !important;
@@ -76,10 +89,4 @@ footer {
 }
 .w-80 {
     width: 85% !important;
-}
-.w-card-team {
-    height: 97%;
-}
-.card-footer {
-    padding: .5rem 3.25rem;
 }
