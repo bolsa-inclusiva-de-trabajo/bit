@@ -193,3 +193,8 @@ a#joinus {
   background-color: #FEFAE0;
 }
 
+.title-post {
+	background-color: darkgreen;
+	color: white;
+	border-radius: 5px 5px 0 0
+}
