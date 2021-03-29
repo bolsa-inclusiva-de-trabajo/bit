@@ -30,7 +30,19 @@
                                 <td colspan="3">
                                     <div class="container mt-2 panel_offers">
 
-                                        <p class="h6"  th:text="${usr.username} + ' - ' + ${usr.firstName} + ' ' + ${usr.lastName}">NOMBRE</p>
+
+
+                                        <table class="title-matches-post align-middle" style=" width: 100%;">
+                                            <tr>
+                                                <td style="width: 20%; ">
+                                                    <i class="bi bi-person-circle h3"></i>
+                                                    <i class="bi bi-building h3"></i>
+                                                </td>
+                                                <td>
+                                                    <p style="padding-top: 5px;" class="h6"  th:text="${usr.username} + ' - ' + ${usr.firstName} + ' ' + ${usr.lastName}">NOMBRE</p>
+                                                </td>
+                                            </tr>
+                                        </table>
 
 
                                         <table class="table table-borderless" style=" width: 100%;">

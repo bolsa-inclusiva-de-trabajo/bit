@@ -195,3 +195,20 @@ a#joinus {
   background-color: #FEFAE0;
 }
 
+.title-post {
+	background-color: darkgreen;
+	color: white;
+	border-radius: 5px 5px 0 0
+}
+
+.title-offer-post {
+	background-color: blueviolet;
+	color: white;
+	border-radius: 5px 5px 0 0
+}
+
+.title-matches-post {
+	background-color: crimson;
+	color: white;
+	border-radius: 5px 5px 0 0
+}

@@ -46,14 +46,15 @@
                                         <td colspan="3">
                                             <div class="container mt-2 panel_offers">
 
-                                                <p class="h6  text-center title-post"  th:text="${usr.username}?: #{bag_offer.noTitle}">USERNAME</p>
-
+                                                <table class="title-post align-middle" style=" width: 100%;">
+                                                    <tr>
+                                                        <td style="width: 10%; "><i class="bi bi-person-circle h3"></i></td>
+                                                        <td><p style="padding-top: 5px;" class="h6  ml-4"  th:text="${usr.username}?: #{bag_offer.noTitle}">USERNAME</p></td>
+                                                    </tr>
+                                                </table>
 
                                                 <table class="table table-borderless" style=" width: 100%;">
-                                                 <!--   <tr >
-                                                        <td style="width: 10%;"><i class="bi bi-person-circle h3"></i></td>
 
-                                                    </tr>-->
                                                     <tr >
                                                         <td>
                                                             <p class="applicant_title h6 mb-0" th:text="#{bag_applicants.skillsTitle}">SKILLS</p>
