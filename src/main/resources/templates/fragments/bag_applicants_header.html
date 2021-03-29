@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<div th:fragment="header">
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top font-weight-bold">
+
+    <nav  th:fragment="header" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top font-weight-bold">
         <div class="container">
             <a class="navbar-brand" th:href="@{/}">
                 <img class="pb-1" alt="BIT" width=32 height=32 th:src="@{/static/public/logo/favicon-32x32.png}">
@@ -35,7 +35,7 @@
                     </li>
 
                     <li class="nav-item ml-2">
-                        <p class="nav-link"  th:text="${#authentication.name}">John</p>
+                        <span class="nav-link"  th:text="${#authentication.name}">John</span>
                     </li>
                     <li class="nav-item ml-2">
                         <a class="nav-link"  href="/user" >
@@ -54,5 +54,5 @@
         </div>
     </nav>
 
-</div>
+
 </html>

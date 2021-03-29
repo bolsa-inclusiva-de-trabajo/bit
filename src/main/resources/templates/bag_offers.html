@@ -12,21 +12,24 @@
                 <div class="row" >
 
 
-                    <div class="col-4 col-sm-4 col-md-2 col_a " >
-                        <button id="addOffersButton" type="button" class="btn btn-primary mt-2" onclick="showModalCreateJob()" th:text="#{bag_offer.addOfferButton}">add</button>
-                        <div class="container panel_news mt-2">
-                            <p class="h6" th:text="#{bag_applicants.newsTitle}">NOVEDADES</p>
-                            <table>
-                                <tr>
-                                    <td><p class="news_content" >news</p></td>
-                                </tr>
-                            </table>
+                    <div class="col-12 col-md-3 mt-4" >
+                        <div class="alert alert-info shadow-sm d-flex flex-column
+                                   align-items-center justify-content-center" role="alert">
+                            <i class="bi bi-megaphone-fill display-1"></i>
+                            <p class="text-center">Aquí puedes buscar los empleos que
+                                te interesen, márcalos para tenerlos entre tus intereses
+                                para no perderlos de vista.</p>
+                            <p class="text-center mt-4">También puedes ofrecer trabajos
+                                a otras personas:</p>
+                            <button id="addOffersButton" type="button"
+                                    class="btn btn-primary mb-4" onclick="showModalCreateJob()"
+                                    th:text="#{bag_offer.addOfferButton}">add</button>
                         </div>
                     </div>
 
 
-                    <div class="col-8 col-sm-8 col-md-7  col_b" >
-                        <div class="col">
+                    <div class="col-12 col-md-6 col_b" >
+
                             <ul class="nav nav-pills nav-stacked ">
 
 
@@ -162,14 +165,14 @@
 
                                 </table>
                             </ul>
-                        </div>
+
                     </div>
 
 
-                    <div class="col-0 col-sm col-md-3 col-c" >
+                    <div class="col-12 col-md-3 mt-2" >
 
                         <!-- <form class="row" >         is-checking -->
-                            <table class="table table ">
+                            <table class="table table-borderless">
                                 <tr style="vertical-align: middle; width: 100%">
                                     <td colspan="4">
                                         <input id="txtSearch" type="text" class="form-control" >
