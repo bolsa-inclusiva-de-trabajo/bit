@@ -87,6 +87,7 @@ public class UserController {
             dbUser.setFullTime(user.getFullTime());
             dbUser.setPartTime(user.getPartTime());
             dbUser.setHomeWork(user.getHomeWork());
+            dbUser.setApplyForJob(user.getApplyForJob());
             repositoryUser.save(dbUser);
             attrs.addFlashAttribute("newUsername", user.getUsername());
             return "redirect:/user";

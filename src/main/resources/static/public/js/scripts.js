@@ -169,10 +169,13 @@ $(document).ready(function() {
         	$('.modal-dialog').hide();
         	$('#EditProfileSkill').show();
   		});
-//		$("#nextEditProfileAvailability").click(function() {
-////        	$('.modal-dialog').hide();
-////        	$('#editProfileAvailability').show();
-//  		});
+		$("#nextEditProfileAvailability").click(function() {
+			CRUDJobSetCheckbox('inputFullTimeEditUser','formEditProfileUser','fullTime');
+	        CRUDJobSetCheckbox('inputPartTimeEditUser','formEditProfileUser','partTime');
+	        CRUDJobSetCheckbox('inputHomeWorkEditUser','formEditProfileUser','homeWork');
+	        CRUDJobSetCheckbox('inputapplyForJobEditUser','formEditProfileUser','applyForJob');
+			$("#formEditProfileUser").submit();
+  		});
 		$("#savePassword").click(function() {
 			if(checkEmpty('#inputPasswordEditUser'))
 			{
